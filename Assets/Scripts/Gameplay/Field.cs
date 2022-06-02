@@ -40,6 +40,10 @@ public class Field : MonoBehaviour {
                 var item = Instantiate(qBitPrefab, qBitsContainer);
                 item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
                 qBitsLinks.Add(item);
+                spawnPoint.isFree = false;
+                QBit qBit = item.GetComponent<QBit>();
+                QBitData qBitData = GameData.Instance.GetRandomQBit();
+                qBit.Init(qBitData, spawnPoint);
             }
         }
     }

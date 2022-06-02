@@ -15,6 +15,10 @@ public class Player : MonoBehaviour {
 
     private DragInput input;
 
+    public int qBitsCollected_Green;
+    public int qBitsCollected_Red;
+    public int qBitsCollected_Blue;
+
     public static Player Instance { get; private set; }
     
     
@@ -29,13 +33,16 @@ public class Player : MonoBehaviour {
 
         foreach(var point in MovementManager.Instance.Points)
             point.onPointReach.AddListener(SwitchTargetToNextPoint);
+
+        qBitsCollected_Green = 0;
+        qBitsCollected_Red = 0;
+        qBitsCollected_Blue = 0;
     }
 
 
     void FixedUpdate() {
         if(GameplayController.Instance.IsMove)
             Move();
-        //else if()
     }
 
 
@@ -76,5 +83,20 @@ public class Player : MonoBehaviour {
 
         activeTargetIndex++;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+    }
+
+
+    public void PickQBit(QBitData data) {
+        switch(data.qType) {
+            case QBitType.GREEN:
+                qBitsCollected_Green++;
+                break;
+            case QBitType.RED:
+                qBitsCollected_Red++;
+                break;
+            case QBitType.BLUE:
+                qBitsCollected_Blue++;
+                break;
+        }
     }
 }

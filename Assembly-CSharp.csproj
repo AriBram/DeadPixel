@@ -53,6 +53,9 @@
      <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Tile.cs" />
      <Compile Include="Assets\Scripts\Data\TileData.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\QBit.cs" />
+     <Compile Include="Assets\Scripts\Data\QBitData.cs" />
+     <Compile Include="Assets\Scripts\Data\GameData.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
