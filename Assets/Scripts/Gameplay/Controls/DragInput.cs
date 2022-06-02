@@ -44,7 +44,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        //onDragEnd.Invoke();
+        MovementManager.Instance.SetMovementTrack(activatedPoints);
     }
 
 
