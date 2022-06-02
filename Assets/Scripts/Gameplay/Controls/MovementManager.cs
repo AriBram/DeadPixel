@@ -9,7 +9,7 @@ public class MovementManager : MonoBehaviour {
 
     public static MovementManager Instance { get; private set; }
     
-    void Start() {
+    void Awake() {
         Instance = this;
 
         GameObject[] pointsGameObjects = GameObject.FindGameObjectsWithTag("MovementPoint");
@@ -25,7 +25,7 @@ public class MovementManager : MonoBehaviour {
 
     public void SetMovementTrack(List<MovementPoint> points) {
         ClearMovementTrack();
-        
+
         foreach(var point in points)
             ActivatedPoints.Add(point);
     }

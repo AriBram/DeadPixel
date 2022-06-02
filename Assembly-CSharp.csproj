@@ -41,17 +41,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Data\TileData.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Tile.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
+     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Gameplay\GameplayController.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\DragInput.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementPoint.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementManager.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Player.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Controls\DragInput.cs" />
      <Compile Include="Assets\Scripts\UI\UI.cs" />
      <Compile Include="Assets\Scripts\UI\GameMenu.cs" />
-     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Tile.cs" />
+     <Compile Include="Assets\Scripts\Data\TileData.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

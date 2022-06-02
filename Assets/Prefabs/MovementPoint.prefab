@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5270225300806469786}
   - component: {fileID: 4294948541205010290}
   - component: {fileID: 8135011232016838522}
+  - component: {fileID: 2130093987694138726}
   m_Layer: 6
   m_Name: MovementPoint
   m_TagString: MovementPoint
@@ -95,3 +96,19 @@ MonoBehaviour:
   active: {r: 0.43164828, g: 0.9433962, b: 0.64429367, a: 1}
   passive: {r: 1, g: 1, b: 1, a: 1}
   isActive: 0
+--- !u!58 &2130093987694138726
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111478206815467028}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1

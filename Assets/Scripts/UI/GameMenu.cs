@@ -13,6 +13,10 @@ public class GameMenu : MenuBase {
         goBtn.onClick.AddListener(OnBtnGoClick);
     }
 
+    void Update() {
+        goBtn.gameObject.SetActive(GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 0);
+    }
+
     public override void Show() {
         gameObject.SetActive(true);
     }
@@ -24,5 +28,7 @@ public class GameMenu : MenuBase {
     public override void OnBackPressed() {}
 
 
-    public void OnBtnGoClick() {}
+    public void OnBtnGoClick() {
+        Player.Instance.ActivateMove();
+    }
 }

@@ -44,6 +44,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     }
 
     public void OnPointerUp(PointerEventData eventData) {
+        Debug.Log("activated points count: " + activatedPoints.Count.ToString());
         MovementManager.Instance.SetMovementTrack(activatedPoints);
     }
 

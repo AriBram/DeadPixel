@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public class MovementPoint : MonoBehaviour {
@@ -14,6 +15,9 @@ public class MovementPoint : MonoBehaviour {
     public Color passive;
 
     public bool isActive;
+
+    public class PointReachedEvent : UnityEvent { }
+    [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
 
     
     void Start() {
@@ -29,5 +33,15 @@ public class MovementPoint : MonoBehaviour {
     public void Deactivate() {
         isActive = false;
         frame.color = passive;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Player")) {
+            if(GameplayController.Instance.IsMove) {
+                Deactivate();
+                onPointReach.Invoke();
+            }
+        }
     }
 }
