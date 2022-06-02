@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
     
     void Awake() {
         Instance = this;
+
+        if(currentPoint != null)
+            currentPoint.isFree = false;
     }
 
 

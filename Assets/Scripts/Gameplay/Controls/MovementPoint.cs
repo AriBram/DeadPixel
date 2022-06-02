@@ -16,11 +16,14 @@ public class MovementPoint : MonoBehaviour {
 
     public bool isActive;
 
+    public bool isFree;
+
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
 
     
-    void Start() {
+    void Awake() {
+        isFree = true;
         Deactivate();
     }
 

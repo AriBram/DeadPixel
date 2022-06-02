@@ -65,7 +65,9 @@ public class Player : MonoBehaviour {
     public void SwitchTargetToNextPoint() {
         if(activeTargetIndex + 1 > maxPointIndex) {
             GameplayController.Instance.SetPrepareState();
+            PlayerController.Instance.currentPoint.isFree = true;
             PlayerController.Instance.currentPoint = activatedPoints[maxPointIndex];
+            PlayerController.Instance.currentPoint.isFree = false;
             activeTargetIndex = 0;
             input.ClearMovementTrack();
             activatedPoints.Clear();

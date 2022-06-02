@@ -85,6 +85,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
     public void ClearMovementTrack() {
         lastActivatedPoint = PlayerController.Instance.currentPoint;
+        PlayerController.Instance.currentPoint.isFree = false;
         activatedPoints.Clear();
         activatedPoints.Add(lastActivatedPoint);
 
