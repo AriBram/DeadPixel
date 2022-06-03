@@ -7,6 +7,7 @@ using UnityEngine;
 public class LevelData {
     public Coordinate player;
     public List<Coordinate> obstacles;
+    public List<Coordinate> destroyables;
 }
 
 

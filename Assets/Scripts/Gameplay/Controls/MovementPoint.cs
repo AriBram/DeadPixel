@@ -18,17 +18,20 @@ public class MovementPoint : MonoBehaviour {
 
     public bool isFree;
     public bool canDrop;
-    public bool isObstacle;
+
+    public bool isObstacle => data == PointData.Obstacle;
+    public bool isDestroyable => data == PointData.Destroyable;
+    public bool isQbit => data == PointData.QBit;
+
+    public PointData data;
 
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
 
     
     void Awake() {
-        isFree = true;
-        canDrop = true;
-        isObstacle = false;
         Deactivate();
+        Reset();
     }
 
     
@@ -51,4 +54,14 @@ public class MovementPoint : MonoBehaviour {
             }
         }
     }
+
+
+    public void Reset() {
+        isFree = true;
+        canDrop = true;
+        data = PointData.None;
+    }
 }
+
+
+public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit}

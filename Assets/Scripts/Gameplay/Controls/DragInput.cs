@@ -46,7 +46,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        Debug.Log("activated points count: " + activatedPoints.Count.ToString());
+        //Debug.Log("activated points count: " + activatedPoints.Count.ToString());
         MovementManager.Instance.SetMovementTrack(activatedPoints);
     }
 
@@ -72,7 +72,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         if(choosenType == QBitType.NONE)
                             choosenType = qType;
 
-                        if(qType == choosenType) {
+                        if(qType == choosenType || (point.isDestroyable && !activatedPoints[activatedPoints.Count - 1].isDestroyable)) {
                             point.Activate();
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);

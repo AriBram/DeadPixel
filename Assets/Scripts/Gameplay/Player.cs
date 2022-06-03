@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
     public int qBitsCollected_Red;
     public int qBitsCollected_Blue;
 
+    public int comboCheckPointIndex;
+
     public Image root;
     public QBitType colorType;
 
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour {
 
         activeTargetIndex = 0;
         maxPointIndex = 0;
+        comboCheckPointIndex = 0;
 
         foreach(var point in MovementManager.Instance.Points)
             point.onPointReach.AddListener(SwitchTargetToNextPoint);
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour {
             return;
 
         activeTargetIndex = 0;
+        comboCheckPointIndex = 1;
         maxPointIndex = activatedPoints.Count - 1;
 
         SwitchTargetToNextPoint();
@@ -89,9 +93,42 @@ public class Player : MonoBehaviour {
             EndMove();
             return;
         }
+        else if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isDestroyable) {
+            AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+            if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
+                EndMove();
+                return;
+            }
+        }
+        else if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
+            AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+            activeTargetIndex += 2;
+            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            return;
+        }
 
         activeTargetIndex++;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+    }
+
+
+    public int CountAttackPower(int targetIndex) {
+        int attackPower = 0;
+        for(int i = comboCheckPointIndex; i < targetIndex; i++) {
+            //Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
+            //if(activatedPoints[i].isQbit)
+            if(activatedPoints[i].data == PointData.None)
+                attackPower++;
+        }
+        comboCheckPointIndex = targetIndex;
+        return attackPower; //kostyl
+    }
+
+
+    public void AttackDestroyable(int power, MovementPoint point) {
+        Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
+        Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
+        destroyableToAttack.Attack(power);
     }
 
 
@@ -117,7 +154,7 @@ public class Player : MonoBehaviour {
         GameplayController.Instance.SetPrepareState();
         PlayerController.Instance.currentPoint.isFree = true;
         PlayerController.Instance.currentPoint.canDrop = true;
-        PlayerController.Instance.currentPoint = activatedPoints[maxPointIndex];
+        PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
         activeTargetIndex = 0;

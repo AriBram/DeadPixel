@@ -26,7 +26,8 @@ public class QBit : MonoBehaviour {
         if(other.CompareTag("Player")) {
             if(GameplayController.Instance.IsMove) {
                 Player.Instance.PickQBit(data);
-                MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y).isFree = true;
+                MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
+                point.Reset();
                 QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
                 Field.Instance.qBits.Remove(qBitToRemove);
                 Destroy(this.gameObject);

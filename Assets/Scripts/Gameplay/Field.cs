@@ -11,9 +11,14 @@ public class Field : MonoBehaviour {
     public Transform obstacleContainer;
     public GameObject obstaclePrefab;
 
+    public Transform destroyableContainer;
+    public GameObject destroyablePrefab;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
     public List<GameObject> obstaclesLinks = new List<GameObject>();
+    public List<GameObject> destroyablesLinks = new List<GameObject>();
+    public List<Destroyable> destroyables = new List<Destroyable>();
 
     public int size_X;
     public int size_Y;
@@ -67,8 +72,9 @@ public class Field : MonoBehaviour {
                         Transform dropPoint = point.gameObject.GetComponent<Transform>();
                         qBitToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
                         qBitToDrop.Init(qBitToDrop.data, point);
-                        newPoint.isFree = true;
+                        newPoint.Reset();
                         point.isFree = false;
+                        point.data = PointData.QBit;
                         break;
                     }
                 }
@@ -85,6 +91,7 @@ public class Field : MonoBehaviour {
                 item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
                 qBitsLinks.Add(item);
                 spawnPoint.isFree = false;
+                spawnPoint.data = PointData.QBit;
                 QBit qBit = item.GetComponent<QBit>();
                 QBitData qBitData = GameData.Instance.GetRandomQBit();
                 qBit.Init(qBitData, spawnPoint);
@@ -98,6 +105,7 @@ public class Field : MonoBehaviour {
     public void SpawnLevelElements(LevelData level) {
         SpawnPlayer(level.player);
         SpawnObstacles(level.obstacles);
+        SpawnDestroyables(level.destroyables);
     }
 
     public void SpawnPlayer(Coordinate pos) {
@@ -113,7 +121,24 @@ public class Field : MonoBehaviour {
             obstaclesLinks.Add(item);
             spawnPoint.isFree = false;
             spawnPoint.canDrop = false;
-            spawnPoint.isObstacle = true;
+            spawnPoint.data = PointData.Obstacle;
+        }
+    }
+
+    public void SpawnDestroyables(List<Coordinate> obstacles) {
+        foreach(var destroyable in obstacles) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == destroyable.x && p.y == destroyable.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+            var item = Instantiate(destroyablePrefab, destroyableContainer);
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            destroyablesLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = false;
+            spawnPoint.data = PointData.Destroyable;
+
+            Destroyable d = item.GetComponent<Destroyable>();
+            d.Init(spawnPoint);
+            destroyables.Add(d);
         }
     }
 }
