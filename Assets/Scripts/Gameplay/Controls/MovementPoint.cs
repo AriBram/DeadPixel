@@ -17,6 +17,7 @@ public class MovementPoint : MonoBehaviour {
     public bool isActive;
 
     public bool isFree;
+    public bool canDrop;
 
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
@@ -24,6 +25,7 @@ public class MovementPoint : MonoBehaviour {
     
     void Awake() {
         isFree = true;
+        canDrop = true;
         Deactivate();
     }
 

@@ -71,13 +71,7 @@ public class Player : MonoBehaviour {
 
     public void SwitchTargetToNextPoint() {
         if(activeTargetIndex + 1 > maxPointIndex) {
-            GameplayController.Instance.SetPrepareState();
-            PlayerController.Instance.currentPoint.isFree = true;
-            PlayerController.Instance.currentPoint = activatedPoints[maxPointIndex];
-            PlayerController.Instance.currentPoint.isFree = false;
-            activeTargetIndex = 0;
-            input.ClearMovementTrack();
-            activatedPoints.Clear();
+            EndMove();
             return;
         }
 
@@ -98,5 +92,21 @@ public class Player : MonoBehaviour {
                 qBitsCollected_Blue++;
                 break;
         }
+    }
+
+
+    public void EndMove() {
+        GameplayController.Instance.SetPrepareState();
+        PlayerController.Instance.currentPoint.isFree = true;
+        PlayerController.Instance.currentPoint.canDrop = true;
+        PlayerController.Instance.currentPoint = activatedPoints[maxPointIndex];
+        PlayerController.Instance.currentPoint.isFree = false;
+        PlayerController.Instance.currentPoint.canDrop = false;
+        activeTargetIndex = 0;
+        input.ClearMovementTrack();
+        activatedPoints.Clear();
+
+        Field.Instance.DropTiles();
+        Field.Instance.FillFreePoints();
     }
 }

@@ -490,6 +490,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   activatedPoints: []
+  qBitsCollected_Green: 0
+  qBitsCollected_Red: 0
+  qBitsCollected_Blue: 0
 --- !u!58 &160957868
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3954,6 +3957,57 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6400735309757048189, guid: 17a9ec3868b1c9c4eaa171735e903d06, type: 3}
   m_PrefabInstance: {fileID: 1102872963}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1112977024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112977026}
+  - component: {fileID: 1112977025}
+  m_Layer: 0
+  m_Name: GameData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1112977025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112977024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b6df265b92a8f42916adee9a42ea8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qBits:
+  - qType: 0
+    color: {r: 0.11232326, g: 0.46226418, b: 0.102483094, a: 1}
+  - qType: 1
+    color: {r: 0.8018868, g: 0.14751692, b: 0.14751692, a: 1}
+  - qType: 2
+    color: {r: 0, g: 0.7069087, b: 1, a: 1}
+--- !u!4 &1112977026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112977024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.76045, y: 1.4051028, z: 116.323524}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1119675924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6906,6 +6960,9 @@ MonoBehaviour:
   qBitsContainer: {fileID: 507979139}
   qBitPrefab: {fileID: 1241738737039526099, guid: 2eaf063fc1f2cd14581db2b017120bc5, type: 3}
   qBitsLinks: []
+  qBits: []
+  size_X: 7
+  size_Y: 7
 --- !u!1001 &1988167002
 PrefabInstance:
   m_ObjectHideFlags: 0

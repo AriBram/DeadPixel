@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class QBit : MonoBehaviour {
 
-    QBitData data;
+    public QBitData data;
 
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     public Image frame;
 
@@ -27,6 +27,8 @@ public class QBit : MonoBehaviour {
             if(GameplayController.Instance.IsMove) {
                 Player.Instance.PickQBit(data);
                 MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y).isFree = true;
+                QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
+                Field.Instance.qBits.Remove(qBitToRemove);
                 Destroy(this.gameObject);
             }
         }
