@@ -7,12 +7,10 @@ using UnityEngine.UI;
 public class GameMenu : MenuBase {
 
     public Button goBtn;
-    public Button initFieldBtn;
 
 
     void Start() {
         goBtn.onClick.AddListener(OnBtnGoClick);
-        initFieldBtn.onClick.AddListener(OnBtnInitClick);
     }
 
     void Update() {
@@ -21,7 +19,7 @@ public class GameMenu : MenuBase {
 
     public override void Show() {
         gameObject.SetActive(true);
-        //Field.Instance.Init();
+        Field.Instance.Init();
     }
 
     public override void Hide() {
@@ -33,9 +31,5 @@ public class GameMenu : MenuBase {
 
     public void OnBtnGoClick() {
         Player.Instance.ActivateMove();
-    }
-
-    public void OnBtnInitClick() {
-        Field.Instance.Init();
     }
 }

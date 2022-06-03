@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public class Player : MonoBehaviour {
@@ -25,11 +26,16 @@ public class Player : MonoBehaviour {
     public QBitType colorType;
 
     public static Player Instance { get; private set; }
+
+    public class AwakeEvent : UnityEvent { }
+    [HideInInspector] public AwakeEvent onAwake = new AwakeEvent();
     
+    
+    void Awake() {
+        Instance = this;
+    }
     
     void Start() {
-        Instance = this;
-
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<DragInput>();
 
@@ -44,6 +50,8 @@ public class Player : MonoBehaviour {
         qBitsCollected_Blue = 0;
 
         SetColorByType(QBitType.GREEN);
+
+        onAwake.Invoke();
     }
 
 
@@ -125,5 +133,18 @@ public class Player : MonoBehaviour {
         QBitData qData = GameData.Instance.qBits.Find(q => q.qType == qType);
         root.color = qData.color;
         colorType = qType;
+    }
+
+
+
+    public void SetSpawnPosition(Coordinate pos) {
+        MovementPoint newPoint = MovementManager.Instance.Points.Find(p => p.x == pos.x && p.y == pos.y);
+        Transform newPointTransform = newPoint.gameObject.GetComponent<Transform>();
+        this.transform.position = new Vector3(newPointTransform.position.x, newPointTransform.position.y, newPointTransform.position.z);
+        PlayerController.Instance.currentPoint.isFree = true;
+        PlayerController.Instance.currentPoint.canDrop = true;
+        PlayerController.Instance.currentPoint = newPoint;
+        PlayerController.Instance.currentPoint.isFree = false;
+        PlayerController.Instance.currentPoint.canDrop = false;
     }
 }

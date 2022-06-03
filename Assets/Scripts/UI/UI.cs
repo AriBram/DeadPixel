@@ -17,7 +17,9 @@ public class UI : MonoBehaviour {
     void Start() {
         Instance = this;
 
-        Restart();
+        Player.Instance.onAwake.AddListener(StartUI);
+
+        //Restart();
     }
 
     void Update() {}
@@ -68,6 +70,13 @@ public class UI : MonoBehaviour {
     public void Restart() {
         HideAll();
         PushMenu(mainMenu);
+    }
+
+
+    public void StartUI() {
+        gameMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
+        Restart();
     }
 }
 

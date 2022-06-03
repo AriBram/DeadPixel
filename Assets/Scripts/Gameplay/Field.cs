@@ -31,14 +31,17 @@ public class Field : MonoBehaviour {
 
 
     public void Init() {
-        SpawnField();
-    }
-
-
-    public void SpawnField() {
         DestroyField();
+        LevelData level = GameData.Instance.GetCurrentLevel();
+        SpawnLevelElements(level);
         FillFreePoints();
     }
+
+
+    /*public void SpawnField() {
+        DestroyField();
+        FillFreePoints();
+    }*/
 
     public void DestroyField() {
         foreach(GameObject qBit in qBitsLinks)
@@ -88,5 +91,15 @@ public class Field : MonoBehaviour {
                 qBits.Add(qBit);
             }
         }
+    }
+
+
+
+    public void SpawnLevelElements(LevelData level) {
+        SpawnPlayer(level.player);
+    }
+
+    public void SpawnPlayer(Coordinate pos) {
+        Player.Instance.SetSpawnPosition(pos);
     }
 }
