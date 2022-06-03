@@ -10,4 +10,4 @@ public class QBitData {
 }
 
 
-public enum QBitType {GREEN, RED, BLUE}
+public enum QBitType {GREEN, RED, BLUE, NONE}
