@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour {
 
@@ -18,6 +20,9 @@ public class Player : MonoBehaviour {
     public int qBitsCollected_Green;
     public int qBitsCollected_Red;
     public int qBitsCollected_Blue;
+
+    public Image root;
+    public QBitType colorType;
 
     public static Player Instance { get; private set; }
     
@@ -37,6 +42,8 @@ public class Player : MonoBehaviour {
         qBitsCollected_Green = 0;
         qBitsCollected_Red = 0;
         qBitsCollected_Blue = 0;
+
+        SetColorByType(QBitType.GREEN);
     }
 
 
@@ -84,12 +91,15 @@ public class Player : MonoBehaviour {
         switch(data.qType) {
             case QBitType.GREEN:
                 qBitsCollected_Green++;
+                SetColorByType(QBitType.GREEN);
                 break;
             case QBitType.RED:
                 qBitsCollected_Red++;
+                SetColorByType(QBitType.RED);
                 break;
             case QBitType.BLUE:
                 qBitsCollected_Blue++;
+                SetColorByType(QBitType.BLUE);
                 break;
         }
     }
@@ -108,5 +118,12 @@ public class Player : MonoBehaviour {
 
         Field.Instance.DropTiles();
         Field.Instance.FillFreePoints();
+    }
+
+
+    public void SetColorByType(QBitType qType) {
+        QBitData qData = GameData.Instance.qBits.Find(q => q.qType == qType);
+        root.color = qData.color;
+        colorType = qType;
     }
 }

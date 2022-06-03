@@ -493,6 +493,8 @@ MonoBehaviour:
   qBitsCollected_Green: 0
   qBitsCollected_Red: 0
   qBitsCollected_Blue: 0
+  root: {fileID: 160957864}
+  colorType: 0
 --- !u!58 &160957868
 CircleCollider2D:
   m_ObjectHideFlags: 0
