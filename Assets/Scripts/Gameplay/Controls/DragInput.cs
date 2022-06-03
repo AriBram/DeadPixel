@@ -67,11 +67,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                 if(qBit != null)
                     qType = qBit.data.qType;
 
-                if(!activatedPoints.Contains(point)) {
+                if(!activatedPoints.Contains(point) && !point.isObstacle) {
                     if(Mathf.Abs(point.x - lastActivatedPoint.x) <= 1 && Mathf.Abs(point.y - lastActivatedPoint.y) <= 1) {
                         if(choosenType == QBitType.NONE)
                             choosenType = qType;
-                            
+
                         if(qType == choosenType) {
                             point.Activate();
                             lastActivatedPoint = point;

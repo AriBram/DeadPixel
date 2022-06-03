@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class LevelData {
     public Coordinate player;
+    public List<Coordinate> obstacles;
 }
 
 

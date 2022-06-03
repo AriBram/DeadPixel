@@ -8,8 +8,12 @@ public class Field : MonoBehaviour {
     public Transform qBitsContainer;
     public GameObject qBitPrefab;
 
+    public Transform obstacleContainer;
+    public GameObject obstaclePrefab;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
+    public List<GameObject> obstaclesLinks = new List<GameObject>();
 
     public int size_X;
     public int size_Y;
@@ -38,10 +42,6 @@ public class Field : MonoBehaviour {
     }
 
 
-    /*public void SpawnField() {
-        DestroyField();
-        FillFreePoints();
-    }*/
 
     public void DestroyField() {
         foreach(GameObject qBit in qBitsLinks)
@@ -97,9 +97,23 @@ public class Field : MonoBehaviour {
 
     public void SpawnLevelElements(LevelData level) {
         SpawnPlayer(level.player);
+        SpawnObstacles(level.obstacles);
     }
 
     public void SpawnPlayer(Coordinate pos) {
         Player.Instance.SetSpawnPosition(pos);
+    }
+
+    public void SpawnObstacles(List<Coordinate> obstacles) {
+        foreach(var obstacle in obstacles) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == obstacle.x && p.y == obstacle.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+            var item = Instantiate(obstaclePrefab, obstacleContainer);
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            obstaclesLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = false;
+            spawnPoint.isObstacle = true;
+        }
     }
 }
