@@ -120,7 +120,7 @@ public class Player : MonoBehaviour {
             if(activatedPoints[i].data == PointData.None)
                 attackPower++;
         }
-        comboCheckPointIndex = targetIndex;
+        comboCheckPointIndex = targetIndex + 1;
         return attackPower; //kostyl
     }
 
