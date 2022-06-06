@@ -8,6 +8,8 @@ public class LevelData {
     public Coordinate player;
     public List<Coordinate> obstacles;
     public List<Coordinate> destroyables;
+
+    public List<GoalData> goals;
 }
 
 
@@ -19,5 +21,19 @@ public class Coordinate {
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+}
+
+
+public enum GoalType {CollectGreen, CollectBlue, CollectRed}
+
+[System.Serializable]
+public class GoalData {
+    public GoalType gType;
+    public int value;
+
+    public GoalData(GoalType gType, int value) {
+        this.gType = gType;
+        this.value = value;
     }
 }

@@ -172,6 +172,7 @@ public class Player : MonoBehaviour {
 
         Field.Instance.DropTiles();
         Field.Instance.FillFreePoints();
+        Field.Instance.goals.Refresh();
     }
 
 

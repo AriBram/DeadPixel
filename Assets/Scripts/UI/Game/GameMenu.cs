@@ -9,6 +9,7 @@ public class GameMenu : MenuBase {
     public Button goBtn;
 
     public HealthBar healthBar;
+    public GoalsBar goalsBar;
 
 
     void Start() {

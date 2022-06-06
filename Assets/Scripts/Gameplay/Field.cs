@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class Field : MonoBehaviour {
@@ -20,14 +21,21 @@ public class Field : MonoBehaviour {
     public List<GameObject> destroyablesLinks = new List<GameObject>();
     public List<Destroyable> destroyables = new List<Destroyable>();
 
+    public GoalsController goals;
+
     public int size_X;
     public int size_Y;
 
     public static Field Instance { get; private set; }
 
+    public class FieldInitEvent : UnityEvent { }
+    [HideInInspector] public FieldInitEvent onFieldInit = new FieldInitEvent();
+
     
     void Awake() {
         Instance = this;
+
+        goals.onGoalsComplete.AddListener(MoveToNextLevel);
     }
 
     void Start() {
@@ -44,6 +52,7 @@ public class Field : MonoBehaviour {
         LevelData level = GameData.Instance.GetCurrentLevel();
         SpawnLevelElements(level);
         FillFreePoints();
+        onFieldInit.Invoke();
     }
 
 
@@ -54,6 +63,9 @@ public class Field : MonoBehaviour {
 
         qBitsLinks.Clear();
         qBits.Clear();
+
+        foreach(var point in MovementManager.Instance.Points)
+            point.Reset();
     }
 
 
@@ -106,6 +118,7 @@ public class Field : MonoBehaviour {
         SpawnPlayer(level.player);
         SpawnObstacles(level.obstacles);
         SpawnDestroyables(level.destroyables);
+        goals.Init(level.goals);
     }
 
     public void SpawnPlayer(Coordinate pos) {
@@ -140,5 +153,12 @@ public class Field : MonoBehaviour {
             d.Init(spawnPoint);
             destroyables.Add(d);
         }
+    }
+
+
+
+    public void MoveToNextLevel() {
+        UserData.Instance.currentLevel++;
+        Init();
     }
 }
