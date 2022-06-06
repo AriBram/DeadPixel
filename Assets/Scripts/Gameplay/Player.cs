@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
 
+    public Health health;
+
     private Transform target;
     private Rigidbody2D rb;
 
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<DragInput>();
+        health = GetComponent<Health>();
 
         activeTargetIndex = 0;
         maxPointIndex = 0;
@@ -121,7 +124,7 @@ public class Player : MonoBehaviour {
                 attackPower++;
         }
         comboCheckPointIndex = targetIndex + 1;
-        return attackPower; //kostyl
+        return attackPower;
     }
 
 
