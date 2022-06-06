@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
 
     public Image root;
     public QBitType colorType;
+    public QBitType lastMoveType;
 
     public static Player Instance { get; private set; }
 
@@ -160,6 +161,11 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
+
+        if(colorType == lastMoveType && activatedPoints.Count >= 2)
+            health.GetHeal(0, 1);
+        lastMoveType = colorType;
+
         activeTargetIndex = 0;
         input.ClearMovementTrack();
         activatedPoints.Clear();

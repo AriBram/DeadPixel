@@ -6,6 +6,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour {
     
     public List<GameObject> healthPoints;
+    public List<GameObject> shields;
 
 
     void Start() {
@@ -18,13 +19,21 @@ public class HealthBar : MonoBehaviour {
         Clear();
 
         int playerHp = Player.Instance.health.hp;
+        int shieldsCount = Player.Instance.health.shields.value;
+
         for(int i = 0; i < playerHp; i++)
             healthPoints[i].SetActive(true);
+
+        for(int i = 0; i < shieldsCount; i++)
+            shields[i].SetActive(true);
     }
 
 
     void Clear() {
         foreach(var hp in healthPoints)
             hp.SetActive(false);
+
+        foreach(var sh in shields)
+            sh.SetActive(false);
     }
 }

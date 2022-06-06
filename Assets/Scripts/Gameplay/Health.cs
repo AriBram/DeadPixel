@@ -14,6 +14,8 @@ public class Health : MonoBehaviour {
 
     public int hpLimit;
 
+    public Shields shields;
+
     public class HealthChangedEvent : UnityEvent { }
     [HideInInspector] public HealthChangedEvent onHealthChanged = new HealthChangedEvent();
 
@@ -25,12 +27,14 @@ public class Health : MonoBehaviour {
 
     
     public void GetDamage(int damage) {
-        hp = Mathf.Clamp(hp - damage, 0, maxHp);
+        int damageAfterShields = shields.Use(damage);
+        hp = Mathf.Clamp(hp - damageAfterShields, 0, maxHp);
         onHealthChanged.Invoke();
     }
 
-    public void GetHeal(int heal) {
+    public void GetHeal(int heal, int shieldsCount) {
         hp = Mathf.Clamp(hp + heal, 0, maxHp);
+        shields.GetShields(shieldsCount);
         onHealthChanged.Invoke();
     }
 
