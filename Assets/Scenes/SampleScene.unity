@@ -592,7 +592,7 @@ RectTransform:
   - {fileID: 1950207239}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50.535}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2256,7 +2256,7 @@ RectTransform:
   - {fileID: 65061554}
   - {fileID: 1113163591}
   m_Father: {fileID: 1950207239}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5389,6 +5389,44 @@ MonoBehaviour:
       y: 0
     - x: 6
       y: 0
+    - x: 0
+      y: 1
+    - x: 6
+      y: 1
+    - x: 0
+      y: 5
+    - x: 0
+      y: 6
+    - x: 6
+      y: 5
+    - x: 6
+      y: 6
+    destroyables: []
+    defects: []
+    enemies:
+    - eType: 0
+      point:
+        x: 2
+        y: 4
+    - eType: 0
+      point:
+        x: 5
+        y: 2
+    - eType: 0
+      point:
+        x: 5
+        y: 5
+    goals:
+    - gType: 2
+      value: 40
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
+      y: 0
+    - x: 6
+      y: 0
     destroyables:
     - x: 1
       y: 3
@@ -5405,6 +5443,7 @@ MonoBehaviour:
       y: 5
     - x: 5
       y: 6
+    enemies: []
     goals:
     - gType: 1
       value: 40
@@ -8932,8 +8971,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 54931220}
-  - {fileID: 430694676}
   - {fileID: 1985898033}
+  - {fileID: 430694676}
   - {fileID: 1944521955}
   - {fileID: 160957862}
   m_Father: {fileID: 127393865}
@@ -8996,7 +9035,7 @@ RectTransform:
   - {fileID: 332506439}
   - {fileID: 1611736954}
   m_Father: {fileID: 1950207239}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9061,6 +9100,12 @@ MonoBehaviour:
   destroyablePrefab: {fileID: 4455279887709038895, guid: d54e9bb45cdc41e46aa2b98870a5b0af, type: 3}
   defectContainer: {fileID: 332506439}
   defectPrefab: {fileID: 4455279887709038895, guid: 97b9fea9a10489446abd91d35fb4559e, type: 3}
+  enemiesContainer: {fileID: 1611736954}
+  enemyPrefab_Worm: {fileID: 7181365842108163436, guid: 7403da0a397007d43899fb4c574638d3, type: 3}
+  enemyPrefab_Skeleton: {fileID: 7181365842108163436, guid: 99fd200bb7e36be4f9a3d2483a0ae9f1, type: 3}
+  enemyPrefab_Zombie: {fileID: 7181365842108163436, guid: b4d230f330131804b92f4e9cdd9378e1, type: 3}
+  enemyPrefab_Agent: {fileID: 7181365842108163436, guid: 764ed74ae4178054294531a14acbb4ed, type: 3}
+  enemiesCounter: 0
   qBitsLinks: []
   qBits: []
   obstaclesLinks: []
@@ -9068,6 +9113,8 @@ MonoBehaviour:
   destroyables: []
   defectsLinks: []
   defectsItems: []
+  enemiesLinks: []
+  enemiesItems: []
   goals: {fileID: 1985898037}
   size_X: 7
   size_Y: 7

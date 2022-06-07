@@ -23,6 +23,8 @@ public class MovementPoint : MonoBehaviour {
     public bool isDestroyable => data == PointData.Destroyable;
     public bool isQbit => data == PointData.QBit;
     public bool isDefect => data == PointData.Defect;
+    public bool isEnemy => data == PointData.Enemy;
+    public bool isPlayer => data == PointData.Player;
 
     public PointData data;
 
@@ -65,4 +67,4 @@ public class MovementPoint : MonoBehaviour {
 }
 
 
-public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit}
+public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player}

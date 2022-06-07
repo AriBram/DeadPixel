@@ -155,12 +155,11 @@ public class Player : MonoBehaviour {
 
 
     public void EndMove() {
-        GameplayController.Instance.SetPrepareState();
-        PlayerController.Instance.currentPoint.isFree = true;
-        PlayerController.Instance.currentPoint.canDrop = true;
+        PlayerController.Instance.currentPoint.Reset();
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
+        PlayerController.Instance.currentPoint.data = PointData.Player;
 
         Field.Instance.CheckDefectsForAttackPlayer();
 
@@ -172,9 +171,8 @@ public class Player : MonoBehaviour {
         input.ClearMovementTrack();
         activatedPoints.Clear();
 
-        Field.Instance.DropTiles();
-        Field.Instance.FillFreePoints();
-        Field.Instance.goals.Refresh();
+        //GameplayController.Instance.SetPrepareState();
+        Field.Instance.ActivateEnemyMove();
     }
 
 

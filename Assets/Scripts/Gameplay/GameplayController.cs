@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum GameplayState {IDLE, PREPARE, MOVE, ENEMY_MOVE}
+public enum GameplayState {IDLE, PREPARE, MOVE, ENEMY_MOVE, ENEMY_ATTACK}
 
 
 public class GameplayController : MonoBehaviour {
@@ -22,10 +22,6 @@ public class GameplayController : MonoBehaviour {
         Instance = this;
     }
 
-    
-    void Update() {
-        
-    }
 
 
     public void SetPrepareState() {

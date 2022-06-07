@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
         if(currentPoint != null) {
             currentPoint.isFree = false;
             currentPoint.canDrop = false;
+            currentPoint.data = PointData.Player;
         }
     }
 

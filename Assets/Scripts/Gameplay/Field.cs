@@ -18,6 +18,13 @@ public class Field : MonoBehaviour {
     public Transform defectContainer;
     public GameObject defectPrefab;
 
+    public Transform enemiesContainer;
+    public GameObject enemyPrefab_Worm;
+    public GameObject enemyPrefab_Skeleton;
+    public GameObject enemyPrefab_Zombie;
+    public GameObject enemyPrefab_Agent;
+    public int enemiesCounter;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
     public List<GameObject> obstaclesLinks = new List<GameObject>();
@@ -25,6 +32,8 @@ public class Field : MonoBehaviour {
     public List<Destroyable> destroyables = new List<Destroyable>();
     public List<GameObject> defectsLinks = new List<GameObject>();
     public List<Defect> defectsItems = new List<Defect>();
+    public List<GameObject> enemiesLinks = new List<GameObject>();
+    public List<Enemy> enemiesItems = new List<Enemy>();
 
     public GoalsController goals;
 
@@ -43,12 +52,14 @@ public class Field : MonoBehaviour {
         goals.onGoalsComplete.AddListener(MoveToNextLevel);
     }
 
-    void Start() {
-        //Init();
-    }
+    void Start() {}
 
     void Update() {
-        
+        if(GameplayController.Instance.IsEnemyMove) {
+            Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
+            if(enemiesCounter == enemiesItems.Count)
+                Refill();
+        }
     }
 
 
@@ -133,6 +144,7 @@ public class Field : MonoBehaviour {
         SpawnObstacles(level.obstacles);
         SpawnDestroyables(level.destroyables);
         SpawnDefects(level.defects);
+        SpawnEnemies(level.enemies);
         goals.Init(level.goals);
     }
 
@@ -187,6 +199,41 @@ public class Field : MonoBehaviour {
         }
     }
 
+    public void SpawnEnemies(List<EnemyData> enemies) {
+        foreach(var e in enemies) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == e.point.x && p.y == e.point.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+
+            GameObject item = new GameObject();
+
+            switch(e.eType) {
+                case EnemyType.Worm:
+                    item = Instantiate(enemyPrefab_Worm, enemiesContainer);
+                    break;
+                case EnemyType.Skeleton:
+                    item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
+                    break;
+                case EnemyType.Zombie:
+                    item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
+                    break;
+                case EnemyType.Agent:
+                    item = Instantiate(enemyPrefab_Agent, enemiesContainer);
+                    break;
+            }
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            enemiesLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = false;
+            spawnPoint.data = PointData.Enemy;
+
+            Enemy enemy = item.GetComponent<Enemy>();
+            enemy.Init(e.eType, spawnPoint);
+            enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
+            enemiesItems.Add(enemy);
+        }
+    }
+
 
 
     public void MoveToNextLevel() {
@@ -198,5 +245,28 @@ public class Field : MonoBehaviour {
     public void CheckDefectsForAttackPlayer() {
         foreach(var d in defectsItems)
             d.FindAndAttackPlayer();
+    }
+
+
+    public void ActivateEnemyMove() {
+        enemiesCounter = 0;
+        GameplayController.Instance.SetEnemyMoveState();
+        foreach(var e in enemiesItems)
+            e.ActivateMove();
+    }
+
+    public void UpdateEnemiesCounter() {
+        enemiesCounter++;
+    }
+
+
+
+
+
+    public void Refill() {
+        DropTiles();
+        FillFreePoints();
+        goals.Refresh();
+        GameplayController.Instance.SetPrepareState();
     }
 }

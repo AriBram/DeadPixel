@@ -12,6 +12,6 @@ public class UserData : MonoBehaviour {
 
     void Awake() {
         Instance = this;
-        currentLevel = 1;
+        currentLevel = 0;
     }
 }

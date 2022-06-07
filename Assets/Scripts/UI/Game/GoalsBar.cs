@@ -11,7 +11,7 @@ public class GoalsBar : MonoBehaviour {
     public List<Goal> goals;
 
     
-    void Start() {
+    void Awake() {
         Field.Instance.onFieldInit.AddListener(Init);
         Field.Instance.goals.onGoalsRefresh.AddListener(Refresh);
     }
@@ -20,11 +20,7 @@ public class GoalsBar : MonoBehaviour {
     public void Init() {
         Clear();
 
-        List<GoalData> goalsData = new List<GoalData>();
-        foreach(var g in Field.Instance.goals.activeGoals)
-            goalsData.Add(g);
-
-        foreach(var g in goalsData) {
+        foreach(var g in Field.Instance.goals.activeGoals) {
             var item = Instantiate(goalPrefab, goalsContainer);
             goalsLinks.Add(item);
             Goal goal = item.GetComponent<Goal>();

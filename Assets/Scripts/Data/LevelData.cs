@@ -10,6 +10,8 @@ public class LevelData {
     public List<Coordinate> destroyables;
     public List<Coordinate> defects;
 
+    public List<EnemyData> enemies; 
+
     public List<GoalData> goals;
 }
 
@@ -36,5 +38,17 @@ public class GoalData {
     public GoalData(GoalType gType, int value) {
         this.gType = gType;
         this.value = value;
+    }
+}
+
+
+[System.Serializable]
+public class EnemyData {
+    public EnemyType eType;
+    public Coordinate point;
+
+    public EnemyData(EnemyType eType, Coordinate point) {
+        this.eType = eType;
+        this.point = point;
     }
 }

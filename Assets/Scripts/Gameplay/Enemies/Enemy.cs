@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour {
     public int attackPower;
 
     public MovementPoint currentPoint;
+    public MovementPoint targetPoint;
 
     public List<Coordinate> attackPoints;
     public List<Coordinate> availablePointsToMove;
@@ -25,14 +27,23 @@ public class Enemy : MonoBehaviour {
 
     public float moveSpeed;
 
+    public bool isAttacking;
+
+    public class MoveEndEvent : UnityEvent { }
+    [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
+
     
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        isAttacking = false;
     }
 
     void FixedUpdate() {
-        if(GameplayController.Instance.IsEnemyMove)
+        if(GameplayController.Instance.IsEnemyMove) {
             Move();
+            if(isAttacking)
+                Attack();
+        }   
     }
 
 
@@ -55,15 +66,13 @@ public class Enemy : MonoBehaviour {
 
         healthPoints = Random.Range(minHP, maxHP + 1);
 
-        attackPoints = new List<Coordinate>();
-        availablePointsToMove = new List<Coordinate>();
-
         SetAttackPoints();
         SetMovePoints();
     }
 
 
     void SetAttackPoints() {
+        attackPoints = new List<Coordinate>();
         switch(eType) {
             case EnemyType.Worm: case EnemyType.Skeleton: case EnemyType.Zombie:
                 attackPoints.Add(new Coordinate(currentPoint.x + 1, currentPoint.y));
@@ -83,6 +92,7 @@ public class Enemy : MonoBehaviour {
     }
 
     void SetMovePoints() {
+        availablePointsToMove = new List<Coordinate>();
         switch(eType) {
             case EnemyType.Worm: case EnemyType.Skeleton: case EnemyType.Agent:
                 availablePointsToMove.Add(new Coordinate(currentPoint.x + 1, currentPoint.y));
@@ -119,13 +129,32 @@ public class Enemy : MonoBehaviour {
         
         MovementPoint p = MovementManager.Instance.Points.Find(p => p.x == movePoint.x && p.y == movePoint.y);
         target = p.gameObject.GetComponent<Transform>();
+        targetPoint = p;
 
-        GameplayController.Instance.SetEnemyMoveState();
+        if(targetPoint.x == currentPoint.x && targetPoint.y == currentPoint.y)
+            isAttacking = true;
     }
+
+    public void EndMove() {
+        currentPoint.Reset();
+        currentPoint = targetPoint;
+        currentPoint.isFree = false;
+        currentPoint.canDrop = false;
+        currentPoint.data = PointData.Enemy;
+        isAttacking = false;
+        SetAttackPoints();
+        SetMovePoints();
+        onMoveEnd.Invoke();
+    }
+
+
 
     public void Attack() {
-
+        EndMove();
     }
+
+
+
 
     public bool IsPointInAttackRadius(Coordinate point) {
         foreach(var p in attackPoints) {
@@ -137,10 +166,14 @@ public class Enemy : MonoBehaviour {
     }
 
     public Coordinate FindShortestWayToPoint(Coordinate point) {
-        Coordinate shortestWayPoint = availablePointsToMove[0];
+        Coordinate shortestWayPoint = new Coordinate(currentPoint.x, currentPoint.y);
         int currentDistance = CountDistanceBetweenPoints(point, shortestWayPoint);
 
         foreach(var p in availablePointsToMove) {
+            MovementPoint movementPoint = MovementManager.Instance.Points.Find(pp => pp.x == p.x && pp.y == p.y);
+            if(movementPoint.isObstacle || movementPoint.isDestroyable || movementPoint.isEnemy || movementPoint.isDefect || movementPoint.isPlayer)
+                continue;
+
             int newDistance = CountDistanceBetweenPoints(point, p);
             if(newDistance < currentDistance) {
                 shortestWayPoint = p;
