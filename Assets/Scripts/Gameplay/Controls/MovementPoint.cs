@@ -22,6 +22,7 @@ public class MovementPoint : MonoBehaviour {
     public bool isObstacle => data == PointData.Obstacle;
     public bool isDestroyable => data == PointData.Destroyable;
     public bool isQbit => data == PointData.QBit;
+    public bool isDefect => data == PointData.Defect;
 
     public PointData data;
 

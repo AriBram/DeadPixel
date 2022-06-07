@@ -15,11 +15,16 @@ public class Field : MonoBehaviour {
     public Transform destroyableContainer;
     public GameObject destroyablePrefab;
 
+    public Transform defectContainer;
+    public GameObject defectPrefab;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
     public List<GameObject> obstaclesLinks = new List<GameObject>();
     public List<GameObject> destroyablesLinks = new List<GameObject>();
     public List<Destroyable> destroyables = new List<Destroyable>();
+    public List<GameObject> defectsLinks = new List<GameObject>();
+    public List<Defect> defectsItems = new List<Defect>();
 
     public GoalsController goals;
 
@@ -80,13 +85,22 @@ public class Field : MonoBehaviour {
                 for(int i = 1; y + i < size_Y; i++) {
                     MovementPoint newPoint = MovementManager.Instance.Points.Find(p => p.x == x && p.y == y + i);
                     if (!newPoint.isFree && newPoint.canDrop) {
-                        QBit qBitToDrop = qBits.Find(q => q.x == newPoint.x && q.y == newPoint.y);
                         Transform dropPoint = point.gameObject.GetComponent<Transform>();
-                        qBitToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
-                        qBitToDrop.Init(qBitToDrop.data, point);
-                        newPoint.Reset();
+                        if(newPoint.isQbit) {
+                            QBit qBitToDrop = qBits.Find(q => q.x == newPoint.x && q.y == newPoint.y);
+                            
+                            qBitToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
+                            qBitToDrop.Init(qBitToDrop.data, point);
+                            point.data = PointData.QBit;
+                        }
+                        else if(newPoint.isDefect) {
+                            Defect defectToDrop = defectsItems.Find(d => d.x == newPoint.x && d.y == newPoint.y);
+                            defectToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
+                            defectToDrop.Init(point);  
+                            point.data = PointData.Defect;
+                        }
                         point.isFree = false;
-                        point.data = PointData.QBit;
+                        newPoint.Reset();
                         break;
                     }
                 }
@@ -118,6 +132,7 @@ public class Field : MonoBehaviour {
         SpawnPlayer(level.player);
         SpawnObstacles(level.obstacles);
         SpawnDestroyables(level.destroyables);
+        SpawnDefects(level.defects);
         goals.Init(level.goals);
     }
 
@@ -155,10 +170,33 @@ public class Field : MonoBehaviour {
         }
     }
 
+    public void SpawnDefects(List<Coordinate> defects) {
+        foreach(var defect in defects) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == defect.x && p.y == defect.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+            var item = Instantiate(defectPrefab, defectContainer);
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            defectsLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = true;
+            spawnPoint.data = PointData.Defect;
+
+            Defect d = item.GetComponent<Defect>();
+            d.Init(spawnPoint);
+            defectsItems.Add(d);
+        }
+    }
+
 
 
     public void MoveToNextLevel() {
         UserData.Instance.currentLevel++;
         Init();
+    }
+
+
+    public void CheckDefectsForAttackPlayer() {
+        foreach(var d in defectsItems)
+            d.FindAndAttackPlayer();
     }
 }

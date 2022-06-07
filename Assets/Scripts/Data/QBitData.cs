@@ -7,7 +7,12 @@ using UnityEngine;
 public class QBitData {
     public QBitType qType;
     public Color color;
+
+    public QBitData(QBitType qType, Color color) {
+        this.qType = qType;
+        this.color = color;
+    }
 }
 
 
-public enum QBitType {GREEN, RED, BLUE, NONE}
+public enum QBitType {GREEN, RED, BLUE, NONE, DEFECT}

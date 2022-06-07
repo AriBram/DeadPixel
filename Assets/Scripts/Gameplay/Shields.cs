@@ -12,7 +12,7 @@ public class Shields : MonoBehaviour {
     public int shieldsLimit;
 
 
-    void Start() {
+    void Awake() {
         value = startShields;
     }
 

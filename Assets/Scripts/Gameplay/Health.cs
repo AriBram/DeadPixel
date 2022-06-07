@@ -20,7 +20,7 @@ public class Health : MonoBehaviour {
     [HideInInspector] public HealthChangedEvent onHealthChanged = new HealthChangedEvent();
 
 
-    void Start() {
+    void Awake() {
         hp = startHp;
         maxHp = startMaxHp;
     }

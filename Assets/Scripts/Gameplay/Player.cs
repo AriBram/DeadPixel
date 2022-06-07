@@ -121,7 +121,7 @@ public class Player : MonoBehaviour {
         for(int i = comboCheckPointIndex; i < targetIndex; i++) {
             //Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
             //if(activatedPoints[i].isQbit)
-            if(activatedPoints[i].data == PointData.None)
+            if(activatedPoints[i].data == PointData.None) //bug
                 attackPower++;
         }
         comboCheckPointIndex = targetIndex + 1;
@@ -161,6 +161,8 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
+
+        Field.Instance.CheckDefectsForAttackPlayer();
 
         if(colorType == lastMoveType && activatedPoints.Count >= 2)
             health.GetHeal(0, 1);

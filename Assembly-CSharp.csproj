@@ -41,30 +41,30 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Gameplay\Shields.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Gameplay\GameplayController.cs" />
+     <Compile Include="Assets\Scripts\UI\Game\GoalsBar.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementPoint.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Obstacle.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementManager.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Player.cs" />
+     <Compile Include="Assets\Scripts\UI\Game\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\DragInput.cs" />
      <Compile Include="Assets\Scripts\UI\UI.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\GameMenu.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\QBit.cs" />
-     <Compile Include="Assets\Scripts\Data\QBitData.cs" />
-     <Compile Include="Assets\Scripts\Data\GameData.cs" />
      <Compile Include="Assets\Scripts\Data\LevelData.cs" />
-     <Compile Include="Assets\Scripts\Data\UserData.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Obstacle.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
+     <Compile Include="Assets\Scripts\UI\Game\GameMenu.cs" />
      <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Defect.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\HealthBar.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Health.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Shields.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\GoalsBar.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\GoalsController.cs" />
      <Compile Include="Assets\Scripts\UI\Game\Goal.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Health.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\QBit.cs" />
+     <Compile Include="Assets\Scripts\Data\GameData.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\GoalsController.cs" />
+     <Compile Include="Assets\Scripts\Data\QBitData.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
+     <Compile Include="Assets\Scripts\Data\UserData.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

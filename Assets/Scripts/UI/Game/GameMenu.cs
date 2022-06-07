@@ -8,9 +8,6 @@ public class GameMenu : MenuBase {
 
     public Button goBtn;
 
-    public HealthBar healthBar;
-    public GoalsBar goalsBar;
-
 
     void Start() {
         goBtn.onClick.AddListener(OnBtnGoClick);
@@ -23,7 +20,6 @@ public class GameMenu : MenuBase {
     public override void Show() {
         gameObject.SetActive(true);
         Field.Instance.Init();
-        healthBar.Refresh();
     }
 
     public override void Hide() {
