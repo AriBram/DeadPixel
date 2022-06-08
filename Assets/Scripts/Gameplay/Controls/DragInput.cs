@@ -72,10 +72,17 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         if(choosenType == QBitType.NONE)
                             choosenType = qType;
 
-                        if(qType == choosenType || ( (point.isDestroyable || point.isEnemy) && (!activatedPoints[activatedPoints.Count - 1].isDestroyable || !activatedPoints[activatedPoints.Count - 1].isEnemy) )) {
+                        if(point.isQbit && qType == choosenType) {
                             point.Activate();
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
+                        }
+                        else if(point.isDestroyable || point.isEnemy) {
+                            if(!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer) {
+                                point.Activate();
+                                lastActivatedPoint = point;
+                                activatedPoints.Add(point);
+                            }
                         }
                     }
                 }
