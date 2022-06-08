@@ -134,7 +134,7 @@ public class Player : MonoBehaviour {
     public int CountAttackPower(int targetIndex) {
         int attackPower = 0;
         for(int i = comboCheckPointIndex; i < targetIndex; i++) {
-            Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
+            //Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
             //if(activatedPoints[i].isQbit)
             if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit) //bug
                 attackPower++;
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour {
 
     public void SetColorByType(QBitType qType) {
         QBitData qData = GameData.Instance.qBits.Find(q => q.qType == qType);
-        root.color = qData.color;
+        root.sprite = qData.rootSprite;
         colorType = qType;
     }
 
