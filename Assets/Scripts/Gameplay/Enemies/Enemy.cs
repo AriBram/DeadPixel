@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using TMPro;
 
 
 public enum EnemyType {Worm, Skeleton, Zombie, Agent, Spider}
@@ -29,6 +30,8 @@ public class Enemy : MonoBehaviour {
 
     public bool canMove;
 
+    public TMP_Text hpCaption;
+
     public class MoveEndEvent : UnityEvent { }
     [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
 
@@ -37,6 +40,9 @@ public class Enemy : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         target = currentPoint.gameObject.GetComponent<Transform>();
         canMove = true;
+
+        healthPoints = Random.Range(minHP, maxHP + 1);
+        hpCaption.text = healthPoints.ToString();
     }
 
     void FixedUpdate() {
@@ -120,7 +126,7 @@ public class Enemy : MonoBehaviour {
     public void ActivateMove() {
         if(!canMove)
             return;
-            
+
         MovementPoint playerPoint = PlayerController.Instance.currentPoint;
         Coordinate playerCoordinate = new Coordinate(playerPoint.x, playerPoint.y);
         bool isPlayerInAttackRadius = IsPointInAttackRadius(playerCoordinate);
@@ -150,7 +156,27 @@ public class Enemy : MonoBehaviour {
 
 
     public void Attack() {
+        MovementPoint playerPoint = PlayerController.Instance.currentPoint;
+        bool isPlayerInAttackRadius = attackPoints.Find(ap => ap.x == playerPoint.x && ap.y == playerPoint.y) == null ? false : true;
+
+        if(isPlayerInAttackRadius)
+            Player.Instance.health.GetDamage(attackPower);
+
         onMoveEnd.Invoke();
+    }
+
+
+
+    public void GetDamageByPlayer(int damage) {
+        healthPoints -= damage;
+        if(healthPoints <= 0) {
+            MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == currentPoint.x && p.y == currentPoint.y);
+            point.Reset();
+            Field.Instance.enemiesItems.Remove(this);
+            Destroy(this.gameObject);
+        }
+
+        hpCaption.text = healthPoints.ToString();
     }
 
 

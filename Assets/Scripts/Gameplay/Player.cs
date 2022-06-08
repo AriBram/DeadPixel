@@ -97,6 +97,7 @@ public class Player : MonoBehaviour {
             EndMove();
             return;
         }
+
         else if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isDestroyable) {
             AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
             if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
@@ -106,6 +107,20 @@ public class Player : MonoBehaviour {
         }
         else if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
             AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+            activeTargetIndex += 2;
+            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            return;
+        }
+
+        else if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isEnemy) {
+            AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+            if(activatedPoints[activeTargetIndex + 1].isEnemy) {
+                EndMove();
+                return;
+            }
+        }
+        else if(activatedPoints[activeTargetIndex + 1].isEnemy) {
+            AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
             activeTargetIndex += 2;
             target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
             return;
@@ -132,7 +147,13 @@ public class Player : MonoBehaviour {
     public void AttackDestroyable(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
-        destroyableToAttack.Attack(power);
+        destroyableToAttack.GetDamageByPlayer(power);
+    }
+
+    public void AttackEnemy(int power, MovementPoint point) {
+        Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
+        Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
+        enemyToAttack.GetDamageByPlayer(power);
     }
 
 

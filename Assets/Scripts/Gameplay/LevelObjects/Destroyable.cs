@@ -7,7 +7,7 @@ public class Destroyable : MonoBehaviour
 {
     public int x;
     public int y;
-    public int healPoints;
+    public int healthPoints;
 
     public TMP_Text hpCaption;
 
@@ -15,14 +15,14 @@ public class Destroyable : MonoBehaviour
     public void Init(MovementPoint point) {
         x = point.x;
         y = point.y;
-        healPoints = 2;
+        healthPoints = 2;
 
-        hpCaption.text = healPoints.ToString();
+        hpCaption.text = healthPoints.ToString();
     }
 
-    public void Attack(int damage) {
-        healPoints -= damage;
-        if(healPoints <= 0) {
+    public void GetDamageByPlayer(int damage) {
+        healthPoints -= damage;
+        if(healthPoints <= 0) {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
             point.Reset();
             Destroyable fieldDestroyable = Field.Instance.destroyables.Find(d => d.x == this.x && d.y == this.y);
@@ -31,6 +31,6 @@ public class Destroyable : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        hpCaption.text = healPoints.ToString();
+        hpCaption.text = healthPoints.ToString();
     }
 }
