@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour {
 
     public float moveSpeed;
 
+    public bool canMove;
+
     public class MoveEndEvent : UnityEvent { }
     [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
 
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         target = currentPoint.gameObject.GetComponent<Transform>();
+        canMove = true;
     }
 
     void FixedUpdate() {
@@ -115,6 +118,9 @@ public class Enemy : MonoBehaviour {
 
 
     public void ActivateMove() {
+        if(!canMove)
+            return;
+            
         MovementPoint playerPoint = PlayerController.Instance.currentPoint;
         Coordinate playerCoordinate = new Coordinate(playerPoint.x, playerPoint.y);
         bool isPlayerInAttackRadius = IsPointInAttackRadius(playerCoordinate);
@@ -170,7 +176,7 @@ public class Enemy : MonoBehaviour {
             MovementPoint movementPoint = MovementManager.Instance.Points.Find(pp => pp.x == p.x && pp.y == p.y);
             if(movementPoint == null)
                 continue;
-                
+
             if(movementPoint.isObstacle || movementPoint.isDestroyable || movementPoint.isEnemy || movementPoint.isDefect || movementPoint.isPlayer)
                 continue;
 
@@ -190,5 +196,11 @@ public class Enemy : MonoBehaviour {
         int distance = 0;
         distance += Mathf.Abs(point2.x - point1.x) + Mathf.Abs(point2.y - point1.y);
         return distance;
+    }
+
+
+
+    public void SetCanMove(bool canMove) {
+        this.canMove = canMove;
     }
 }

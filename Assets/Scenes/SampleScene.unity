@@ -9093,6 +9093,7 @@ MonoBehaviour:
   enemyPrefab_Zombie: {fileID: 7181365842108163436, guid: b4d230f330131804b92f4e9cdd9378e1, type: 3}
   enemyPrefab_Agent: {fileID: 7181365842108163436, guid: 764ed74ae4178054294531a14acbb4ed, type: 3}
   enemiesCounter: 0
+  maxEnemiesCanMove: 2
   qBitsLinks: []
   qBits: []
   obstaclesLinks: []

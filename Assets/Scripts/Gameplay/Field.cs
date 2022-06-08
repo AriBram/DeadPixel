@@ -24,6 +24,7 @@ public class Field : MonoBehaviour {
     public GameObject enemyPrefab_Zombie;
     public GameObject enemyPrefab_Agent;
     public int enemiesCounter;
+    public int maxEnemiesCanMove;
 
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
@@ -57,7 +58,7 @@ public class Field : MonoBehaviour {
     void Update() {
         if(GameplayController.Instance.IsEnemyMove) {
             //Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
-            if(enemiesCounter == enemiesItems.Count)
+            if(enemiesCounter == Mathf.Clamp(enemiesItems.Count, 0, maxEnemiesCanMove))
                 Refill();
         }
     }
@@ -252,6 +253,7 @@ public class Field : MonoBehaviour {
         enemiesCounter = 0;
         GameplayController.Instance.SetEnemyMoveState();
         EnemiesMovementManager.Instance.Reset();
+        EnemiesMovementManager.Instance.SetQueue(enemiesItems);
         foreach(var e in enemiesItems)
             e.ActivateMove();
     }

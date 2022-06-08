@@ -6,18 +6,22 @@ public class EnemiesMovementManager : MonoBehaviour {
 
     public List<Coordinate> busyPoints = new List<Coordinate>();
 
+    private int nextInQueue;
+
     public static EnemiesMovementManager Instance { get; private set; }
     
     
     void Awake() {
         Instance = this;
+        Init();
+    }
+
+    public void Init() {
+        nextInQueue = 0;
     }
 
 
     public bool IsPointBusy(Coordinate point) {
-        //Debug.Log(busyPoints.Contains(point));
-        Debug.Log(busyPoints.Count);
-        //return busyPoints.Find(p => p.x == point.x && p.y == point.y) != null;
         return busyPoints.Find(p => p.x == point.x && p.y == point.y) != null;
     }
 
@@ -27,5 +31,33 @@ public class EnemiesMovementManager : MonoBehaviour {
     
     public void AddBusyPoint(Coordinate point) {
         busyPoints.Add(point);
+    }
+
+
+    public void SetQueue(List<Enemy> enemies) {
+        int queueSize = enemies.Count - 1;
+        if(nextInQueue > queueSize)
+            nextInQueue = 0;
+
+        if(enemies.Count <= Field.Instance.maxEnemiesCanMove) {
+            foreach(var e in enemies)
+                e.SetCanMove(true);
+        }
+        else {
+            foreach(var e in enemies)
+                e.SetCanMove(false);
+
+            enemies[nextInQueue].SetCanMove(true);
+            MoveQueue(queueSize);
+            enemies[nextInQueue].SetCanMove(true);
+            MoveQueue(queueSize);
+        }
+    }
+
+    private void MoveQueue(int qSize) {
+        if( (nextInQueue + 1) > qSize )
+            nextInQueue = 0;
+        else
+            nextInQueue++;
     }
 }
