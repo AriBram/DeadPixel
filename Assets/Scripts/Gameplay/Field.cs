@@ -56,7 +56,7 @@ public class Field : MonoBehaviour {
 
     void Update() {
         if(GameplayController.Instance.IsEnemyMove) {
-            Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
+            //Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
             if(enemiesCounter == enemiesItems.Count)
                 Refill();
         }
@@ -251,6 +251,7 @@ public class Field : MonoBehaviour {
     public void ActivateEnemyMove() {
         enemiesCounter = 0;
         GameplayController.Instance.SetEnemyMoveState();
+        EnemiesMovementManager.Instance.Reset();
         foreach(var e in enemiesItems)
             e.ActivateMove();
     }

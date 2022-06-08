@@ -35,11 +35,6 @@ public class QBit : MonoBehaviour {
         }
 
         else if(other.CompareTag("Enemy")) {
-            if(GameplayController.Instance.IsEnemyMove) {
-                Enemy e = other.gameObject.GetComponent<Enemy>();
-                if(e.targetPoint.x == this.x && e.targetPoint.y == this.y)
-                    e.isAttacking = true;
-            }
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
             point.Reset();
             QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);

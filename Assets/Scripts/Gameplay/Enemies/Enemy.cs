@@ -27,23 +27,18 @@ public class Enemy : MonoBehaviour {
 
     public float moveSpeed;
 
-    public bool isAttacking;
-
     public class MoveEndEvent : UnityEvent { }
     [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
 
     
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        isAttacking = false;
+        target = currentPoint.gameObject.GetComponent<Transform>();
     }
 
     void FixedUpdate() {
-        if(GameplayController.Instance.IsEnemyMove) {
+        if(GameplayController.Instance.IsEnemyMove)
             Move();
-            if(isAttacking)
-                Attack();
-        }   
     }
 
 
@@ -132,7 +127,7 @@ public class Enemy : MonoBehaviour {
         targetPoint = p;
 
         if(targetPoint.x == currentPoint.x && targetPoint.y == currentPoint.y)
-            isAttacking = true;
+            EndMove();
     }
 
     public void EndMove() {
@@ -141,16 +136,15 @@ public class Enemy : MonoBehaviour {
         currentPoint.isFree = false;
         currentPoint.canDrop = false;
         currentPoint.data = PointData.Enemy;
-        isAttacking = false;
         SetAttackPoints();
         SetMovePoints();
-        onMoveEnd.Invoke();
+        Attack();
     }
 
 
 
     public void Attack() {
-        EndMove();
+        onMoveEnd.Invoke();
     }
 
 
@@ -170,7 +164,13 @@ public class Enemy : MonoBehaviour {
         int currentDistance = CountDistanceBetweenPoints(point, shortestWayPoint);
 
         foreach(var p in availablePointsToMove) {
+            if(EnemiesMovementManager.Instance.IsPointBusy(p))
+                continue;
+
             MovementPoint movementPoint = MovementManager.Instance.Points.Find(pp => pp.x == p.x && pp.y == p.y);
+            if(movementPoint == null)
+                continue;
+                
             if(movementPoint.isObstacle || movementPoint.isDestroyable || movementPoint.isEnemy || movementPoint.isDefect || movementPoint.isPlayer)
                 continue;
 
@@ -180,6 +180,8 @@ public class Enemy : MonoBehaviour {
                 currentDistance = newDistance;
             }
         }
+
+        EnemiesMovementManager.Instance.AddBusyPoint(shortestWayPoint);
 
         return shortestWayPoint;
     }

@@ -56,6 +56,14 @@ public class MovementPoint : MonoBehaviour {
                 onPointReach.Invoke();
             }
         }
+
+        else if(other.CompareTag("Enemy")) {
+            if(GameplayController.Instance.IsEnemyMove) {
+                Enemy e = other.gameObject.GetComponent<Enemy>();
+                if(e.targetPoint.x == this.x && e.targetPoint.y == this.y)
+                    e.EndMove();
+            }
+        }
     }
 
 
