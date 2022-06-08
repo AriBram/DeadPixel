@@ -7,7 +7,10 @@ using UnityEngine;
 public class QBitData {
     public QBitType qType;
     public Color color;
+
     public Sprite rootSprite;
+    public Sprite qBitSprite;
+    public Sprite qBitActiveSprite;
 
     public QBitData(QBitType qType, Color color) {
         this.qType = qType;

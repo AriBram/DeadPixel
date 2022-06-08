@@ -30,7 +30,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.08627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -93,9 +92,12 @@ MonoBehaviour:
   x: 0
   y: 0
   frame: {fileID: 4294948541205010290}
-  active: {r: 0.43164828, g: 0.9433962, b: 0.64429367, a: 1}
-  passive: {r: 1, g: 1, b: 1, a: 1}
+  active: {r: 0.43164828, g: 0.9433962, b: 0.64429367, a: 0.23529412}
+  passive: {r: 1, g: 1, b: 1, a: 0.078431375}
   isActive: 0
+  isFree: 0
+  canDrop: 0
+  data: 0
 --- !u!58 &2130093987694138726
 CircleCollider2D:
   m_ObjectHideFlags: 0

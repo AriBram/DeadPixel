@@ -14,7 +14,7 @@ public class GameMenu : MenuBase {
     }
 
     void Update() {
-        goBtn.gameObject.SetActive(GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 0);
+        goBtn.gameObject.SetActive(GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1);
     }
 
     public override void Show() {

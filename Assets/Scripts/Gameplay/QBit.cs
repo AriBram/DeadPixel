@@ -18,7 +18,7 @@ public class QBit : MonoBehaviour {
         this.x = point.x;
         this.y = point.y;
 
-        frame.color = data.color;
+        frame.sprite = data.qBitSprite;
     }
 
 
@@ -41,5 +41,13 @@ public class QBit : MonoBehaviour {
             Field.Instance.qBits.Remove(qBitToRemove);
             Destroy(this.gameObject);
         }
+    }
+
+
+    public void SetActive(bool isAct) {
+        if(isAct)
+            frame.sprite = data.qBitActiveSprite;
+        else
+            frame.sprite = data.qBitSprite;
     }
 }
