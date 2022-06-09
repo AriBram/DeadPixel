@@ -18,7 +18,7 @@ public class GoalsController : MonoBehaviour {
     public void Init(List<GoalData> newGoals) {
         activeGoals = new List<GoalData>();
         foreach(var goal in newGoals)
-            activeGoals.Add(new GoalData(goal.gType, goal.value));
+            activeGoals.Add(new GoalData(goal.gType, goal.value, goal.icon));
     }
 
 

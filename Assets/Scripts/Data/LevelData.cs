@@ -35,10 +35,12 @@ public enum GoalType {CollectGreen, CollectBlue, CollectRed}
 public class GoalData {
     public GoalType gType;
     public int value;
+    public Sprite icon;
 
-    public GoalData(GoalType gType, int value) {
+    public GoalData(GoalType gType, int value, Sprite icon) {
         this.gType = gType;
         this.value = value;
+        this.icon = icon;
     }
 }
 

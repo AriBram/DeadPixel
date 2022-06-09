@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour {
 
         value.text = data.value.ToString();
 
-        switch(goal.gType) {
+        /*switch(goal.gType) {
             case GoalType.CollectGreen:
                 icon.color = GameData.Instance.qBits.Find(q => q.qType == QBitType.GREEN).color;
                 break;
@@ -27,7 +27,8 @@ public class Goal : MonoBehaviour {
             case GoalType.CollectRed:
                 icon.color = GameData.Instance.qBits.Find(q => q.qType == QBitType.RED).color;
                 break;
-        }
+        }*/
+        icon.sprite = data.icon;
     }
 
     
