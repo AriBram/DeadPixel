@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 
 public class Field : MonoBehaviour {
@@ -25,6 +27,7 @@ public class Field : MonoBehaviour {
     public GameObject enemyPrefab_Agent;
     public int enemiesCounter;
     public int maxEnemiesCanMove;
+    public Dictionary<EnemyType, int> deathsCounter;
 
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
@@ -71,7 +74,15 @@ public class Field : MonoBehaviour {
         LevelData level = GameData.Instance.GetCurrentLevel();
         SpawnLevelElements(level);
         FillFreePoints();
+
         isGoalsComplete = false;
+
+        EnemiesRespawnManager.Instance.Init(level.respawns);
+        deathsCounter = new Dictionary<EnemyType, int>();
+        var allEnemyTypes = Enum.GetValues(typeof(EnemyType));
+        foreach(EnemyType eType in allEnemyTypes)
+            deathsCounter[eType] = 0;
+
         onFieldInit.Invoke();
     }
 
@@ -229,6 +240,7 @@ public class Field : MonoBehaviour {
             Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
 
             GameObject item = new GameObject();
+            Destroy(item);
 
             switch(e.eType) {
                 case EnemyType.Worm:
@@ -309,5 +321,71 @@ public class Field : MonoBehaviour {
         FillFreePoints();
         goals.Refresh();
         GameplayController.Instance.SetPrepareState();
+        EnemiesRespawnManager.Instance.MakeRespawnIteration();
+        ApplyDeathCounterToRespawnManager();
+    }
+
+
+
+    public void SpawnEnemy(EnemyType eType) {
+            List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
+            MovementPoint spawnPoint = availablePoints[Random.Range(0, availablePoints.Count)];
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+
+            GameObject item = new GameObject();
+            Destroy(item);
+
+            switch(eType) {
+                case EnemyType.Worm:
+                    item = Instantiate(enemyPrefab_Worm, enemiesContainer);
+                    break;
+                case EnemyType.Skeleton:
+                    item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
+                    break;
+                case EnemyType.Zombie:
+                    item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
+                    break;
+                case EnemyType.Agent:
+                    item = Instantiate(enemyPrefab_Agent, enemiesContainer);
+                    break;
+                case EnemyType.Defect:
+                    item = Instantiate(defectPrefab, defectContainer);
+                    break;
+            }
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+
+            if(eType != EnemyType.Defect) {
+                enemiesLinks.Add(item);
+                spawnPoint.isFree = false;
+                spawnPoint.canDrop = false;
+                spawnPoint.data = PointData.Enemy;
+
+                Enemy enemy = item.GetComponent<Enemy>();
+                enemy.Init(eType, spawnPoint);
+                enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
+                enemiesItems.Add(enemy);
+            }
+            else {
+                defectsLinks.Add(item);
+                spawnPoint.isFree = false;
+                spawnPoint.canDrop = true;
+                spawnPoint.data = PointData.Defect;
+
+                Defect d = item.GetComponent<Defect>();
+                d.Init(spawnPoint);
+                defectsItems.Add(d);
+            }
+    }
+
+
+    public void ApplyDeathCounterToRespawnManager() {
+        foreach(var dc in deathsCounter)
+            EnemiesRespawnManager.Instance.deathsCounter[dc.Key] += dc.Value;
+
+        deathsCounter = new Dictionary<EnemyType, int>();
+        var allEnemyTypes = Enum.GetValues(typeof(EnemyType));
+        foreach(EnemyType eType in allEnemyTypes)
+            deathsCounter[eType] = 0;
     }
 }

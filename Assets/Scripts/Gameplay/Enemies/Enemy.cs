@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 using TMPro;
 
 
-public enum EnemyType {Worm, Skeleton, Zombie, Agent, Spider}
 
 public class Enemy : MonoBehaviour {
     
@@ -196,6 +195,7 @@ public class Enemy : MonoBehaviour {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == currentPoint.x && p.y == currentPoint.y);
             point.Reset();
             Field.Instance.enemiesItems.Remove(this);
+            Field.Instance.deathsCounter[eType] += 1;
             Destroy(this.gameObject);
         }
 

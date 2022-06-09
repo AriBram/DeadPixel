@@ -11,6 +11,7 @@ public class LevelData {
     public List<Coordinate> defects;
 
     public List<EnemyData> enemies; 
+    public List<RespawnData> respawns;
 
     public List<GoalData> goals;
 }
@@ -42,6 +43,8 @@ public class GoalData {
 }
 
 
+public enum EnemyType {Worm, Skeleton, Zombie, Agent, Spider, Defect}
+
 [System.Serializable]
 public class EnemyData {
     public EnemyType eType;
@@ -50,5 +53,21 @@ public class EnemyData {
     public EnemyData(EnemyType eType, Coordinate point) {
         this.eType = eType;
         this.point = point;
+    }
+}
+
+
+public enum RespawnType {Simple, AfterGoalsComplete, AfterDeath}
+
+[System.Serializable]
+public class RespawnData {
+    public RespawnType rType;
+    public EnemyType eType;
+    public int frequency;
+
+    public RespawnData(RespawnType rType, EnemyType eType, int frequency) {
+        this.rType = rType;
+        this.eType = eType;
+        this.frequency = frequency;
     }
 }
