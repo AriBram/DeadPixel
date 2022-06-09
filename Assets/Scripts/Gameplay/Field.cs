@@ -37,6 +37,8 @@ public class Field : MonoBehaviour {
     public List<Enemy> enemiesItems = new List<Enemy>();
 
     public GoalsController goals;
+    public bool isGoalsComplete;
+    public Coordinate exitFromLevelPoint;
 
     public int size_X;
     public int size_Y;
@@ -50,7 +52,7 @@ public class Field : MonoBehaviour {
     void Awake() {
         Instance = this;
 
-        goals.onGoalsComplete.AddListener(MoveToNextLevel);
+        goals.onGoalsComplete.AddListener(SetGoalsCompleteState);
     }
 
     void Start() {}
@@ -69,6 +71,7 @@ public class Field : MonoBehaviour {
         LevelData level = GameData.Instance.GetCurrentLevel();
         SpawnLevelElements(level);
         FillFreePoints();
+        isGoalsComplete = false;
         onFieldInit.Invoke();
     }
 
@@ -78,8 +81,28 @@ public class Field : MonoBehaviour {
         foreach(GameObject qBit in qBitsLinks)
             Destroy(qBit);
 
+        foreach(GameObject obs in obstaclesLinks)
+            Destroy(obs);
+
+        foreach(GameObject des in destroyablesLinks)
+            Destroy(des);
+
+        foreach(GameObject def in defectsLinks)
+            Destroy(def);
+
+        foreach(GameObject en in enemiesLinks)
+            Destroy(en);
+
         qBitsLinks.Clear();
+        obstaclesLinks.Clear();
+        destroyablesLinks.Clear();
+        defectsLinks.Clear();
+        enemiesLinks.Clear();
+
         qBits.Clear();
+        destroyables.Clear();
+        defectsItems.Clear();
+        enemiesItems.Clear();
 
         foreach(var point in MovementManager.Instance.Points)
             point.Reset();
@@ -237,8 +260,23 @@ public class Field : MonoBehaviour {
 
 
 
+    public void SetGoalsCompleteState() {
+        isGoalsComplete = true;
+    }
+
+    public bool CheckIfLevelComplete(Coordinate playerPoint) {
+        if(isGoalsComplete) {
+            if(playerPoint.x == exitFromLevelPoint.x && playerPoint.y == exitFromLevelPoint.y) {
+                MoveToNextLevel();
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void MoveToNextLevel() {
         UserData.Instance.currentLevel++;
+        GameplayController.Instance.SetPrepareState();
         Init();
     }
 

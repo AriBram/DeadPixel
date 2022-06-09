@@ -182,8 +182,6 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint.canDrop = false;
         PlayerController.Instance.currentPoint.data = PointData.Player;
 
-        Field.Instance.CheckDefectsForAttackPlayer();
-
         if(colorType == lastMoveType && activatedPoints.Count >= 3)
             health.GetHeal(0, 1);
         lastMoveType = colorType;
@@ -192,7 +190,11 @@ public class Player : MonoBehaviour {
         input.ClearMovementTrack();
         activatedPoints.Clear();
 
-        //GameplayController.Instance.SetPrepareState();
+        bool isLevelComplete = Field.Instance.CheckIfLevelComplete(new Coordinate(PlayerController.Instance.currentPoint.x, PlayerController.Instance.currentPoint.y));
+        if(isLevelComplete)
+            return;
+
+        Field.Instance.CheckDefectsForAttackPlayer();
         Field.Instance.ActivateEnemyMove();
     }
 

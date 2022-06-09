@@ -5184,7 +5184,7 @@ MonoBehaviour:
     enemies: []
     goals:
     - gType: 1
-      value: 40
+      value: 5
   - player:
       x: 1
       y: 1
@@ -8697,6 +8697,10 @@ MonoBehaviour:
   enemiesLinks: []
   enemiesItems: []
   goals: {fileID: 1985898037}
+  isGoalsComplete: 0
+  exitFromLevelPoint:
+    x: 3
+    y: 6
   size_X: 7
   size_Y: 7
 --- !u!114 &1985898037
