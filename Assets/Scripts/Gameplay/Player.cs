@@ -52,9 +52,7 @@ public class Player : MonoBehaviour {
         foreach(var point in MovementManager.Instance.Points)
             point.onPointReach.AddListener(SwitchTargetToNextPoint);
 
-        qBitsCollected_Green = 0;
-        qBitsCollected_Red = 0;
-        qBitsCollected_Blue = 0;
+        Init();
 
         SetColorByType(QBitType.GREEN);
 
@@ -65,6 +63,13 @@ public class Player : MonoBehaviour {
     void FixedUpdate() {
         if(GameplayController.Instance.IsMove)
             Move();
+    }
+
+
+    public void Init() {
+        qBitsCollected_Green = 0;
+        qBitsCollected_Red = 0;
+        qBitsCollected_Blue = 0;
     }
 
 

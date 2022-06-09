@@ -28,6 +28,8 @@ public class MovementPoint : MonoBehaviour {
 
     public PointData data;
 
+    public List<MovementDirectionData> directionIndicators;
+
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
 
@@ -35,17 +37,24 @@ public class MovementPoint : MonoBehaviour {
     void Awake() {
         Deactivate();
         Reset();
+        ResetIndicators();
     }
 
     
     public void Activate() {
         isActive = true;
         frame.color = active;
+
+        if(isQbit)
+            Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(true);
     }
 
     public void Deactivate() {
         isActive = false;
         frame.color = passive;
+        
+        if(isQbit)
+            Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
     }
 
 
@@ -72,7 +81,29 @@ public class MovementPoint : MonoBehaviour {
         canDrop = true;
         data = PointData.None;
     }
+
+
+
+
+
+    public void ResetIndicators() {
+        foreach(var ind in directionIndicators)
+            ind.indicator.SetActive(false);
+    }
+
+    public void ActivateIndicator(MovementDirection direction) {
+        ResetIndicators();
+        MovementDirectionData di = directionIndicators.Find(i => i.direction == direction);
+        di.indicator.SetActive(true);
+    }
 }
 
 
 public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player}
+public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left}
+
+[System.Serializable]
+public class MovementDirectionData {
+    public MovementDirection direction;
+    public GameObject indicator;
+} 

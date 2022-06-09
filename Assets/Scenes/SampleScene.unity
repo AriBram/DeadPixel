@@ -600,6 +600,39 @@ MonoBehaviour:
   points: []
   activatedPoints: []
   lastActivatedPoint: {fileID: 0}
+  directionData:
+  - difference:
+      x: 0
+      y: 1
+    direction: 0
+  - difference:
+      x: 0
+      y: -1
+    direction: 1
+  - difference:
+      x: 1
+      y: 0
+    direction: 2
+  - difference:
+      x: -1
+      y: 0
+    direction: 3
+  - difference:
+      x: 1
+      y: 1
+    direction: 4
+  - difference:
+      x: -1
+      y: 1
+    direction: 5
+  - difference:
+      x: 1
+      y: -1
+    direction: 6
+  - difference:
+      x: -1
+      y: -1
+    direction: 7
 --- !u!114 &160957864
 MonoBehaviour:
   m_ObjectHideFlags: 0

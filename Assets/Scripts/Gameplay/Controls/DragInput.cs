@@ -17,6 +17,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
     private QBitType choosenType;
 
+    public List<CoordinatesDirectionData> directionData;
+
 
     void Start() {
         UILayer = LayerMask.NameToLayer("Tile");
@@ -74,12 +76,14 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
                         if(point.isQbit && qType == choosenType) {
                             point.Activate();
+                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
                         }
                         else if(point.isDestroyable || point.isEnemy) {
                             if(!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer) {
                                 point.Activate();
+                                lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
                                 lastActivatedPoint = point;
                                 activatedPoints.Add(point);
                             }
@@ -111,10 +115,32 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
         activatedPoints.Clear();
         activatedPoints.Add(lastActivatedPoint);
 
-        foreach(var point in points)
+        foreach(var point in points) {
             point.Deactivate();
+            point.ResetIndicators();
+        }
 
         MovementManager.Instance.ClearMovementTrack();
     }
+
+
+    
+    
+    public MovementDirection GetMovemenetDirection(MovementPoint point_1, MovementPoint point_2) {
+        Coordinate diff = CountDifferenceBetweenPoints(point_1, point_2);
+        MovementDirection dir = directionData.Find(d => d.difference.x == diff.x && d.difference.y == diff.y).direction;
+        return dir;
+    }
+    
+    public Coordinate CountDifferenceBetweenPoints(MovementPoint point_1, MovementPoint point_2) {
+        return new Coordinate(point_2.x - point_1.x, point_2.y - point_1.y);
+    }
 }
+
+
+[System.Serializable]
+public class CoordinatesDirectionData {
+    public Coordinate difference;
+    public MovementDirection direction;
+} 
 

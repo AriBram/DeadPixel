@@ -83,6 +83,8 @@ public class Field : MonoBehaviour {
         foreach(EnemyType eType in allEnemyTypes)
             deathsCounter[eType] = 0;
 
+        Player.Instance.Init();
+
         onFieldInit.Invoke();
     }
 
