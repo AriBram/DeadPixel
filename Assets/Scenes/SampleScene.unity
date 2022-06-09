@@ -5165,6 +5165,34 @@ MonoBehaviour:
       y: 0
     - x: 6
       y: 0
+    destroyables:
+    - x: 1
+      y: 3
+    - x: 3
+      y: 3
+    - x: 5
+      y: 3
+    defects:
+    - x: 3
+      y: 1
+    - x: 3
+      y: 4
+    - x: 1
+      y: 5
+    - x: 5
+      y: 6
+    enemies: []
+    goals:
+    - gType: 1
+      value: 40
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
+      y: 0
+    - x: 6
+      y: 0
     - x: 0
       y: 1
     - x: 6
@@ -5194,34 +5222,6 @@ MonoBehaviour:
         y: 5
     goals:
     - gType: 2
-      value: 40
-  - player:
-      x: 1
-      y: 1
-    obstacles:
-    - x: 0
-      y: 0
-    - x: 6
-      y: 0
-    destroyables:
-    - x: 1
-      y: 3
-    - x: 3
-      y: 3
-    - x: 5
-      y: 3
-    defects:
-    - x: 3
-      y: 1
-    - x: 3
-      y: 4
-    - x: 1
-      y: 5
-    - x: 5
-      y: 6
-    enemies: []
-    goals:
-    - gType: 1
       value: 40
 --- !u!4 &1112977026
 Transform:

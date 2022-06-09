@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 using TMPro;
@@ -31,6 +32,12 @@ public class Enemy : MonoBehaviour {
     public bool canMove;
 
     public TMP_Text hpCaption;
+    public Image shield;
+    public Image heart;
+    public List<GameObject> skulls;
+
+    public bool hasShield;
+    public QBitData colorData;
 
     public class MoveEndEvent : UnityEvent { }
     [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
@@ -43,6 +50,18 @@ public class Enemy : MonoBehaviour {
 
         healthPoints = Random.Range(minHP, maxHP + 1);
         hpCaption.text = healthPoints.ToString();
+
+        hasShield = Random.Range(0, 2) == 0 ? true : false;
+        shield.gameObject.SetActive(hasShield);
+        colorData = GameData.Instance.GetRandomQBit();
+        heart.color = colorData.color;
+        shield.color = colorData.color;
+
+        foreach(var skull in skulls)
+            skull.SetActive(false);
+        
+        for(int i = 0; i < attackPower; i++)
+            skulls[i].SetActive(true);
     }
 
     void FixedUpdate() {
@@ -158,8 +177,9 @@ public class Enemy : MonoBehaviour {
     public void Attack() {
         MovementPoint playerPoint = PlayerController.Instance.currentPoint;
         bool isPlayerInAttackRadius = attackPoints.Find(ap => ap.x == playerPoint.x && ap.y == playerPoint.y) == null ? false : true;
+        QBitType playerQType = Player.Instance.colorType;
 
-        if(isPlayerInAttackRadius)
+        if(isPlayerInAttackRadius && colorData.qType != playerQType)
             Player.Instance.health.GetDamage(attackPower);
 
         onMoveEnd.Invoke();
@@ -167,7 +187,10 @@ public class Enemy : MonoBehaviour {
 
 
 
-    public void GetDamageByPlayer(int damage) {
+    public void GetDamageByPlayer(int damage, QBitType qType) {
+        if(hasShield && qType == colorData.qType)
+            return;
+
         healthPoints -= damage;
         if(healthPoints <= 0) {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == currentPoint.x && p.y == currentPoint.y);

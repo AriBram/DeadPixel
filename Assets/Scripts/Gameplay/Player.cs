@@ -153,7 +153,7 @@ public class Player : MonoBehaviour {
     public void AttackEnemy(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
-        enemyToAttack.GetDamageByPlayer(power);
+        enemyToAttack.GetDamageByPlayer(power, colorType);
     }
 
 
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour {
 
         Field.Instance.CheckDefectsForAttackPlayer();
 
-        if(colorType == lastMoveType && activatedPoints.Count >= 2)
+        if(colorType == lastMoveType && activatedPoints.Count >= 3)
             health.GetHeal(0, 1);
         lastMoveType = colorType;
 
