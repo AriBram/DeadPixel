@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using TMPro;
 
 
 public class Field : MonoBehaviour {
@@ -44,6 +45,11 @@ public class Field : MonoBehaviour {
     public bool isGoalsComplete;
     public Coordinate exitFromLevelPoint;
     public GameObject goalsCompleteUI;
+
+    public bool isMovesLimited;
+    public int movesCount;
+    public GameObject movesCounter;
+    public TMP_Text movesCountCaption;
 
     public int size_X;
     public int size_Y;
@@ -88,6 +94,13 @@ public class Field : MonoBehaviour {
 
         Player.Instance.Init();
 
+        isMovesLimited = level.movesLimitData.isMovesLimited;
+        movesCounter.SetActive(isMovesLimited);
+        if(isMovesLimited) {
+            movesCount = level.movesLimitData.movesCount;
+            movesCountCaption.text = movesCount.ToString();
+        }
+        
         onFieldInit.Invoke();
     }
 
@@ -342,6 +355,11 @@ public class Field : MonoBehaviour {
         EnemiesRespawnManager.Instance.MakeRespawnIteration();
         ApplyDeathCounterToRespawnManager();
         ActivateSkeletonSpawners();
+
+        if(isMovesLimited) {
+            movesCount -= 1;
+            movesCountCaption.text = movesCount.ToString();
+        }
     }
 
 

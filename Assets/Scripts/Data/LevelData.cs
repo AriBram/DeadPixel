@@ -14,6 +14,8 @@ public class LevelData {
     public List<RespawnData> respawns;
 
     public List<GoalData> goals;
+
+    public MovesLimitData movesLimitData;
 }
 
 
@@ -85,5 +87,17 @@ public class RespawnData {
         this.rType = rType;
         this.eType = eType;
         this.frequency = frequency;
+    }
+}
+
+
+[System.Serializable]
+public class MovesLimitData {
+    public bool isMovesLimited;
+    public int movesCount;
+
+    public MovesLimitData(bool isMovesLimited, int movesCount) {
+        this.isMovesLimited = isMovesLimited;
+        this.movesCount = movesCount;
     }
 }
