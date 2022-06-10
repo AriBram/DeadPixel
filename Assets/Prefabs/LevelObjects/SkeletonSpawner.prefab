@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4231362795822696928}
   - component: {fileID: 8285290285355442669}
   m_Layer: 5
-  m_Name: Destroyable
+  m_Name: SkeletonSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.0244, y: 2.0244}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 119, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1391442486774102342
 CanvasRenderer:
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0409677cd91af2c47921c1e686be4102, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d7fd7192fb718b4f8b4c525c860ce89, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,12 +90,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403c765628595e445bf2849e6160d68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dType: 0
+  dType: 1
   x: 0
   y: 0
   healthPoints: 0
-  startHp_Min: 2
-  startHp_Max: 2
+  startHp_Min: 10
+  startHp_Max: 12
   hpCaption: {fileID: 3955752782750911518}
 --- !u!1 &8379827832617162195
 GameObject:
@@ -132,8 +132,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.519, y: -29.483}
-  m_SizeDelta: {x: 64.9613, y: 58.9653}
+  m_AnchoredPosition: {x: 20.6, y: -43.3}
+  m_SizeDelta: {x: 92.2225, y: 58.9653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1193012644707535906
 CanvasRenderer:
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 12
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

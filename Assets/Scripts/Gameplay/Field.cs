@@ -15,7 +15,8 @@ public class Field : MonoBehaviour {
     public GameObject obstaclePrefab;
 
     public Transform destroyableContainer;
-    public GameObject destroyablePrefab;
+    public GameObject destroyablePrefab_Simple;
+    public GameObject destroyablePrefab_SkeletonSpawner;
 
     public Transform defectContainer;
     public GameObject defectPrefab;
@@ -204,11 +205,23 @@ public class Field : MonoBehaviour {
         }
     }
 
-    public void SpawnDestroyables(List<Coordinate> obstacles) {
-        foreach(var destroyable in obstacles) {
-            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == destroyable.x && p.y == destroyable.y);
+    public void SpawnDestroyables(List<DestroyableData> data) {
+        foreach(var destroyable in data) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == destroyable.point.x && p.y == destroyable.point.y);
             Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
-            var item = Instantiate(destroyablePrefab, destroyableContainer);
+
+            GameObject item = new GameObject();
+            Destroy(item);
+
+            switch(destroyable.dType) {
+                case DestroyableType.Simple:
+                    item = Instantiate(destroyablePrefab_Simple, destroyableContainer);
+                    break;
+                case DestroyableType.SkeletonSpawner:
+                    item = Instantiate(destroyablePrefab_SkeletonSpawner, destroyableContainer);
+                    break;
+            }
+
             item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
             destroyablesLinks.Add(item);
             spawnPoint.isFree = false;
