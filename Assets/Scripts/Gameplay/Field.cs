@@ -195,12 +195,25 @@ public class Field : MonoBehaviour {
                 qBits.Add(qBit);
             }
         }
+
+        DestroyDuplicates(); //bug
     }
 
     public QBitData GetRandomColor() {
         QBitType qType = availableColors[Random.Range(0, availableColors.Count)];
         QBitData qBitData = GameData.Instance.GetQBitDataByType(qType);
         return qBitData;
+    }
+
+    private void DestroyDuplicates() {
+        foreach(var point in MovementManager.Instance.Points) {
+            List<QBit> qBitsByPoint = qBits.FindAll(q => q.x == point.x && q.y == point.y);
+            if(qBitsByPoint.Count > 1) {
+                qBits.Remove(qBitsByPoint[0]);
+                Destroy(qBitsByPoint[0].gameObject);
+                Debug.Log("duplicate destroyed");
+            }
+        }
     }
 
 
