@@ -333,6 +333,11 @@ public class Field : MonoBehaviour {
             List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
             MovementPoint spawnPoint = availablePoints[Random.Range(0, availablePoints.Count)];
             Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+            
+            if(spawnPoint.isQbit) {
+                QBit qBitToDestroy = qBits.Find(q => q.x == spawnPoint.x && q.y == spawnPoint.y);
+                qBitToDestroy.DestroyQbit();
+            }
 
             GameObject item = new GameObject();
             Destroy(item);

@@ -26,20 +26,12 @@ public class QBit : MonoBehaviour {
         if(other.CompareTag("Player")) {
             if(GameplayController.Instance.IsMove) {
                 Player.Instance.PickQBit(data);
-                MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
-                point.Reset();
-                QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
-                Field.Instance.qBits.Remove(qBitToRemove);
-                Destroy(this.gameObject);
+                DestroyQbit();
             }
         }
 
         else if(other.CompareTag("Enemy")) {
-            MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
-            point.Reset();
-            QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
-            Field.Instance.qBits.Remove(qBitToRemove);
-            Destroy(this.gameObject);
+            //DestroyQbit();
         }
     }
 
@@ -49,5 +41,14 @@ public class QBit : MonoBehaviour {
             frame.sprite = data.qBitActiveSprite;
         else
             frame.sprite = data.qBitSprite;
+    }
+
+
+    public void DestroyQbit() {
+        MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
+        point.Reset();
+        QBit qBitToRemove = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
+        Field.Instance.qBits.Remove(qBitToRemove);
+        Destroy(this.gameObject);
     }
 }

@@ -161,6 +161,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void EndMove() {
+        Debug.Log("enemy end move: " + targetPoint.x.ToString() + " " + targetPoint.y.ToString());
         currentPoint.Reset();
         currentPoint = targetPoint;
         currentPoint.isFree = false;

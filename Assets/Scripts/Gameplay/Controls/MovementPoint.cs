@@ -52,7 +52,7 @@ public class MovementPoint : MonoBehaviour {
     public void Deactivate() {
         isActive = false;
         frame.color = passive;
-        
+
         if(isQbit)
             Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
     }
@@ -68,6 +68,10 @@ public class MovementPoint : MonoBehaviour {
 
         else if(other.CompareTag("Enemy")) {
             if(GameplayController.Instance.IsEnemyMove) {
+                if(isQbit) {
+                    QBit qBitToDestroy = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
+                    qBitToDestroy.DestroyQbit();
+                }
                 Enemy e = other.gameObject.GetComponent<Enemy>();
                 if(e.targetPoint.x == this.x && e.targetPoint.y == this.y)
                     e.EndMove();

@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour {
 
         for(int i = 0; i < shieldsCount; i++) {
             shields[i].SetActive(true);
-            shields[i].GetComponent<Image>().color = UIcolor;
+            //shields[i].GetComponent<Image>().color = UIcolor;
         }
 
         hpCaption.text = playerHp.ToString();
