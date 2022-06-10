@@ -8,9 +8,13 @@ public class GameMenu : MenuBase {
 
     public Button goBtn;
 
+    /*Debug features*/
+    public Button goNextArenaBtn;
+
 
     void Start() {
         goBtn.onClick.AddListener(OnBtnGoClick);
+        goNextArenaBtn.onClick.AddListener(OnBtnGoNextArenaClick);
     }
 
     void Update() {
@@ -31,5 +35,9 @@ public class GameMenu : MenuBase {
 
     public void OnBtnGoClick() {
         Player.Instance.ActivateMove();
+    }
+
+    public void OnBtnGoNextArenaClick() {
+        Field.Instance.MoveToNextLevel();
     }
 }
