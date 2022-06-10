@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelData {
     public Coordinate player;
     public List<Coordinate> obstacles;
-    public List<Coordinate> destroyables;
+    public List<DestroyableData> destroyables;
     public List<Coordinate> defects;
 
     public List<EnemyData> enemies; 
@@ -29,7 +29,7 @@ public class Coordinate {
 }
 
 
-public enum GoalType {CollectGreen, CollectBlue, CollectRed}
+public enum GoalType {CollectGreen, CollectBlue, CollectRed, KillWorms, KillSkeletons}
 
 [System.Serializable]
 public class GoalData {
@@ -54,6 +54,20 @@ public class EnemyData {
 
     public EnemyData(EnemyType eType, Coordinate point) {
         this.eType = eType;
+        this.point = point;
+    }
+}
+
+
+public enum DestroyableType {Simple, SkeletonSpawner}
+
+[System.Serializable]
+public class DestroyableData {
+    public DestroyableType dType;
+    public Coordinate point;
+
+    public DestroyableData(DestroyableType dType, Coordinate point) {
+        this.dType = dType;
         this.point = point;
     }
 }

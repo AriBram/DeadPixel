@@ -26,16 +26,24 @@ public class GoalsController : MonoBehaviour {
         foreach(var goal in activeGoals) {
             switch(goal.gType) {
                 case GoalType.CollectGreen:
-                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected_Green, 0, goal.value);
-                    Player.Instance.qBitsCollected_Green = 0;
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected[QBitType.GREEN], 0, goal.value);
+                    Player.Instance.qBitsCollected[QBitType.GREEN] = 0;
                     break;
                 case GoalType.CollectBlue:
-                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected_Blue, 0, goal.value);
-                    Player.Instance.qBitsCollected_Blue = 0;
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected[QBitType.BLUE], 0, goal.value);
+                    Player.Instance.qBitsCollected[QBitType.BLUE] = 0;
                     break;
                 case GoalType.CollectRed:
-                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected_Red, 0, goal.value);
-                    Player.Instance.qBitsCollected_Red = 0;
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected[QBitType.RED], 0, goal.value);
+                    Player.Instance.qBitsCollected[QBitType.RED] = 0;
+                    break;
+                case GoalType.KillWorms:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Worm], 0, goal.value);
+                    Player.Instance.enemiesKilled[EnemyType.Worm] = 0;
+                    break;
+                case GoalType.KillSkeletons:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Skeleton], 0, goal.value);
+                    Player.Instance.enemiesKilled[EnemyType.Skeleton] = 0;
                     break;
             }
         }

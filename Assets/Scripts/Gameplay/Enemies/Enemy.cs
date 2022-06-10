@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour {
     public float moveSpeed;
 
     public bool canMove;
+    public GameObject canMoveIndicator;
 
     public TMP_Text hpCaption;
     public Image shield;
@@ -197,6 +198,7 @@ public class Enemy : MonoBehaviour {
             point.Reset();
             Field.Instance.enemiesItems.Remove(this);
             Field.Instance.deathsCounter[eType] += 1;
+            Player.Instance.enemiesKilled[eType] += 1;
             Destroy(this.gameObject);
         }
 
@@ -252,5 +254,6 @@ public class Enemy : MonoBehaviour {
 
     public void SetCanMove(bool canMove) {
         this.canMove = canMove;
+        canMoveIndicator.SetActive(canMove);
     }
 }

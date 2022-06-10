@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,9 +21,8 @@ public class Player : MonoBehaviour {
 
     private DragInput input;
 
-    public int qBitsCollected_Green;
-    public int qBitsCollected_Red;
-    public int qBitsCollected_Blue;
+    public Dictionary<QBitType, int> qBitsCollected;
+    public Dictionary<EnemyType, int> enemiesKilled;
 
     public int comboCheckPointIndex;
 
@@ -67,9 +67,15 @@ public class Player : MonoBehaviour {
 
 
     public void Init() {
-        qBitsCollected_Green = 0;
-        qBitsCollected_Red = 0;
-        qBitsCollected_Blue = 0;
+        enemiesKilled = new Dictionary<EnemyType, int>();
+        var allEnemyTypes = Enum.GetValues(typeof(EnemyType));
+        foreach(EnemyType eType in allEnemyTypes)
+            enemiesKilled[eType] = 0;
+
+        qBitsCollected = new Dictionary<QBitType, int>();
+        var allQBitTypes = Enum.GetValues(typeof(QBitType));
+        foreach(QBitType qType in allQBitTypes)
+            qBitsCollected[qType] = 0;
     }
 
 
@@ -163,20 +169,8 @@ public class Player : MonoBehaviour {
 
 
     public void PickQBit(QBitData data) {
-        switch(data.qType) {
-            case QBitType.GREEN:
-                qBitsCollected_Green++;
-                SetColorByType(QBitType.GREEN);
-                break;
-            case QBitType.RED:
-                qBitsCollected_Red++;
-                SetColorByType(QBitType.RED);
-                break;
-            case QBitType.BLUE:
-                qBitsCollected_Blue++;
-                SetColorByType(QBitType.BLUE);
-                break;
-        }
+        qBitsCollected[data.qType]++;
+        SetColorByType(data.qType);
     }
 
 

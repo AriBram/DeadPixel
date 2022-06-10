@@ -707,9 +707,6 @@ MonoBehaviour:
   health: {fileID: 160957869}
   moveSpeed: 20
   activatedPoints: []
-  qBitsCollected_Green: 0
-  qBitsCollected_Red: 0
-  qBitsCollected_Blue: 0
   comboCheckPointIndex: 0
   root: {fileID: 160957864}
   colorType: 0
@@ -5915,6 +5912,116 @@ MonoBehaviour:
       y: 1
     obstacles:
     - x: 0
+      y: 1
+    - x: 0
+      y: 2
+    - x: 6
+      y: 1
+    - x: 6
+      y: 2
+    destroyables:
+    - dType: 0
+      point:
+        x: 5
+        y: 1
+    - dType: 0
+      point:
+        x: 4
+        y: 3
+    - dType: 0
+      point:
+        x: 2
+        y: 4
+    - dType: 0
+      point:
+        x: 1
+        y: 4
+    - dType: 0
+      point:
+        x: 1
+        y: 5
+    defects: []
+    enemies:
+    - eType: 0
+      point:
+        x: 2
+        y: 5
+    - eType: 0
+      point:
+        x: 5
+        y: 4
+    - eType: 0
+      point:
+        x: 5
+        y: 6
+    - eType: 1
+      point:
+        x: 3
+        y: 4
+    respawns:
+    - rType: 2
+      eType: 0
+      frequency: 1
+    - rType: 2
+      eType: 1
+      frequency: 1
+    - rType: 0
+      eType: 1
+      frequency: 2
+    - rType: 0
+      eType: 0
+      frequency: 2
+    goals:
+    - gType: 3
+      value: 1
+      icon: {fileID: 21300000, guid: 9c62445ecf732ed4faec0c052ced34e0, type: 3}
+    - gType: 4
+      value: 1
+      icon: {fileID: 21300000, guid: c54de2155ef5afe49ae19e4289e04786, type: 3}
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
+      y: 0
+    - x: 6
+      y: 0
+    destroyables:
+    - dType: 0
+      point:
+        x: 1
+        y: 3
+    - dType: 0
+      point:
+        x: 3
+        y: 3
+    - dType: 0
+      point:
+        x: 5
+        y: 3
+    defects:
+    - x: 3
+      y: 1
+    - x: 3
+      y: 4
+    - x: 1
+      y: 5
+    - x: 5
+      y: 6
+    enemies: []
+    respawns:
+    - rType: 1
+      eType: 5
+      frequency: 1
+    goals:
+    - gType: 1
+      value: 5
+      icon: {fileID: 21300000, guid: dbd01d293cc419944a023bcb1437cd87, type: 3}
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
       y: 0
     - x: 6
       y: 0
@@ -5956,39 +6063,6 @@ MonoBehaviour:
     - gType: 2
       value: 5
       icon: {fileID: 21300000, guid: 7443320497c2b32438000ddcfef561eb, type: 3}
-  - player:
-      x: 1
-      y: 1
-    obstacles:
-    - x: 0
-      y: 0
-    - x: 6
-      y: 0
-    destroyables:
-    - x: 1
-      y: 3
-    - x: 3
-      y: 3
-    - x: 5
-      y: 3
-    defects:
-    - x: 3
-      y: 1
-    - x: 3
-      y: 4
-    - x: 1
-      y: 5
-    - x: 5
-      y: 6
-    enemies: []
-    respawns:
-    - rType: 1
-      eType: 5
-      frequency: 1
-    goals:
-    - gType: 1
-      value: 5
-      icon: {fileID: 21300000, guid: dbd01d293cc419944a023bcb1437cd87, type: 3}
 --- !u!4 &1112977026
 Transform:
   m_ObjectHideFlags: 0
@@ -9480,7 +9554,8 @@ MonoBehaviour:
   obstacleContainer: {fileID: 1727527696}
   obstaclePrefab: {fileID: 2205893372015723463, guid: 568f46ba8a64dba48ac0fb1029323b3c, type: 3}
   destroyableContainer: {fileID: 43159122}
-  destroyablePrefab: {fileID: 4455279887709038895, guid: d54e9bb45cdc41e46aa2b98870a5b0af, type: 3}
+  destroyablePrefab_Simple: {fileID: 4455279887709038895, guid: d54e9bb45cdc41e46aa2b98870a5b0af, type: 3}
+  destroyablePrefab_SkeletonSpawner: {fileID: 4455279887709038895, guid: 824993244da98d542ba17a7d935f6030, type: 3}
   defectContainer: {fileID: 332506439}
   defectPrefab: {fileID: 4455279887709038895, guid: 97b9fea9a10489446abd91d35fb4559e, type: 3}
   enemiesContainer: {fileID: 1611736954}
