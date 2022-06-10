@@ -42,6 +42,7 @@ public class Field : MonoBehaviour {
     public GoalsController goals;
     public bool isGoalsComplete;
     public Coordinate exitFromLevelPoint;
+    public GameObject goalsCompleteUI;
 
     public int size_X;
     public int size_Y;
@@ -76,6 +77,7 @@ public class Field : MonoBehaviour {
         FillFreePoints();
 
         isGoalsComplete = false;
+        goalsCompleteUI.SetActive(false);
 
         EnemiesRespawnManager.Instance.Init(level.respawns);
         deathsCounter = new Dictionary<EnemyType, int>();
@@ -276,6 +278,7 @@ public class Field : MonoBehaviour {
 
     public void SetGoalsCompleteState() {
         isGoalsComplete = true;
+        goalsCompleteUI.SetActive(true);
     }
 
     public bool CheckIfLevelComplete(Coordinate playerPoint) {
