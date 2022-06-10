@@ -707,6 +707,7 @@ MonoBehaviour:
   health: {fileID: 160957869}
   moveSpeed: 20
   activatedPoints: []
+  skeletonSpawnersDestroyed: 0
   comboCheckPointIndex: 0
   root: {fileID: 160957864}
   colorType: 0
@@ -5912,70 +5913,60 @@ MonoBehaviour:
       y: 1
     obstacles:
     - x: 0
-      y: 1
+      y: 0
     - x: 0
-      y: 2
+      y: 4
     - x: 6
-      y: 1
+      y: 0
     - x: 6
-      y: 2
+      y: 4
     destroyables:
     - dType: 0
       point:
-        x: 5
-        y: 1
-    - dType: 0
-      point:
-        x: 4
-        y: 3
-    - dType: 0
-      point:
         x: 2
         y: 4
     - dType: 0
-      point:
-        x: 1
-        y: 4
-    - dType: 0
-      point:
-        x: 1
-        y: 5
-    defects: []
-    enemies:
-    - eType: 0
-      point:
-        x: 2
-        y: 5
-    - eType: 0
-      point:
-        x: 5
-        y: 4
-    - eType: 0
-      point:
-        x: 5
-        y: 6
-    - eType: 1
       point:
         x: 3
         y: 4
+    - dType: 0
+      point:
+        x: 4
+        y: 4
+    - dType: 1
+      point:
+        x: 3
+        y: 5
+    defects: []
+    enemies:
+    - eType: 1
+      point:
+        x: 1
+        y: 5
+    - eType: 1
+      point:
+        x: 3
+        y: 2
+    - eType: 1
+      point:
+        x: 5
+        y: 3
+    - eType: 3
+      point:
+        x: 5
+        y: 6
     respawns:
     - rType: 2
-      eType: 0
-      frequency: 1
-    - rType: 2
-      eType: 1
+      eType: 3
       frequency: 1
     - rType: 0
-      eType: 1
-      frequency: 2
-    - rType: 0
-      eType: 0
-      frequency: 2
+      eType: 3
+      frequency: 3
     goals:
-    - gType: 3
+    - gType: 8
       value: 1
-      icon: {fileID: 21300000, guid: 9c62445ecf732ed4faec0c052ced34e0, type: 3}
-    - gType: 4
+      icon: {fileID: 21300000, guid: a139a0fb0161c8d47860a93ace1ab346, type: 3}
+    - gType: 6
       value: 1
       icon: {fileID: 21300000, guid: c54de2155ef5afe49ae19e4289e04786, type: 3}
   - player:
@@ -6063,6 +6054,77 @@ MonoBehaviour:
     - gType: 2
       value: 5
       icon: {fileID: 21300000, guid: 7443320497c2b32438000ddcfef561eb, type: 3}
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
+      y: 1
+    - x: 0
+      y: 2
+    - x: 6
+      y: 1
+    - x: 6
+      y: 2
+    destroyables:
+    - dType: 0
+      point:
+        x: 5
+        y: 1
+    - dType: 0
+      point:
+        x: 4
+        y: 3
+    - dType: 0
+      point:
+        x: 2
+        y: 4
+    - dType: 0
+      point:
+        x: 1
+        y: 4
+    - dType: 0
+      point:
+        x: 1
+        y: 5
+    defects: []
+    enemies:
+    - eType: 0
+      point:
+        x: 2
+        y: 5
+    - eType: 0
+      point:
+        x: 5
+        y: 4
+    - eType: 0
+      point:
+        x: 5
+        y: 6
+    - eType: 1
+      point:
+        x: 3
+        y: 4
+    respawns:
+    - rType: 2
+      eType: 0
+      frequency: 1
+    - rType: 2
+      eType: 1
+      frequency: 1
+    - rType: 0
+      eType: 1
+      frequency: 2
+    - rType: 0
+      eType: 0
+      frequency: 2
+    goals:
+    - gType: 3
+      value: 1
+      icon: {fileID: 21300000, guid: 9c62445ecf732ed4faec0c052ced34e0, type: 3}
+    - gType: 4
+      value: 1
+      icon: {fileID: 21300000, guid: c54de2155ef5afe49ae19e4289e04786, type: 3}
 --- !u!4 &1112977026
 Transform:
   m_ObjectHideFlags: 0

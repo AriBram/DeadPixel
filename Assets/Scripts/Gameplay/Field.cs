@@ -341,12 +341,17 @@ public class Field : MonoBehaviour {
         GameplayController.Instance.SetPrepareState();
         EnemiesRespawnManager.Instance.MakeRespawnIteration();
         ApplyDeathCounterToRespawnManager();
+        ActivateSkeletonSpawners();
     }
 
 
 
     public void SpawnEnemy(EnemyType eType) {
             List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
+
+            if(availablePoints.Count == 0)
+                return;
+
             MovementPoint spawnPoint = availablePoints[Random.Range(0, availablePoints.Count)];
             Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
             
@@ -410,5 +415,13 @@ public class Field : MonoBehaviour {
         var allEnemyTypes = Enum.GetValues(typeof(EnemyType));
         foreach(EnemyType eType in allEnemyTypes)
             deathsCounter[eType] = 0;
+    }
+
+
+    public void ActivateSkeletonSpawners() {
+        foreach(var d in destroyables) {
+            if(d.dType == DestroyableType.SkeletonSpawner)
+                d.Use();
+        }
     }
 }

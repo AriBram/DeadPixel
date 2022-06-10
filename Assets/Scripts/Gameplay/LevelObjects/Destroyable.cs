@@ -35,6 +35,9 @@ public class Destroyable : MonoBehaviour {
             if(fieldDestroyable != null)
                 Field.Instance.destroyables.Remove(fieldDestroyable);
             Destroy(this.gameObject);
+
+            if(dType == DestroyableType.SkeletonSpawner)
+                Player.Instance.skeletonSpawnersDestroyed += 1;
         }
 
         hpCaption.text = healthPoints.ToString();

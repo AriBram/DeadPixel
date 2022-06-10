@@ -29,7 +29,7 @@ public class Coordinate {
 }
 
 
-public enum GoalType {CollectGreen, CollectBlue, CollectRed, KillWorms, KillSkeletons}
+public enum GoalType {CollectGreen, CollectBlue, CollectRed, KillWorms, KillSkeletons, KillZombies, KillAgents, KillSpiders, DestroySkeletonSpawners}
 
 [System.Serializable]
 public class GoalData {

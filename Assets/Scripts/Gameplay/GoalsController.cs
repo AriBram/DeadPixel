@@ -25,6 +25,7 @@ public class GoalsController : MonoBehaviour {
     public void Refresh() {
         foreach(var goal in activeGoals) {
             switch(goal.gType) {
+
                 case GoalType.CollectGreen:
                     goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected[QBitType.GREEN], 0, goal.value);
                     Player.Instance.qBitsCollected[QBitType.GREEN] = 0;
@@ -37,6 +38,7 @@ public class GoalsController : MonoBehaviour {
                     goal.value = Mathf.Clamp(goal.value - Player.Instance.qBitsCollected[QBitType.RED], 0, goal.value);
                     Player.Instance.qBitsCollected[QBitType.RED] = 0;
                     break;
+
                 case GoalType.KillWorms:
                     goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Worm], 0, goal.value);
                     Player.Instance.enemiesKilled[EnemyType.Worm] = 0;
@@ -44,6 +46,23 @@ public class GoalsController : MonoBehaviour {
                 case GoalType.KillSkeletons:
                     goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Skeleton], 0, goal.value);
                     Player.Instance.enemiesKilled[EnemyType.Skeleton] = 0;
+                    break;
+                case GoalType.KillZombies:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Zombie], 0, goal.value);
+                    Player.Instance.enemiesKilled[EnemyType.Zombie] = 0;
+                    break;
+                case GoalType.KillAgents:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Agent], 0, goal.value);
+                    Player.Instance.enemiesKilled[EnemyType.Agent] = 0;
+                    break;
+                case GoalType.KillSpiders:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.enemiesKilled[EnemyType.Spider], 0, goal.value);
+                    Player.Instance.enemiesKilled[EnemyType.Spider] = 0;
+                    break;
+
+                case GoalType.DestroySkeletonSpawners:
+                    goal.value = Mathf.Clamp(goal.value - Player.Instance.skeletonSpawnersDestroyed, 0, goal.value);
+                    Player.Instance.skeletonSpawnersDestroyed = 0;
                     break;
             }
         }

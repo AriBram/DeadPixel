@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
 
     public Dictionary<QBitType, int> qBitsCollected;
     public Dictionary<EnemyType, int> enemiesKilled;
+    public int skeletonSpawnersDestroyed;
 
     public int comboCheckPointIndex;
 
@@ -76,6 +77,8 @@ public class Player : MonoBehaviour {
         var allQBitTypes = Enum.GetValues(typeof(QBitType));
         foreach(QBitType qType in allQBitTypes)
             qBitsCollected[qType] = 0;
+
+        skeletonSpawnersDestroyed = 0;
     }
 
 
