@@ -16,6 +16,8 @@ public class LevelData {
     public List<GoalData> goals;
 
     public MovesLimitData movesLimitData;
+
+    public List<QBitType> availableColors;
 }
 
 

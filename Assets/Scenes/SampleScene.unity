@@ -6202,6 +6202,31 @@ MonoBehaviour:
     rootSprite: {fileID: 21300000, guid: 6b21f3b5f5a3b764c8dd4daebac8e4fd, type: 3}
     qBitSprite: {fileID: 21300000, guid: 509fc7ee531d32d4d8bd6d7f53d11c8a, type: 3}
     qBitActiveSprite: {fileID: 21300000, guid: 874ccc6b245ffad4091f1dd630a623e5, type: 3}
+  - qType: 5
+    color: {r: 0.5740922, g: 0.8152887, b: 0.9150943, a: 1}
+    rootSprite: {fileID: 21300000, guid: 5dad2c63f39559d438938b6458808e5c, type: 3}
+    qBitSprite: {fileID: 21300000, guid: 33d382eb88f3a684b88fae098d41840a, type: 3}
+    qBitActiveSprite: {fileID: 21300000, guid: 0c45c642e8a552747acef59ea976bc00, type: 3}
+  - qType: 6
+    color: {r: 1, g: 0.5518868, b: 0.99684936, a: 1}
+    rootSprite: {fileID: 21300000, guid: 209878892a52de342b12b5cd2c7ba212, type: 3}
+    qBitSprite: {fileID: 21300000, guid: 5d32230ef1e73014db451f77f9d39180, type: 3}
+    qBitActiveSprite: {fileID: 21300000, guid: d1a338abc08f87d4abf914d793cdf52e, type: 3}
+  - qType: 7
+    color: {r: 0.54003817, g: 0.28235295, b: 0.9254902, a: 1}
+    rootSprite: {fileID: 21300000, guid: 375b6b6ac9ee8c741b6d19f593c04cc4, type: 3}
+    qBitSprite: {fileID: 21300000, guid: 087fd4adfbb00294d81f4b801e2c0514, type: 3}
+    qBitActiveSprite: {fileID: 21300000, guid: 066b3c988d395a34b9d1c3b90d360259, type: 3}
+  - qType: 8
+    color: {r: 0.87549293, g: 0.9245283, b: 0.38812745, a: 1}
+    rootSprite: {fileID: 21300000, guid: f35856c835a49ad4d90d2059b1029ee3, type: 3}
+    qBitSprite: {fileID: 21300000, guid: cf309661d5e782b428023fd6f83fdffa, type: 3}
+    qBitActiveSprite: {fileID: 21300000, guid: 8477a97d70f24e14e88ce92ba46baf1c, type: 3}
+  - qType: 9
+    color: {r: 0.9245283, g: 0.63562167, b: 0.14391243, a: 1}
+    rootSprite: {fileID: 21300000, guid: ab05fb8ac30bc1b42903b32592991a8f, type: 3}
+    qBitSprite: {fileID: 21300000, guid: 5ab0d0908cb2a1c438a974a122c3ee43, type: 3}
+    qBitActiveSprite: {fileID: 21300000, guid: 9a35ac4d818b516468d845c564b160ef, type: 3}
   Levels:
   - player:
       x: 1
@@ -6245,6 +6270,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
+    availableColors: 000000000100000002000000
   - player:
       x: 1
       y: 1
@@ -6294,6 +6320,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
+    availableColors: 000000000100000002000000
   - player:
       x: 1
       y: 1
@@ -6368,6 +6395,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
+    availableColors: 000000000100000002000000
   - player:
       x: 1
       y: 1
@@ -6432,6 +6460,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
+    availableColors: 00000000010000000200000006000000
   - player:
       x: 1
       y: 1
@@ -6487,6 +6516,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 1
       movesCount: 25
+    availableColors: 000000000100000006000000
 --- !u!4 &1112977026
 Transform:
   m_ObjectHideFlags: 0
@@ -10281,6 +10311,7 @@ MonoBehaviour:
   movesCount: 0
   movesCounter: {fileID: 783402104}
   movesCountCaption: {fileID: 532475333}
+  availableColors: 
   size_X: 7
   size_Y: 7
 --- !u!114 &1985898037

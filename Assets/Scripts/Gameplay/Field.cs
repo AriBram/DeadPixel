@@ -51,6 +51,8 @@ public class Field : MonoBehaviour {
     public GameObject movesCounter;
     public TMP_Text movesCountCaption;
 
+    public List<QBitType> availableColors;
+
     public int size_X;
     public int size_Y;
 
@@ -81,7 +83,6 @@ public class Field : MonoBehaviour {
         DestroyField();
         LevelData level = GameData.Instance.GetCurrentLevel();
         SpawnLevelElements(level);
-        FillFreePoints();
 
         isGoalsComplete = false;
         goalsCompleteUI.SetActive(false);
@@ -100,6 +101,12 @@ public class Field : MonoBehaviour {
             movesCount = level.movesLimitData.movesCount;
             movesCountCaption.text = movesCount.ToString();
         }
+
+        availableColors = new List<QBitType>();
+        foreach(var c in level.availableColors)
+            availableColors.Add(c);
+
+        FillFreePoints();
         
         onFieldInit.Invoke();
     }
@@ -183,11 +190,17 @@ public class Field : MonoBehaviour {
                 spawnPoint.isFree = false;
                 spawnPoint.data = PointData.QBit;
                 QBit qBit = item.GetComponent<QBit>();
-                QBitData qBitData = GameData.Instance.GetRandomQBit();
+                QBitData qBitData = GetRandomColor();
                 qBit.Init(qBitData, spawnPoint);
                 qBits.Add(qBit);
             }
         }
+    }
+
+    public QBitData GetRandomColor() {
+        QBitType qType = availableColors[Random.Range(0, availableColors.Count)];
+        QBitData qBitData = GameData.Instance.GetQBitDataByType(qType);
+        return qBitData;
     }
 
 

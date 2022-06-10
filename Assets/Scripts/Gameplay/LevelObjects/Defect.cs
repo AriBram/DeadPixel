@@ -25,6 +25,12 @@ public class Defect : QBit
     }
 
     public void FindAndAttackPlayer() {
+        foreach(var ap in attackPoints) {
+            MovementPoint mp = MovementManager.Instance.Points.Find(p => p.x == ap.x && p.y == ap.y);
+            if(mp != null)
+                mp.SetAttackedState();
+        }
+        
         MovementPoint playerPoint = PlayerController.Instance.currentPoint;
         bool isPlayerInAttackRadius = attackPoints.Find(ap => ap.x == playerPoint.x && ap.y == playerPoint.y) == null ? false : true;
 

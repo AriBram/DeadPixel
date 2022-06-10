@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour {
 
         hasShield = Random.Range(0, 2) == 0 ? true : false;
         shield.gameObject.SetActive(hasShield);
-        colorData = GameData.Instance.GetRandomQBit();
+
+        colorData = Field.Instance.GetRandomColor();
         heart.color = colorData.color;
         shield.color = colorData.color;
 
@@ -162,7 +163,6 @@ public class Enemy : MonoBehaviour {
     }
 
     public void EndMove() {
-        Debug.Log("enemy end move: " + targetPoint.x.ToString() + " " + targetPoint.y.ToString());
         currentPoint.Reset();
         currentPoint = targetPoint;
         currentPoint.isFree = false;
