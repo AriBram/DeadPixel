@@ -198,7 +198,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -450, y: 607}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5270225300806469786
 CanvasRenderer:
@@ -255,6 +255,7 @@ MonoBehaviour:
   frame: {fileID: 4294948541205010290}
   active: {r: 0.43164828, g: 0.9433962, b: 0.64429367, a: 0}
   passive: {r: 1, g: 1, b: 1, a: 0}
+  attacked: {r: 0.8113208, g: 0.44046474, b: 0.36356357, a: 0.27450982}
   isActive: 0
   isFree: 0
   canDrop: 0

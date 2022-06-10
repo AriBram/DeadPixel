@@ -13,6 +13,7 @@ public class MovementPoint : MonoBehaviour {
     public Image frame;
     public Color active;
     public Color passive;
+    public Color attacked;
 
     public bool isActive;
 
@@ -99,6 +100,22 @@ public class MovementPoint : MonoBehaviour {
         ResetIndicators();
         MovementDirectionData di = directionIndicators.Find(i => i.direction == direction);
         di.indicator.SetActive(true);
+    }
+
+
+
+
+
+    public void SetAttackedState() {
+        StartCoroutine(ActivateAttackedState());
+    }
+    
+    public IEnumerator ActivateAttackedState() {
+        frame.color = attacked;
+
+        yield return new WaitForSeconds(1.5f);
+
+        frame.color = passive;
     }
 }
 
