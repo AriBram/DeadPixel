@@ -85,6 +85,10 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                     Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
                                     if(en.hasShield && en.colorData.qType == choosenType)
                                         return true;
+
+                                    int attackPower = CountAttackPower(activatedPoints.Count - 1);
+                                    if(attackPower >= en.healthPoints)
+                                        choosenType = QBitType.NONE;
                                 }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
@@ -101,6 +105,15 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         point.ResetIndicators();
                         activatedPoints.RemoveAt(activatedPoints.Count - 1);
                         lastActivatedPoint = point;
+
+                        if(choosenType == QBitType.NONE && lastActivatedPoint.isQbit)
+                            choosenType = qType;
+                        else if(lastActivatedPoint.isEnemy) {
+                            Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
+                            int attackPower = CountAttackPower(activatedPoints.Count - 2);
+                            if(attackPower >= en.healthPoints)
+                                choosenType = QBitType.NONE;
+                        }
                     }
                 }
 
@@ -163,6 +176,19 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
         if(activatedPoints.Count > 1)
             lastActivatedPoint.canEditMovementPath = true;
+    }
+
+
+
+    public int CountAttackPower(int targetIndex) {
+        int attackPower = 0;
+        for(int i = targetIndex; i >= 0; i--) {
+            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit) //bug
+                attackPower++;
+            else
+                return attackPower;
+        }
+        return attackPower;
     }
 }
 
