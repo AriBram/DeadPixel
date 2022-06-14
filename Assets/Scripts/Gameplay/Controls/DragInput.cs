@@ -81,6 +81,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         }
                         else if(point.isDestroyable || point.isEnemy) {
                             if(!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer) {
+                                if(point.isEnemy) {
+                                    Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
+                                    if(en.hasShield && en.colorData.qType == choosenType)
+                                        return true;
+                                }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
                                 lastActivatedPoint = point;
