@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Point_x4 : MonoBehaviour {
 
-    public int x;
-    public int y;
+    public int x4;
+    public int y4;
     
     public List<MovementPoint> points;
 
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Spider")) {
+        if(other.CompareTag("BigEnemy")) {
             if(GameplayController.Instance.IsEnemyMove) {
                 foreach(var p in points) {
                     if(p.isQbit) {

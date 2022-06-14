@@ -8,44 +8,15 @@ using TMPro;
 
 
 
-public class Enemy : MonoBehaviour {
-    
-    public EnemyType eType;
-
-    [HideInInspector] public int healthPoints;
-    public int minHP;
-    public int maxHP;
-    public int attackPower;
+public class Enemy : EnemyBase {
 
     public MovementPoint currentPoint;
     public MovementPoint targetPoint;
 
-    public List<Coordinate> attackPoints;
-    public List<Coordinate> availablePointsToMove;
 
-    private Transform target;
-    private Rigidbody2D rb;
 
-    public float moveSpeed;
-
-    public bool canMove;
-    public GameObject canMoveIndicator;
-
-    public TMP_Text hpCaption;
-    public Image shield;
-    public Image heart;
-    public List<GameObject> skulls;
-
-    public bool hasShield;
-    public QBitData colorData;
-
-    public class MoveEndEvent : UnityEvent { }
-    [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
-
-    
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        target = currentPoint.gameObject.GetComponent<Transform>();
         canMove = true;
 
         healthPoints = Random.Range(minHP, maxHP + 1);
@@ -65,37 +36,22 @@ public class Enemy : MonoBehaviour {
             skulls[i].SetActive(true);
     }
 
-    void FixedUpdate() {
-        if(GameplayController.Instance.IsEnemyMove)
-            Move();
-    }
-
-
-
-    public void Move() {
-        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-        rb.MovePosition(temp);
-    }
-
-
-
-
 
     public void Init(EnemyType eType, MovementPoint point) {
-        this.eType = eType;
+        BaseInit(eType);
          
         currentPoint = point;
         currentPoint.isFree = false;
         currentPoint.canDrop = false;
 
-        healthPoints = Random.Range(minHP, maxHP + 1);
+        target = currentPoint.gameObject.GetComponent<Transform>();
 
         SetAttackPoints();
         SetMovePoints();
     }
 
 
-    void SetAttackPoints() {
+    public override void SetAttackPoints() {
         attackPoints = new List<Coordinate>();
         switch(eType) {
             case EnemyType.Worm: case EnemyType.Skeleton: case EnemyType.Zombie:
@@ -115,7 +71,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void SetMovePoints() {
+    public override void SetMovePoints() {
         availablePointsToMove = new List<Coordinate>();
         switch(eType) {
             case EnemyType.Worm: case EnemyType.Skeleton: case EnemyType.Agent:
@@ -143,7 +99,7 @@ public class Enemy : MonoBehaviour {
 
 
 
-    public void ActivateMove() {
+    public override void ActivateMove() {
         if(!canMove)
             return;
 
@@ -162,7 +118,7 @@ public class Enemy : MonoBehaviour {
             EndMove();
     }
 
-    public void EndMove() {
+    public override void EndMove() {
         currentPoint.Reset();
         currentPoint = targetPoint;
         currentPoint.isFree = false;
@@ -175,26 +131,9 @@ public class Enemy : MonoBehaviour {
 
 
 
-    public void Attack() {
-        foreach(var ap in attackPoints) {
-            MovementPoint mp = MovementManager.Instance.Points.Find(p => p.x == ap.x && p.y == ap.y);
-            if(mp != null)
-                mp.SetAttackedState();
-        }
-
-        MovementPoint playerPoint = PlayerController.Instance.currentPoint;
-        bool isPlayerInAttackRadius = attackPoints.Find(ap => ap.x == playerPoint.x && ap.y == playerPoint.y) == null ? false : true;
-        QBitType playerQType = Player.Instance.colorType;
-
-        if(isPlayerInAttackRadius && colorData.qType != playerQType)
-            Player.Instance.health.GetDamage(attackPower);
-
-        onMoveEnd.Invoke();
-    }
 
 
-
-    public void GetDamageByPlayer(int damage, QBitType qType) {
+    public override void GetDamageByPlayer(int damage, QBitType qType) {
         if(hasShield && qType == colorData.qType)
             return;
 
@@ -214,16 +153,8 @@ public class Enemy : MonoBehaviour {
 
 
 
-    public bool IsPointInAttackRadius(Coordinate point) {
-        foreach(var p in attackPoints) {
-            if(point.x == p.x && point.y == p.y)
-                return true;
-        }
 
-        return false;
-    }
-
-    public Coordinate FindShortestWayToPoint(Coordinate point) {
+    public override Coordinate FindShortestWayToPoint(Coordinate point) {
         Coordinate shortestWayPoint = new Coordinate(currentPoint.x, currentPoint.y);
         int currentDistance = CountDistanceBetweenPoints(point, shortestWayPoint);
 
@@ -248,18 +179,5 @@ public class Enemy : MonoBehaviour {
         EnemiesMovementManager.Instance.AddBusyPoint(shortestWayPoint);
 
         return shortestWayPoint;
-    }
-
-    public int CountDistanceBetweenPoints(Coordinate point1, Coordinate point2) {
-        int distance = 0;
-        distance += Mathf.Abs(point2.x - point1.x) + Mathf.Abs(point2.y - point1.y);
-        return distance;
-    }
-
-
-
-    public void SetCanMove(bool canMove) {
-        this.canMove = canMove;
-        canMoveIndicator.SetActive(canMove);
     }
 }
