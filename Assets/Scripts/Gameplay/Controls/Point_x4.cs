@@ -18,10 +18,11 @@ public class Point_x4 : MonoBehaviour {
                         QBit qBitToDestroy = Field.Instance.qBits.Find(q => q.x == p.x && q.y == p.y);
                         qBitToDestroy.DestroyQbit();
                     }
-                    /*Enemy e = other.gameObject.GetComponent<Enemy>();
-                    if(e.targetPoint.x == this.x && e.targetPoint.y == this.y)
-                        e.EndMove();*/
                 }
+                BigEnemy e = other.gameObject.GetComponent<BigEnemy>();
+                Debug.Log("big enemy target: " + e.targetPoint.x4.ToString() + " " + e.targetPoint.y4.ToString() + "; this: " + this.x4.ToString() + " " + this.y4.ToString());
+                if(e.targetPoint.x4 == this.x4 && e.targetPoint.y4 == this.y4)
+                    e.EndMove();
             }
         }
     }

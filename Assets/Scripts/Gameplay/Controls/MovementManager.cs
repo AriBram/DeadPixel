@@ -7,6 +7,8 @@ public class MovementManager : MonoBehaviour {
     public List<MovementPoint> Points = new List<MovementPoint>();
     public List<MovementPoint> ActivatedPoints = new List<MovementPoint>();
 
+    public List<Point_x4> Points_x4 = new List<Point_x4>();
+
     public static MovementManager Instance { get; private set; }
     
     void Awake() {
@@ -16,6 +18,12 @@ public class MovementManager : MonoBehaviour {
 
         foreach(GameObject point in pointsGameObjects)
             Points.Add(point.GetComponent<MovementPoint>());
+
+
+        GameObject[] points_x4_GameObjects = GameObject.FindGameObjectsWithTag("Point_x4");
+
+        foreach(GameObject point in points_x4_GameObjects)
+            Points_x4.Add(point.GetComponent<Point_x4>());
     }
 
 

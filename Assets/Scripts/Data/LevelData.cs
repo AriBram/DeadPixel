@@ -11,6 +11,7 @@ public class LevelData {
     public List<Coordinate> defects;
 
     public List<EnemyData> enemies; 
+    public List<EnemyData> bigEnemies;
     public List<RespawnData> respawns;
 
     public List<GoalData> goals;

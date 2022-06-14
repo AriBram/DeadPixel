@@ -34,7 +34,14 @@ public class EnemiesMovementManager : MonoBehaviour {
     }
 
 
-    public void SetQueue(List<Enemy> enemies) {
+    public void SetQueue(List<Enemy> simpleEnemies, List<BigEnemy> bigEnemies) {
+        List<EnemyBase> enemies = new List<EnemyBase>();
+        foreach(var e in simpleEnemies)
+            enemies.Add(e);
+        foreach(var e in bigEnemies)
+            enemies.Add(e);
+
+
         int queueSize = enemies.Count - 1;
         if(nextInQueue > queueSize)
             nextInQueue = 0;

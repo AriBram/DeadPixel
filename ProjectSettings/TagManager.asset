@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MovementPoint
   - Enemy
+  - BigEnemy
+  - Point_x4
   layers:
   - Default
   - TransparentFX

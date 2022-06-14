@@ -27,6 +27,7 @@ public class Field : MonoBehaviour {
     public GameObject enemyPrefab_Skeleton;
     public GameObject enemyPrefab_Zombie;
     public GameObject enemyPrefab_Agent;
+    public GameObject enemyPrefab_Spider;
     public int enemiesCounter;
     public int maxEnemiesCanMove;
     public Dictionary<EnemyType, int> deathsCounter;
@@ -40,6 +41,7 @@ public class Field : MonoBehaviour {
     public List<Defect> defectsItems = new List<Defect>();
     public List<GameObject> enemiesLinks = new List<GameObject>();
     public List<Enemy> enemiesItems = new List<Enemy>();
+    public List<BigEnemy> bigEnemiesItems = new List<BigEnemy>();
 
     public GoalsController goals;
     public bool isGoalsComplete;
@@ -139,6 +141,7 @@ public class Field : MonoBehaviour {
         destroyables.Clear();
         defectsItems.Clear();
         enemiesItems.Clear();
+        bigEnemiesItems.Clear();
 
         foreach(var point in MovementManager.Instance.Points)
             point.Reset();
@@ -224,6 +227,7 @@ public class Field : MonoBehaviour {
         SpawnDestroyables(level.destroyables);
         SpawnDefects(level.defects);
         SpawnEnemies(level.enemies);
+        SpawnBigEnemies(level.bigEnemies);
         goals.Init(level.goals);
     }
 
@@ -327,6 +331,37 @@ public class Field : MonoBehaviour {
     }
 
 
+    public void SpawnBigEnemies(List<EnemyData> enemies) {
+        foreach(var e in enemies) {
+            Point_x4 spawnPoint = MovementManager.Instance.Points_x4.Find(p => p.x4 == e.point.x && p.y4 == e.point.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+
+            GameObject item = new GameObject();
+            Destroy(item);
+
+            switch(e.eType) {
+                case EnemyType.Spider:
+                    item = Instantiate(enemyPrefab_Spider, enemiesContainer);
+                    break;
+            }
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            enemiesLinks.Add(item);
+
+            foreach(var sp in spawnPoint.points) {
+                sp.isFree = false;
+                sp.canDrop = false;
+                sp.data = PointData.Enemy;
+            }
+            
+            BigEnemy enemy = item.GetComponent<BigEnemy>();
+            enemy.Init(e.eType, spawnPoint);
+            enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
+            bigEnemiesItems.Add(enemy);
+        }
+    }
+
+
 
     public void SetGoalsCompleteState() {
         isGoalsComplete = true;
@@ -360,8 +395,10 @@ public class Field : MonoBehaviour {
         enemiesCounter = 0;
         GameplayController.Instance.SetEnemyMoveState();
         EnemiesMovementManager.Instance.Reset();
-        EnemiesMovementManager.Instance.SetQueue(enemiesItems);
+        EnemiesMovementManager.Instance.SetQueue(enemiesItems, bigEnemiesItems);
         foreach(var e in enemiesItems)
+            e.ActivateMove();
+        foreach(var e in bigEnemiesItems)
             e.ActivateMove();
     }
 

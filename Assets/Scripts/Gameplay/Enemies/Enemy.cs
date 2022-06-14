@@ -15,27 +15,6 @@ public class Enemy : EnemyBase {
 
 
 
-    void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        canMove = true;
-
-        healthPoints = Random.Range(minHP, maxHP + 1);
-        hpCaption.text = healthPoints.ToString();
-
-        hasShield = Random.Range(0, 2) == 0 ? true : false;
-        shield.gameObject.SetActive(hasShield);
-
-        colorData = Field.Instance.GetRandomColor();
-        heart.color = colorData.color;
-        shield.color = colorData.color;
-
-        foreach(var skull in skulls)
-            skull.SetActive(false);
-        
-        for(int i = 0; i < attackPower; i++)
-            skulls[i].SetActive(true);
-    }
-
 
     public void Init(EnemyType eType, MovementPoint point) {
         BaseInit(eType);
@@ -43,6 +22,7 @@ public class Enemy : EnemyBase {
         currentPoint = point;
         currentPoint.isFree = false;
         currentPoint.canDrop = false;
+        currentPoint.data = PointData.Enemy;
 
         target = currentPoint.gameObject.GetComponent<Transform>();
 
