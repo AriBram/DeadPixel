@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 
-public class MovementPoint : MonoBehaviour {
+public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public int x;
     public int y;
@@ -34,11 +35,15 @@ public class MovementPoint : MonoBehaviour {
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
 
+    public bool canEditMovementPath;
+
     
     void Awake() {
         Deactivate();
         Reset();
         ResetIndicators();
+
+        canEditMovementPath = false;
     }
 
     
@@ -116,6 +121,23 @@ public class MovementPoint : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
 
         frame.color = passive;
+    }
+
+
+
+
+    public void OnDrag(PointerEventData eventData) {
+        if(!canEditMovementPath)
+            return;
+        
+        bool isPointerOverUI = Player.Instance.input.IsPointerOverUIElement();
+    }
+
+    public void OnEndDrag(PointerEventData eventData) {
+        if(!canEditMovementPath)
+            return;
+
+        Player.Instance.input.UpdateMovementPathData();
     }
 }
 

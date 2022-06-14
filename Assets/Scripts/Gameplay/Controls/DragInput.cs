@@ -48,8 +48,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        //Debug.Log("activated points count: " + activatedPoints.Count.ToString());
-        MovementManager.Instance.SetMovementTrack(activatedPoints);
+        UpdateMovementPathData();
     }
 
 
@@ -90,6 +89,16 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         }
                     }
                 }
+
+                else if(activatedPoints.Count >= 2) {
+                    if(point.x == activatedPoints[activatedPoints.Count - 2].x && point.y == activatedPoints[activatedPoints.Count - 2].y) {
+                        lastActivatedPoint.Deactivate();
+                        point.ResetIndicators();
+                        activatedPoints.RemoveAt(activatedPoints.Count - 1);
+                        lastActivatedPoint = point;
+                    }
+                }
+
                 return true;
             }
         }
@@ -134,6 +143,21 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     
     public Coordinate CountDifferenceBetweenPoints(MovementPoint point_1, MovementPoint point_2) {
         return new Coordinate(point_2.x - point_1.x, point_2.y - point_1.y);
+    }
+
+
+
+    public void UpdateMovementPathData() {
+        UpdateEditableMovementPoint();
+        MovementManager.Instance.SetMovementTrack(activatedPoints);
+    }
+    
+    public void UpdateEditableMovementPoint() {
+        foreach(var p in activatedPoints)
+            p.canEditMovementPath = false;
+
+        if(activatedPoints.Count > 1)
+            lastActivatedPoint.canEditMovementPath = true;
     }
 }
 

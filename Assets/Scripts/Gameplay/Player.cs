@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
     private int activeTargetIndex;
     private int maxPointIndex;
 
-    private DragInput input;
+    public DragInput input;
 
     public Dictionary<QBitType, int> qBitsCollected;
     public Dictionary<EnemyType, int> enemiesKilled;
