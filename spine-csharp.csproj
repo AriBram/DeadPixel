@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3f12fff3-6e48-41af-f02f-513c66989756}</ProjectGuid>
+    <ProjectGuid>{e63f460d-7c07-f24f-7b1d-89e8542ebd30}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>spine-csharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -41,64 +41,50 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Gameplay\Shields.cs" />
-     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\GameplayController.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\GoalsBar.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\MovementPoint.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Obstacle.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\MovementManager.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Player.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\HealthBar.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\DragInput.cs" />
-     <Compile Include="Assets\Scripts\UI\UI.cs" />
-     <Compile Include="Assets\Scripts\Data\LevelData.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\GameMenu.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Defect.cs" />
-     <Compile Include="Assets\Scripts\UI\Game\Goal.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Health.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\QBit.cs" />
-     <Compile Include="Assets\Scripts\Data\GameData.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\GoalsController.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemiesMovementManager.cs" />
-     <Compile Include="Assets\Scripts\Data\QBitData.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
-     <Compile Include="Assets\Scripts\Data\UserData.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemiesRespawnManager.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\Point_x4.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\BigEnemy.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyBase.cs" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-     <None Include="Assets\Utils\Spine\version.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\Animations\Player\player.atlas.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\Animations\Enemies\Fear\enemy.atlas.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\Utils\Spine\package.json" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\Animations\Player\player.json" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
-     <None Include="Assets\Animations\Enemies\Fear\enemy.json" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Json.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Triangulator.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\AnimationState.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\PathAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\AttachmentType.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\ExposedList.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Skin.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Atlas.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\IkConstraintData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonBounds.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\ConstraintData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\IkConstraint.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SlotData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\VertexAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\ClippingAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Animation.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonLoader.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\EventData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\BlendMode.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\AtlasAttachmentLoader.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\TransformConstraintData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Bone.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\PathConstraintData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\MeshAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonClipping.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\RegionAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Skeleton.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\BoneData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\BoundingBoxAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonBinary.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\TransformConstraint.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Slot.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\AnimationStateData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\AttachmentLoader.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\PathConstraint.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Event.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\Attachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\MathUtils.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\Attachments\PointAttachment.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonData.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\IUpdatable.cs" />
+     <Compile Include="Assets\Utils\Spine\Runtime\spine-csharp\SkeletonJson.cs" />
+     <None Include="Assets\Utils\Spine\Runtime\spine-csharp\spine-csharp.asmdef" />
+     <None Include="Assets\Utils\Spine\Runtime\spine-csharp\package.json" />
      <Reference Include="UnityEngine">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
@@ -342,17 +328,44 @@
      <Reference Include="UnityEditor.UnityConnectModule">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
      </Reference>
+     <Reference Include="UnityEditor.Graphs">
+     <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.Android.Extensions">
+     <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+     <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Plastic.Newtonsoft.Json">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.collab-proxy@1.15.1/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Plastic.Antlr3.Runtime">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.collab-proxy@1.15.1/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.YamlDotNet">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.visualscripting@1.7.5/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+     </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.collab-proxy@1.15.1/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Burst.Unsafe">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.burst@1.6.0/Unity.Burst.Unsafe.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst.Cecil.Mdb">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.burst@1.6.0/Unity.Burst.CodeGen/Unity.Burst.Cecil.Mdb.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.VisualScripting.IonicZip">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.visualscripting@1.7.5/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Burst.Cecil.Pdb">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.burst@1.6.0/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst.Cecil">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.burst@1.6.0/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll</HintPath>
+     </Reference>
+     <Reference Include="log4netPlastic">
+     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.collab-proxy@1.15.1/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst.Cecil.Rocks">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/PackageCache/com.unity.burst@1.6.0/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll</HintPath>
@@ -735,143 +748,14 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.Flow.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEngineBridge.001">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VSCode.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.PixelPerfect">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="PsdPlugin">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.TextMeshPro.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Timeline">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Core.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.TextMeshPro">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.State.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Burst.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Sprite.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Path.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Flow">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEditor.UI">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Psdimporter.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.UI">
      <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEditorBridge.001">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Core">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Runtime">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Burst">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Shared.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Runtime">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.PixelPerfect.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Timeline.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Runtime">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.SpriteShape.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Editor">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.SpriteShape.Runtime">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.State">
-     <HintPath>C:/Users/Design/Documents/dead-pixel/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
-     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="spine-unity.csproj">
-      <Project>{2bc10e11-f1dd-36f8-f654-c34647368e19}</Project>
-      <Name>spine-unity</Name>
-    </ProjectReference>
-    <ProjectReference Include="spine-csharp.csproj">
-      <Project>{e63f460d-7c07-f24f-7b1d-89e8542ebd30}</Project>
-      <Name>spine-csharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="spine-unity-editor.csproj">
-      <Project>{d222364e-1cbf-6f66-9d36-2e7e703e971c}</Project>
-      <Name>spine-unity-editor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
