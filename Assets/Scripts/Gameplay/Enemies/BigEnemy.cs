@@ -74,6 +74,9 @@ public class BigEnemy : EnemyBase {
     }
 
     public override void EndMove() {
+        foreach(var p in currentPoint.points)
+            p.Reset();
+
         currentPoint = targetPoint;
         foreach(var p in currentPoint.points) {
             p.isFree = false;

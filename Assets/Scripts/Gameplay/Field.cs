@@ -75,7 +75,8 @@ public class Field : MonoBehaviour {
     void Update() {
         if(GameplayController.Instance.IsEnemyMove) {
             //Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
-            if(enemiesCounter == Mathf.Clamp(enemiesItems.Count, 0, maxEnemiesCanMove))
+            int enemiesCount = enemiesItems.Count + bigEnemiesItems.Count;
+            if(enemiesCounter == Mathf.Clamp(enemiesCount, 0, maxEnemiesCanMove))
                 Refill();
         }
     }
