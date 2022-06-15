@@ -29,6 +29,7 @@ public class Health : MonoBehaviour {
     public void GetDamage(int damage) {
         int damageAfterShields = shields.Use(damage);
         hp = Mathf.Clamp(hp - damageAfterShields, 0, maxHp);
+        Player.Instance.SetOneShotAnimation("get_damage");
         onHealthChanged.Invoke();
     }
 

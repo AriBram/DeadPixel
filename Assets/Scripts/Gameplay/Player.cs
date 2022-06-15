@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Spine.Unity;
 
 
 public class Player : MonoBehaviour {
@@ -27,7 +28,8 @@ public class Player : MonoBehaviour {
 
     public int comboCheckPointIndex;
 
-    public Image root;
+    //public Image root;
+    public SkeletonGraphic root;
     public QBitType colorType;
     public QBitType lastMoveType;
 
@@ -55,7 +57,8 @@ public class Player : MonoBehaviour {
 
         Init();
 
-        SetColorByType(QBitType.GREEN);
+        InitializeAnimation();
+        SetSkeletonColor(QBitType.GREEN);
 
         onAwake.Invoke();
     }
@@ -112,36 +115,81 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        else if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isDestroyable) {
-            AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
-            if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
-                EndMove();
-                return;
-            }
+        MovementDirection mDir = input.GetMovemenetDirection(activatedPoints[activeTargetIndex + 1], activatedPoints[activeTargetIndex]);
+
+        if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isDestroyable) {
+            StartCoroutine(FightWithDestroyableEnd(mDir));
+            return;
         }
         else if(activatedPoints[activeTargetIndex + 1].isDestroyable) {
-            AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
-            activeTargetIndex += 2;
-            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            StartCoroutine(FightWithDestroyableContinuous(mDir));
             return;
         }
 
         else if(activeTargetIndex + 1 == maxPointIndex && (activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy)) {
-            AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
-            if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
-                EndMove();
-                return;
-            }
+            StartCoroutine(FightWithEnemyEnd(mDir));
+            return;
         }
         else if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
-            AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
-            activeTargetIndex += 2;
-            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            StartCoroutine(FightWithEnemyContinuous(mDir));
             return;
         }
 
         activeTargetIndex++;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+
+        SetMoveAnimation(mDir);
+    }
+
+    public IEnumerator FightWithDestroyableContinuous(MovementDirection mDir) {
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        float timing = isLetal ? 0.533f : 0.367f;
+        yield return new WaitForSeconds(1f);
+
+        activeTargetIndex += 2;
+        target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+        MovementDirection newDir = input.GetMovemenetDirection(activatedPoints[activeTargetIndex], activatedPoints[activeTargetIndex - 1]);
+        SetMoveAnimation(newDir);
+    }
+
+    public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        float timing = isLetal ? 0.533f : 0.367f;
+        yield return new WaitForSeconds(1f);
+
+        if(activatedPoints[activeTargetIndex + 1].isDestroyable)
+            EndMove();
+        else {
+            activeTargetIndex++;
+            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            SetMoveAnimation(mDir);
+        }
+    }
+
+    public IEnumerator FightWithEnemyContinuous(MovementDirection mDir) {
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        float timing = isLetal ? 0.533f : 0.367f;
+        yield return new WaitForSeconds(1f);
+
+        activeTargetIndex += 2;
+        target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+        MovementDirection newDir = input.GetMovemenetDirection(activatedPoints[activeTargetIndex], activatedPoints[activeTargetIndex - 1]);
+        SetMoveAnimation(newDir);
+    }
+
+    public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        float timing = isLetal ? 0.533f : 0.367f;
+        yield return new WaitForSeconds(1f);
+
+        if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
+            EndMove();
+        }
+        else {
+            activeTargetIndex++;
+            target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+            SetMoveAnimation(mDir);
+        }
     }
 
 
@@ -158,34 +206,48 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void AttackDestroyable(int power, MovementPoint point) {
+    public bool AttackDestroyable(int power, MovementPoint point, MovementDirection mDir) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
         destroyableToAttack.GetDamageByPlayer(power);
+        bool isLetal = power >= destroyableToAttack.healthPoints ? true : false;
+        SetAttackAnimation(mDir, isLetal);
+        return isLetal;
     }
 
-    public void AttackEnemy(int power, MovementPoint point) {
+    public bool AttackEnemy(int power, MovementPoint point, MovementDirection mDir) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
-        if(enemyToAttack != null)
+        bool isLetal = false;
+        if(enemyToAttack != null) {
+            isLetal = power >= enemyToAttack.healthPoints ? true : false;
+            SetAttackAnimation(mDir, isLetal);
             enemyToAttack.GetDamageByPlayer(power, colorType);
+        }
 
         for(int i = 0; i < Field.Instance.bigEnemiesItems.Count; i++) {
             foreach(var p in Field.Instance.bigEnemiesItems[i].currentPoint.points) {
-                if(p.x == point.x && p.y == point.y)
+                if(p.x == point.x && p.y == point.y) {
+                    isLetal = power >= Field.Instance.bigEnemiesItems[i].healthPoints ? true : false;
+                    SetAttackAnimation(mDir, isLetal);
                     Field.Instance.bigEnemiesItems[i].GetDamageByPlayer(power, colorType);
+                }
             }
         }
+
+        return isLetal;
     }
 
 
     public void PickQBit(QBitData data) {
         qBitsCollected[data.qType]++;
-        SetColorByType(data.qType);
+        SetSkeletonColor(data.qType);
     }
 
 
     public void EndMove() {
+        SetLoopAnimation("idle");
+
         PlayerController.Instance.currentPoint.Reset();
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
         PlayerController.Instance.currentPoint.isFree = false;
@@ -209,13 +271,6 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void SetColorByType(QBitType qType) {
-        QBitData qData = GameData.Instance.qBits.Find(q => q.qType == qType);
-        root.sprite = qData.rootSprite;
-        colorType = qType;
-    }
-
-
 
     public void SetSpawnPosition(Coordinate pos) {
         MovementPoint newPoint = MovementManager.Instance.Points.Find(p => p.x == pos.x && p.y == pos.y);
@@ -226,5 +281,120 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint = newPoint;
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
+    }
+
+
+
+
+
+
+    public void InitializeAnimation() {
+        root.Initialize(true);
+        root.AnimationState.SetAnimation(0, "idle", true);
+    }
+
+    public void SetSkeletonColor(QBitType qType) {
+        switch(qType) {
+            case QBitType.GREEN:
+                root.Skeleton.SetSkin("green");
+                break;
+            case QBitType.BLUE:
+                root.Skeleton.SetSkin("blue");
+                break;
+            case QBitType.RED:
+                root.Skeleton.SetSkin("red");
+                break;
+            case QBitType.PINK:
+                root.Skeleton.SetSkin("pink");
+                break;
+        }
+
+        root.Skeleton.SetSlotsToSetupPose();
+        root.LateUpdate();
+    }
+
+    public void SetOneShotAnimation(string animName) {
+        root.AnimationState.SetAnimation(0, animName, false);
+        root.AnimationState.AddAnimation(0, "idle", true, 0);
+    }
+
+    public void SetLoopAnimation(string animName) {
+        root.AnimationState.SetAnimation(0, animName, true);
+    }
+
+    public void SetMoveAnimation(MovementDirection mDir) {
+        switch(mDir) {
+            case MovementDirection.Up:
+                SetLoopAnimation("move_down_up");
+                break;
+            case MovementDirection.Down:
+                SetLoopAnimation("move_up_down");
+                break;
+            case MovementDirection.Right:
+                SetLoopAnimation("move_horizontal");
+                break;
+            case MovementDirection.Left:
+                SetLoopAnimation("move_horizontal");
+                break;
+            case MovementDirection.Up_Right:
+                SetLoopAnimation("move_diagonal_down_up");
+                break;
+            case MovementDirection.Up_Left:
+                SetLoopAnimation("move_diagonal_down_up");
+                break;
+            case MovementDirection.Down_Right:
+                SetLoopAnimation("move_diagonal_up_down");
+                break;
+            case MovementDirection.Down_Left:
+                SetLoopAnimation("move_diagonal_up_down");
+                break;
+        }
+    }
+
+    public void SetAttackAnimation(MovementDirection mDir, bool isLetal) {
+        switch(mDir) {
+            case MovementDirection.Up:
+                SetOneShotAnimation("attack_vertical_down_up");
+                break;
+            case MovementDirection.Down:
+                SetOneShotAnimation("attack_vertical_up_down");
+                break;
+            case MovementDirection.Right:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+            case MovementDirection.Left:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+            case MovementDirection.Up_Right:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+            case MovementDirection.Up_Left:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+            case MovementDirection.Down_Right:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+            case MovementDirection.Down_Left:
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_horizontal");
+                break;
+        }
     }
 }
