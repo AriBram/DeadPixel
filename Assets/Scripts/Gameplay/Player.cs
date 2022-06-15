@@ -126,14 +126,14 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        else if(activeTargetIndex + 1 == maxPointIndex && activatedPoints[activeTargetIndex + 1].isEnemy) {
+        else if(activeTargetIndex + 1 == maxPointIndex && (activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy)) {
             AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
-            if(activatedPoints[activeTargetIndex + 1].isEnemy) {
+            if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
                 EndMove();
                 return;
             }
         }
-        else if(activatedPoints[activeTargetIndex + 1].isEnemy) {
+        else if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
             AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
             activeTargetIndex += 2;
             target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
@@ -167,7 +167,15 @@ public class Player : MonoBehaviour {
     public void AttackEnemy(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
-        enemyToAttack.GetDamageByPlayer(power, colorType);
+        if(enemyToAttack != null)
+            enemyToAttack.GetDamageByPlayer(power, colorType);
+
+        for(int i = 0; i < Field.Instance.bigEnemiesItems.Count; i++) {
+            foreach(var p in Field.Instance.bigEnemiesItems[i].currentPoint.points) {
+                if(p.x == point.x && p.y == point.y)
+                    Field.Instance.bigEnemiesItems[i].GetDamageByPlayer(power, colorType);
+            }
+        }
     }
 
 

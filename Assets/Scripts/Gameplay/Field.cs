@@ -352,7 +352,7 @@ public class Field : MonoBehaviour {
             foreach(var sp in spawnPoint.points) {
                 sp.isFree = false;
                 sp.canDrop = false;
-                sp.data = PointData.Enemy;
+                sp.data = PointData.BigEnemy;
             }
             
             BigEnemy enemy = item.GetComponent<BigEnemy>();

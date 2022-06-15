@@ -146,7 +146,7 @@ public class Enemy : EnemyBase {
             if(movementPoint == null)
                 continue;
 
-            if(movementPoint.isObstacle || movementPoint.isDestroyable || movementPoint.isEnemy || movementPoint.isDefect || movementPoint.isPlayer)
+            if(movementPoint.isObstacle || movementPoint.isDestroyable || movementPoint.isEnemy || movementPoint.isDefect || movementPoint.isPlayer || movementPoint.isBigEnemy)
                 continue;
 
             int newDistance = CountDistanceBetweenPoints(point, p);

@@ -26,6 +26,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     public bool isQbit => data == PointData.QBit;
     public bool isDefect => data == PointData.Defect;
     public bool isEnemy => data == PointData.Enemy;
+    public bool isBigEnemy => data == PointData.BigEnemy;
     public bool isPlayer => data == PointData.Player;
 
     public PointData data;
@@ -142,7 +143,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 }
 
 
-public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player}
+public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player, BigEnemy}
 public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left}
 
 [System.Serializable]

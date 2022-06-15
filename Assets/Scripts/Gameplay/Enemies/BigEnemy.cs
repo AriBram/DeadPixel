@@ -17,7 +17,7 @@ public class BigEnemy : EnemyBase {
         foreach(var p in point.points) {
             p.isFree = false;
             p.canDrop = false;
-            p.data = PointData.Enemy;
+            p.data = PointData.BigEnemy;
         }
         
         target = currentPoint.gameObject.GetComponent<Transform>();
@@ -81,7 +81,7 @@ public class BigEnemy : EnemyBase {
         foreach(var p in currentPoint.points) {
             p.isFree = false;
             p.canDrop = false;
-            p.data = PointData.Enemy;
+            p.data = PointData.BigEnemy;
         }
 
         SetAttackPoints();
@@ -174,7 +174,7 @@ public class BigEnemy : EnemyBase {
             if(p == null)
                 return false;
 
-            if(p.isObstacle || p.isDestroyable || p.isEnemy || p.isDefect || p.isPlayer)
+            if(p.isObstacle || p.isDestroyable || p.isEnemy || p.isDefect || p.isPlayer || p.isBigEnemy)
                 return false;
 
             Coordinate coord = new Coordinate(p.x, p.y);
