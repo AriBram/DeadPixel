@@ -16213,8 +16213,12 @@ MonoBehaviour:
   quantsItems: []
   goals: {fileID: 1985898037}
   isGoalsComplete: 0
-  exitFromLevelPoint:
-    x: 3
+  exitFromLevelPoints:
+  - x: 2
+    y: 6
+  - x: 3
+    y: 6
+  - x: 4
     y: 6
   goalsCompleteUI: {fileID: 235626936}
   isMovesLimited: 0

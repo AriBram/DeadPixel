@@ -57,7 +57,7 @@ public class Field : MonoBehaviour {
 
     public GoalsController goals;
     public bool isGoalsComplete;
-    public Coordinate exitFromLevelPoint;
+    public List<Coordinate> exitFromLevelPoints;
     public GameObject goalsCompleteUI;
 
     public bool isMovesLimited;
@@ -429,9 +429,11 @@ public class Field : MonoBehaviour {
 
     public bool CheckIfLevelComplete(Coordinate playerPoint) {
         if(isGoalsComplete) {
-            if(playerPoint.x == exitFromLevelPoint.x && playerPoint.y == exitFromLevelPoint.y) {
-                MoveToNextLevel();
-                return true;
+            foreach(var exit in exitFromLevelPoints) {
+                if(playerPoint.x == exit.x && playerPoint.y == exit.y) {
+                    MoveToNextLevel();
+                    return true;
+                }
             }
         }
         return false;
