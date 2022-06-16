@@ -28,8 +28,12 @@ public class GameMenu : MenuBase {
     public void Refresh() {
         bool isGoBtnActive = GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1 ? true : false;
         goBtn.gameObject.SetActive(isGoBtnActive);
-        if(isGoBtnActive)
+        if(isGoBtnActive) {
             goCounter.text = MovementManager.Instance.GetCombinationPower().ToString();
+            Player.Instance.SetLoopAnimation("wait_to_move");
+        }
+        else
+            Player.Instance.SetOneShotAnimation("idle");
     }
 
     public override void Show() {
