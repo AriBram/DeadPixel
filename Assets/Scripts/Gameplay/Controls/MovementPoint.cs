@@ -35,6 +35,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     public DebuffType debuff;
 
     public List<MovementDirectionData> directionIndicators;
+    public List<MovementIndicatorData> miData;
 
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
@@ -109,15 +110,23 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
             ind.indicator.SetActive(false);
     }
 
-    public void ActivateIndicator(MovementDirection direction) {
+    public void ActivateIndicator(MovementDirection direction, QBitType qType) {
         ResetIndicators();
         MovementDirectionData di = directionIndicators.Find(i => i.direction == direction);
+        ChangeIndicatorsColor(qType);
         di.indicator.SetActive(true);
     }
 
 
     public void ResetDebuff() {
         debuff = DebuffType.None;
+    }
+
+    public void ChangeIndicatorsColor(QBitType qType) {
+        foreach(var data in directionIndicators) {
+            Sprite newSprite = miData.Find(d => d.qType == qType).indSprite;
+            data.indicator.GetComponent<Image>().sprite = newSprite;
+        }
     }
 
 
@@ -166,4 +175,11 @@ public enum DebuffType {None, Puddle}
 public class MovementDirectionData {
     public MovementDirection direction;
     public GameObject indicator;
-} 
+}
+
+
+[System.Serializable]
+public class MovementIndicatorData {
+    public QBitType qType;
+    public Sprite indSprite;
+}

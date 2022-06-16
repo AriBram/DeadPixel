@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 8479231322882660867}
   - component: {fileID: 732436773922017409}
   - component: {fileID: 4162788930413924534}
+  - component: {fileID: 4290327063861438126}
   m_Layer: 5
   m_Name: Worm
   m_TagString: Enemy
@@ -473,10 +474,6 @@ MonoBehaviour:
   hpCaption: {fileID: 1675926106889633407}
   shield: {fileID: 4911472542732615421}
   heart: {fileID: 134518264603657796}
-  skulls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   hasShield: 0
   colorData:
     qType: 0
@@ -523,3 +520,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!223 &4290327063861438126
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181365842108163436}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0

@@ -79,7 +79,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
                         if(point.isQbit && qType == choosenType) {
                             point.Activate();
-                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
+                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
                         }
@@ -95,7 +95,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                         choosenType = QBitType.NONE;
                                 }
                                 point.Activate();
-                                lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
+                                lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                                 lastActivatedPoint = point;
                                 activatedPoints.Add(point);
                             }
@@ -103,7 +103,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(point.isQuant) {
                             choosenType = QBitType.NONE;
                             point.Activate();
-                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
+                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
                         }

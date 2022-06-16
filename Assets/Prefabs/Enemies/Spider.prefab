@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 6342765385490928679}
   - component: {fileID: 8110908913068263700}
   - component: {fileID: 12590575753170972}
+  - component: {fileID: 5186018966075557645}
   m_Layer: 5
   m_Name: Spider
   m_TagString: BigEnemy
@@ -384,6 +385,27 @@ MonoBehaviour:
     qBitActiveSprite: {fileID: 0}
   currentPoint: {fileID: 0}
   targetPoint: {fileID: 0}
+--- !u!223 &5186018966075557645
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181365842108163436}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &8620484523107033041
 GameObject:
   m_ObjectHideFlags: 0

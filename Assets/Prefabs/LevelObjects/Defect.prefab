@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1391442486774102342}
   - component: {fileID: 4231362795822696928}
   - component: {fileID: 3446690445199963357}
+  - component: {fileID: 4352965599874627638}
   m_Layer: 5
   m_Name: Defect
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.0244, y: 2.0244}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1391442486774102342
 CanvasRenderer:
@@ -101,3 +102,24 @@ MonoBehaviour:
   attackPoints: []
   attackPower: 1
   color: {r: 1, g: 0.26666668, b: 0, a: 1}
+--- !u!223 &4352965599874627638
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455279887709038895}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
