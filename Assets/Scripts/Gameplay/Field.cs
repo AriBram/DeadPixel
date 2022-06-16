@@ -495,6 +495,12 @@ public class Field : MonoBehaviour {
 
     public void SpawnEnemy(EnemyType eType) {
             List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
+            List<Coordinate> unavailablePoints = FindUnavailablePoints();
+
+            for(int i = availablePoints.Count - 1; i >= 0; i--) {
+                if(unavailablePoints.Find(p => p.x == availablePoints[i].x && p.y == availablePoints[i].y) != null)
+                    availablePoints.RemoveAt(i);
+            }
 
             if(availablePoints.Count == 0)
                 return;
@@ -551,6 +557,21 @@ public class Field : MonoBehaviour {
                 d.Init(spawnPoint);
                 defectsItems.Add(d);
             }
+    }
+
+    public List<Coordinate> FindUnavailablePoints() {
+        List<Coordinate> unavailable = new List<Coordinate>();
+        MovementPoint player_mp = PlayerController.Instance.currentPoint;
+        unavailable.Add(new Coordinate(player_mp.x, player_mp.y + 1));
+        unavailable.Add(new Coordinate(player_mp.x, player_mp.y - 1));
+        unavailable.Add(new Coordinate(player_mp.x + 1, player_mp.y));
+        unavailable.Add(new Coordinate(player_mp.x - 1, player_mp.y));
+        unavailable.Add(new Coordinate(player_mp.x + 1, player_mp.y + 1));
+        unavailable.Add(new Coordinate(player_mp.x + 1, player_mp.y - 1));
+        unavailable.Add(new Coordinate(player_mp.x - 1, player_mp.y + 1));
+        unavailable.Add(new Coordinate(player_mp.x - 1, player_mp.y - 1));
+
+        return unavailable;
     }
 
 
