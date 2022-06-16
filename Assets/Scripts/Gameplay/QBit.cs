@@ -37,10 +37,14 @@ public class QBit : MonoBehaviour {
 
 
     public void SetActive(bool isAct) {
-        if(isAct)
+        if(isAct) {
             frame.sprite = data.qBitActiveSprite;
-        else
+            this.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+        }
+        else {
             frame.sprite = data.qBitSprite;
+            this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
     }
 
 
