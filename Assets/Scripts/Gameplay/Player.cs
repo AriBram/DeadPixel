@@ -28,7 +28,6 @@ public class Player : MonoBehaviour {
 
     public int comboCheckPointIndex;
 
-    //public Image root;
     public SkeletonGraphic root;
     public QBitType colorType;
     public QBitType lastMoveType;
@@ -144,8 +143,12 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithDestroyableContinuous(MovementDirection mDir) {
+        SetMoveAnimation(mDir);
+        yield return new WaitForSeconds(0.01f);
+
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
+        SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 2;
@@ -157,6 +160,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
+        SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isDestroyable)
@@ -169,8 +173,12 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithEnemyContinuous(MovementDirection mDir) {
+        SetMoveAnimation(mDir);
+        yield return new WaitForSeconds(0.01f);
+
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
+        SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 2;
@@ -182,6 +190,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
+        SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
@@ -198,9 +207,7 @@ public class Player : MonoBehaviour {
     public int CountAttackPower(int targetIndex) {
         int attackPower = 0;
         for(int i = comboCheckPointIndex; i < targetIndex; i++) {
-            //Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
-            //if(activatedPoints[i].isQbit)
-            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant) //bug
+            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant)
                 attackPower++;
         }
         comboCheckPointIndex = targetIndex + 1;
@@ -213,7 +220,6 @@ public class Player : MonoBehaviour {
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
         destroyableToAttack.GetDamageByPlayer(power);
         bool isLetal = power >= destroyableToAttack.healthPoints ? true : false;
-        SetAttackAnimation(mDir, isLetal);
         return isLetal;
     }
 
@@ -223,7 +229,6 @@ public class Player : MonoBehaviour {
         bool isLetal = false;
         if(enemyToAttack != null) {
             isLetal = power >= enemyToAttack.healthPoints ? true : false;
-            SetAttackAnimation(mDir, isLetal);
             enemyToAttack.GetDamageByPlayer(power, colorType);
         }
 
@@ -231,7 +236,6 @@ public class Player : MonoBehaviour {
             foreach(var p in Field.Instance.bigEnemiesItems[i].currentPoint.points) {
                 if(p.x == point.x && p.y == point.y) {
                     isLetal = power >= Field.Instance.bigEnemiesItems[i].healthPoints ? true : false;
-                    SetAttackAnimation(mDir, isLetal);
                     Field.Instance.bigEnemiesItems[i].GetDamageByPlayer(power, colorType);
                 }
             }
