@@ -82,6 +82,8 @@ public class Player : MonoBehaviour {
             qBitsCollected[qType] = 0;
 
         skeletonSpawnersDestroyed = 0;
+
+        SetPlayerStartOrientation();
     }
 
 
@@ -144,7 +146,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithDestroyableContinuous(MovementDirection mDir) {
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 2;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
@@ -155,7 +157,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isDestroyable)
             EndMove();
@@ -169,7 +171,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithEnemyContinuous(MovementDirection mDir) {
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 2;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
@@ -180,7 +182,7 @@ public class Player : MonoBehaviour {
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
         float timing = isLetal ? 0.533f : 0.367f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
             EndMove();
@@ -246,7 +248,7 @@ public class Player : MonoBehaviour {
 
 
     public void EndMove() {
-        SetLoopAnimation("idle");
+        SetOneShotAnimation("idle");
 
         PlayerController.Instance.currentPoint.Reset();
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
@@ -290,7 +292,7 @@ public class Player : MonoBehaviour {
 
     public void InitializeAnimation() {
         root.Initialize(true);
-        root.AnimationState.SetAnimation(0, "idle", true);
+        root.AnimationState.SetAnimation(0, "idle", false);
     }
 
     public void SetSkeletonColor(QBitType qType) {
@@ -315,7 +317,7 @@ public class Player : MonoBehaviour {
 
     public void SetOneShotAnimation(string animName) {
         root.AnimationState.SetAnimation(0, animName, false);
-        root.AnimationState.AddAnimation(0, "idle", true, 0);
+        root.AnimationState.AddAnimation(0, "idle", false, 0);
     }
 
     public void SetLoopAnimation(string animName) {
@@ -331,21 +333,27 @@ public class Player : MonoBehaviour {
                 SetLoopAnimation("move_up_down");
                 break;
             case MovementDirection.Right:
+                FlipHorizontalToRight();
                 SetLoopAnimation("move_horizontal");
                 break;
             case MovementDirection.Left:
+                FlipHorizontalToLeft();
                 SetLoopAnimation("move_horizontal");
                 break;
             case MovementDirection.Up_Right:
+                FlipHorizontalToRight();
                 SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Up_Left:
+                FlipHorizontalToLeft();
                 SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Down_Right:
+                FlipHorizontalToRight();
                 SetLoopAnimation("move_diagonal_up_down");
                 break;
             case MovementDirection.Down_Left:
+                FlipHorizontalToLeft();
                 SetLoopAnimation("move_diagonal_up_down");
                 break;
         }
@@ -354,47 +362,134 @@ public class Player : MonoBehaviour {
     public void SetAttackAnimation(MovementDirection mDir, bool isLetal) {
         switch(mDir) {
             case MovementDirection.Up:
-                SetOneShotAnimation("attack_vertical_down_up");
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_vertical_down_up");
                 break;
             case MovementDirection.Down:
-                SetOneShotAnimation("attack_vertical_up_down");
+                if(isLetal)
+                    SetOneShotAnimation("attack_horizontal_letal");
+                else
+                    SetOneShotAnimation("attack_vertical_up_down");
                 break;
             case MovementDirection.Right:
+                FlipHorizontalToRight();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Left:
+                FlipHorizontalToLeft();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Up_Right:
+                FlipHorizontalToRight();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Up_Left:
+                FlipHorizontalToLeft();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Down_Right:
+                FlipHorizontalToRight();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Down_Left:
+                FlipHorizontalToLeft();
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_horizontal");
                 break;
         }
+    }
+
+
+    public void FlipHorizontalToLeft() {
+        root.Skeleton.ScaleX = 1;
+    }
+
+    public void FlipHorizontalToRight() {
+        root.Skeleton.ScaleX = -1;
+    }
+
+
+    public void SetPlayerStartOrientation() {
+        List<EnemyBase> enemies = new List<EnemyBase>();
+        List<Enemy> simpleEnemies = new List<Enemy>(Field.Instance.enemiesItems);
+        List<BigEnemy> bigEnemies = new List<BigEnemy>(Field.Instance.bigEnemiesItems);
+        foreach(var e in simpleEnemies)
+            enemies.Add(e);
+        foreach(var e in bigEnemies)
+            enemies.Add(e);
+
+        if(enemies.Count == 0) {
+            if(PlayerController.Instance.currentPoint.x < 3)
+                FlipHorizontalToLeft();
+            else if(PlayerController.Instance.currentPoint.x > 3)
+                FlipHorizontalToRight();
+        }
+        else {
+            MovementPoint closestEnemy = FindClosestEnemy(simpleEnemies, bigEnemies);
+            MovementDirection newDir = input.GetMovemenetDirection(PlayerController.Instance.currentPoint, closestEnemy);
+            switch(newDir) {
+                case MovementDirection.Right: case MovementDirection.Up_Right: case MovementDirection.Down_Right:
+                    FlipHorizontalToLeft();
+                    break;
+                case MovementDirection.Left: case MovementDirection.Up_Left: case MovementDirection.Down_Left:
+                    FlipHorizontalToRight();
+                    break;
+            }
+        }
+    }
+
+    public MovementPoint FindClosestEnemy(List<Enemy> simpleEnemies, List<BigEnemy> bigEnemies) {
+        Coordinate closestEnemy = new Coordinate(simpleEnemies[0].currentPoint.x, simpleEnemies[0].currentPoint.y);
+        Coordinate playerC = new Coordinate(PlayerController.Instance.currentPoint.x, PlayerController.Instance.currentPoint.y);
+        int shortestDistance = CountDistanceBetweenPoints(playerC, closestEnemy);
+
+        foreach(var e in simpleEnemies) {
+            Coordinate c = new Coordinate(e.currentPoint.x, e.currentPoint.y);
+            int newDistance = CountDistanceBetweenPoints(playerC, c);
+            if(newDistance < shortestDistance) {
+                closestEnemy = c;
+                shortestDistance = newDistance;
+            }
+        }
+
+        foreach(var e in bigEnemies) {
+            foreach(var p in e.currentPoint.points) {
+                Coordinate c = new Coordinate(p.x, p.y);
+                int newDistance = CountDistanceBetweenPoints(playerC, c);
+                if(newDistance < shortestDistance) {
+                    closestEnemy = c;
+                    shortestDistance = newDistance;
+                }
+            }
+        }
+
+        MovementPoint enemyPoint = MovementManager.Instance.Points.Find(p => p.x == closestEnemy.x && p.y == closestEnemy.y);
+        
+        return enemyPoint;
+    }
+
+    public int CountDistanceBetweenPoints(Coordinate point1, Coordinate point2) {
+        int distance = 0;
+        distance += Mathf.Abs(point2.x - point1.x) + Mathf.Abs(point2.y - point1.y);
+        return distance;
     }
 }

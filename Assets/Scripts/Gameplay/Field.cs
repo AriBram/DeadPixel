@@ -419,6 +419,7 @@ public class Field : MonoBehaviour {
         EnemiesRespawnManager.Instance.MakeRespawnIteration();
         ApplyDeathCounterToRespawnManager();
         ActivateSkeletonSpawners();
+        Player.Instance.SetPlayerStartOrientation();
 
         if(isMovesLimited) {
             movesCount -= 1;
