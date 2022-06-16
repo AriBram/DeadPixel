@@ -35,6 +35,10 @@ public class Field : MonoBehaviour {
     public Transform debuffsContainer;
     public GameObject debuffPrefab_Puddle;
 
+    public Transform quantsContainer;
+    public GameObject quantPrefab;
+    public int quantSpawnThreshold;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
     public List<GameObject> obstaclesLinks = new List<GameObject>();
@@ -47,6 +51,8 @@ public class Field : MonoBehaviour {
     public List<BigEnemy> bigEnemiesItems = new List<BigEnemy>();
     public List<GameObject> debuffsLinks = new List<GameObject>();
     public List<Debuff> debuffsItems = new List<Debuff>();
+    public List<GameObject> quantsLinks = new List<GameObject>();
+    public List<Quant> quantsItems = new List<Quant>();
     
 
     public GoalsController goals;
@@ -138,17 +144,27 @@ public class Field : MonoBehaviour {
         foreach(GameObject en in enemiesLinks)
             Destroy(en);
 
+        foreach(GameObject deb in debuffsLinks)
+            Destroy(deb);
+
+        foreach(GameObject q in quantsLinks)
+            Destroy(q);
+
         qBitsLinks.Clear();
         obstaclesLinks.Clear();
         destroyablesLinks.Clear();
         defectsLinks.Clear();
         enemiesLinks.Clear();
+        debuffsLinks.Clear();
+        quantsLinks.Clear();
 
         qBits.Clear();
         destroyables.Clear();
         defectsItems.Clear();
         enemiesItems.Clear();
         bigEnemiesItems.Clear();
+        debuffsItems.Clear();
+        quantsItems.Clear();
 
         foreach(var point in MovementManager.Instance.Points) {
             point.Reset();
@@ -181,6 +197,12 @@ public class Field : MonoBehaviour {
                             defectToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
                             defectToDrop.Init(point);  
                             point.data = PointData.Defect;
+                        }
+                        else if(newPoint.isQuant) {
+                            Quant quantToDrop = quantsItems.Find(q => q.x == newPoint.x && q.y == newPoint.y);
+                            quantToDrop.gameObject.transform.position = new Vector3(dropPoint.position.x, dropPoint.position.y, dropPoint.position.z);
+                            quantToDrop.Init(point);  
+                            point.data = PointData.Quant;
                         }
                         point.isFree = false;
                         newPoint.Reset();
@@ -528,6 +550,37 @@ public class Field : MonoBehaviour {
                 defectsItems.Add(d);
             }
     }
+
+
+    public void SpawnQuant() {
+            List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
+
+            if(availablePoints.Count == 0)
+                return;
+
+            MovementPoint spawnPoint = availablePoints[Random.Range(0, availablePoints.Count)];
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+            
+            if(spawnPoint.isQbit) {
+                QBit qBitToDestroy = qBits.Find(q => q.x == spawnPoint.x && q.y == spawnPoint.y);
+                qBitToDestroy.DestroyQbit();
+            }
+
+            GameObject item = Instantiate(quantPrefab, quantsContainer);
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+
+            quantsLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = true;
+            spawnPoint.data = PointData.Quant;
+            Quant q = item.GetComponent<Quant>();
+            q.Init(spawnPoint);
+            quantsItems.Add(q);
+    }
+
+
+
 
 
     public void ApplyDeathCounterToRespawnManager() {

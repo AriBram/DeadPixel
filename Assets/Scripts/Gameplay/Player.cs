@@ -200,7 +200,7 @@ public class Player : MonoBehaviour {
         for(int i = comboCheckPointIndex; i < targetIndex; i++) {
             //Debug.Log(i.ToString() + ": " + activatedPoints[i].data.ToString());
             //if(activatedPoints[i].isQbit)
-            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit) //bug
+            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant) //bug
                 attackPower++;
         }
         comboCheckPointIndex = targetIndex + 1;
@@ -246,6 +246,10 @@ public class Player : MonoBehaviour {
         SetSkeletonColor(data.qType);
     }
 
+    public void PickQuant() {
+        UserData.Instance.quantsCollected++;
+    }
+
 
     public void EndMove() {
         SetOneShotAnimation("idle");
@@ -259,6 +263,10 @@ public class Player : MonoBehaviour {
         if(colorType == lastMoveType && activatedPoints.Count >= 3)
             health.GetHeal(0, 1);
         lastMoveType = colorType;
+
+        int comboPower = MovementManager.Instance.GetCombinationPower();
+        if(comboPower >= Field.Instance.quantSpawnThreshold)
+            Field.Instance.SpawnQuant();
 
         activeTargetIndex = 0;
         input.ClearMovementTrack();

@@ -28,6 +28,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     public bool isEnemy => data == PointData.Enemy;
     public bool isBigEnemy => data == PointData.BigEnemy;
     public bool isPlayer => data == PointData.Player;
+    public bool isQuant => data == PointData.Quant;
 
     public PointData data;
 
@@ -80,6 +81,10 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
                 if(isQbit) {
                     QBit qBitToDestroy = Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y);
                     qBitToDestroy.DestroyQbit();
+                }
+                else if(isQuant) {
+                    Quant quantToDestroy = Field.Instance.quantsItems.Find(q => q.x == this.x && q.y == this.y);
+                    quantToDestroy.DestroyQuant();
                 }
                 Enemy e = other.gameObject.GetComponent<Enemy>();
                 if(e.targetPoint.x == this.x && e.targetPoint.y == this.y)
@@ -150,7 +155,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 }
 
 
-public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player, BigEnemy}
+public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player, BigEnemy, Quant}
 
 public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left}
 

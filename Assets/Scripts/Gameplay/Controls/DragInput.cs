@@ -100,6 +100,13 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                 activatedPoints.Add(point);
                             }
                         }
+                        else if(point.isQuant) {
+                            choosenType = QBitType.NONE;
+                            point.Activate();
+                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point));
+                            lastActivatedPoint = point;
+                            activatedPoints.Add(point);
+                        }
                     }
                 }
 
@@ -126,7 +133,10 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                 choosenType = QBitType.NONE;
                         }
                         else if(lastActivatedPoint.isBigEnemy) {
-
+                            //big enemy cancel logic
+                        }
+                        else if(lastActivatedPoint.isQuant) {
+                            choosenType = QBitType.NONE;
                         }
                     }
                 }

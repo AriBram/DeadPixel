@@ -50,7 +50,7 @@ public class MovementManager : MonoBehaviour {
     public int GetCombinationPower() {
         int power = 0;
         foreach(var p in ActivatedPoints) {
-            if(p.data == PointData.None || p.isQbit) //bug
+            if(p.data == PointData.None || p.isQbit || p.isQuant) //bug
                 power++;
         }
         return power;
