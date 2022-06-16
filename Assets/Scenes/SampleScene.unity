@@ -10224,7 +10224,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000500000002000000
+    availableColors: 00000000010000000600000002000000
   - player:
       x: 0
       y: 1
@@ -10302,7 +10302,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000500000002000000
+    availableColors: 00000000010000000600000002000000
   - player:
       x: 1
       y: 0
@@ -10360,7 +10360,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 0000000001000000050000000200000006000000
+    availableColors: 00000000010000000600000002000000
   - player:
       x: 1
       y: 1
