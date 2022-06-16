@@ -32,6 +32,9 @@ public class Field : MonoBehaviour {
     public int maxEnemiesCanMove;
     public Dictionary<EnemyType, int> deathsCounter;
 
+    public Transform debuffsContainer;
+    public GameObject debuffPrefab_Puddle;
+
     public List<GameObject> qBitsLinks = new List<GameObject>();
     public List<QBit> qBits = new List<QBit>();
     public List<GameObject> obstaclesLinks = new List<GameObject>();
@@ -42,6 +45,9 @@ public class Field : MonoBehaviour {
     public List<GameObject> enemiesLinks = new List<GameObject>();
     public List<Enemy> enemiesItems = new List<Enemy>();
     public List<BigEnemy> bigEnemiesItems = new List<BigEnemy>();
+    public List<GameObject> debuffsLinks = new List<GameObject>();
+    public List<Debuff> debuffsItems = new List<Debuff>();
+    
 
     public GoalsController goals;
     public bool isGoalsComplete;
@@ -144,8 +150,10 @@ public class Field : MonoBehaviour {
         enemiesItems.Clear();
         bigEnemiesItems.Clear();
 
-        foreach(var point in MovementManager.Instance.Points)
+        foreach(var point in MovementManager.Instance.Points) {
             point.Reset();
+            point.ResetDebuff();
+        }
     }
 
 
@@ -229,6 +237,7 @@ public class Field : MonoBehaviour {
         SpawnDefects(level.defects);
         SpawnEnemies(level.enemies);
         SpawnBigEnemies(level.bigEnemies);
+        SpawnDebuffs(level.debuffs);
         goals.Init(level.goals);
     }
 
@@ -359,6 +368,33 @@ public class Field : MonoBehaviour {
             enemy.Init(e.eType, spawnPoint);
             enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
             bigEnemiesItems.Add(enemy);
+        }
+    }
+
+
+    public void SpawnDebuffs(List<DebuffData> debuffs) {
+        foreach(var d in debuffs) {
+            Point_x4 spawnPoint = MovementManager.Instance.Points_x4.Find(p => p.x4 == d.point_x4.x && p.y4 == d.point_x4.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+
+            GameObject item = new GameObject();
+            Destroy(item);
+
+            switch(d.debuff) {
+                case DebuffType.Puddle:
+                    item = Instantiate(debuffPrefab_Puddle, debuffsContainer);
+                    break;
+            }
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+            debuffsLinks.Add(item);
+
+            foreach(var sp in spawnPoint.points)
+                sp.debuff = DebuffType.Puddle;
+            
+            Debuff debuffItem = item.GetComponent<Debuff>();
+            debuffItem.Init(d.debuff, spawnPoint);
+            debuffsItems.Add(debuffItem);
         }
     }
 

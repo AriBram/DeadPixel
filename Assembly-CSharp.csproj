@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Gameplay\Controls\Point_x4.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemies\BigEnemy.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyBase.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Debuff.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Utils\Spine\version.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

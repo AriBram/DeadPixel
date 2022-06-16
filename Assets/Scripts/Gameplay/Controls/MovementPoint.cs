@@ -31,6 +31,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public PointData data;
 
+    public DebuffType debuff;
+
     public List<MovementDirectionData> directionIndicators;
 
     public class PointReachedEvent : UnityEvent { }
@@ -109,6 +111,11 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     }
 
 
+    public void ResetDebuff() {
+        debuff = DebuffType.None;
+    }
+
+
 
 
 
@@ -144,7 +151,11 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
 
 public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player, BigEnemy}
+
 public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left}
+
+public enum DebuffType {None, Puddle}
+
 
 [System.Serializable]
 public class MovementDirectionData {

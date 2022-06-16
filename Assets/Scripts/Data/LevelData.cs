@@ -19,6 +19,8 @@ public class LevelData {
     public MovesLimitData movesLimitData;
 
     public List<QBitType> availableColors;
+
+    public List<DebuffData> debuffs;
 }
 
 
@@ -102,5 +104,17 @@ public class MovesLimitData {
     public MovesLimitData(bool isMovesLimited, int movesCount) {
         this.isMovesLimited = isMovesLimited;
         this.movesCount = movesCount;
+    }
+}
+
+
+[System.Serializable]
+public class DebuffData {
+    public DebuffType debuff;
+    public Coordinate point_x4;
+
+    public DebuffData(DebuffType debuff, Coordinate point_x4) {
+        this.debuff = debuff;
+        this.point_x4 = point_x4;
     }
 }
