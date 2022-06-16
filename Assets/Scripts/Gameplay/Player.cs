@@ -283,6 +283,7 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint = newPoint;
         PlayerController.Instance.currentPoint.isFree = false;
         PlayerController.Instance.currentPoint.canDrop = false;
+        PlayerController.Instance.currentPoint.data = PointData.Player;
     }
 
 

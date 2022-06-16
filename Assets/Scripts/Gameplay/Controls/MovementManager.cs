@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class MovementManager : MonoBehaviour {
 
@@ -10,6 +12,10 @@ public class MovementManager : MonoBehaviour {
     public List<Point_x4> Points_x4 = new List<Point_x4>();
 
     public static MovementManager Instance { get; private set; }
+
+    public class MovementTrackChangedEvent : UnityEvent { }
+    [HideInInspector] public MovementTrackChangedEvent onMovementTrackChanged = new MovementTrackChangedEvent();
+
     
     void Awake() {
         Instance = this;
@@ -29,6 +35,7 @@ public class MovementManager : MonoBehaviour {
 
     public void ClearMovementTrack() {
         ActivatedPoints.Clear();
+        onMovementTrackChanged.Invoke();
     }
 
     public void SetMovementTrack(List<MovementPoint> points) {
@@ -36,5 +43,16 @@ public class MovementManager : MonoBehaviour {
 
         foreach(var point in points)
             ActivatedPoints.Add(point);
+
+        onMovementTrackChanged.Invoke();
+    }
+
+    public int GetCombinationPower() {
+        int power = 0;
+        foreach(var p in ActivatedPoints) {
+            if(p.data == PointData.None || p.isQbit) //bug
+                power++;
+        }
+        return power;
     }
 }

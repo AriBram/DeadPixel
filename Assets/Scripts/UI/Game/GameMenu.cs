@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class GameMenu : MenuBase {
+
+    public TMP_Text goCounter;
 
     public Button goBtn;
 
@@ -15,10 +18,18 @@ public class GameMenu : MenuBase {
     void Start() {
         goBtn.onClick.AddListener(OnBtnGoClick);
         goNextArenaBtn.onClick.AddListener(OnBtnGoNextArenaClick);
+
+        MovementManager.Instance.onMovementTrackChanged.AddListener(Refresh);
+
+        goBtn.gameObject.SetActive(false);
     }
 
-    void Update() {
-        goBtn.gameObject.SetActive(GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1);
+
+    public void Refresh() {
+        bool isGoBtnActive = GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1 ? true : false;
+        goBtn.gameObject.SetActive(isGoBtnActive);
+        if(isGoBtnActive)
+            goCounter.text = MovementManager.Instance.GetCombinationPower().ToString();
     }
 
     public override void Show() {
