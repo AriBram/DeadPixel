@@ -29,7 +29,6 @@ public abstract class EnemyBase : MonoBehaviour {
     public TMP_Text hpCaption;
     public Image shield;
     public Image heart;
-    public List<GameObject> skulls;
 
     public bool hasShield;
     public QBitData colorData;
@@ -52,12 +51,6 @@ public abstract class EnemyBase : MonoBehaviour {
         colorData = Field.Instance.GetRandomColor();
         heart.color = colorData.color;
         shield.color = colorData.color;
-
-        foreach(var skull in skulls)
-            skull.SetActive(false);
-        
-        for(int i = 0; i < attackPower; i++)
-            skulls[i].SetActive(true);
     }
 
 
