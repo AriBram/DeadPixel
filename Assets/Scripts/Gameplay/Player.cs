@@ -269,6 +269,7 @@ public class Player : MonoBehaviour {
             return;
 
         Field.Instance.CheckDefectsForAttackPlayer();
+        Field.Instance.CheckDebuffsOnPlayer();
         Field.Instance.ActivateEnemyMove();
     }
 

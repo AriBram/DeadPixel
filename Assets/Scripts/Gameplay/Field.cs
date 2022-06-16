@@ -427,6 +427,10 @@ public class Field : MonoBehaviour {
             d.FindAndAttackPlayer();
     }
 
+    public void CheckDebuffsOnPlayer() {
+        foreach(var d in debuffsItems)
+            d.FindAndDebuffPlayer();
+    }
 
     public void ActivateEnemyMove() {
         enemiesCounter = 0;

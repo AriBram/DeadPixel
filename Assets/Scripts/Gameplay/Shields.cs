@@ -26,4 +26,8 @@ public class Shields : MonoBehaviour {
     public void GetShields(int shieldsCount) {
         value = Mathf.Clamp(value + shieldsCount, 0, shieldsLimit);
     }
+
+    public void ResetShields() {
+        value = 0;
+    }
 }

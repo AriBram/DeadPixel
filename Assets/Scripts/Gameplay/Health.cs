@@ -43,4 +43,9 @@ public class Health : MonoBehaviour {
         maxHp = Mathf.Clamp(maxHp + increaseValue, 0, hpLimit);
         onHealthChanged.Invoke();
     }
+
+    public void ResetShields() {
+        shields.ResetShields();
+        onHealthChanged.Invoke();
+    }
 }
