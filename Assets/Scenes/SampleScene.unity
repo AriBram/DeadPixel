@@ -1692,7 +1692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3018868, g: 0.09540761, b: 0.18120684, a: 1}
+  m_Color: {r: 0.7830189, g: 0.121885024, b: 0.3901163, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10926,7 +10926,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000200000006000000
+    availableColors: 000000000100000002000000
     debuffs: []
   - player:
       x: 0
@@ -11048,7 +11048,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000600000002000000
+    availableColors: 000000000100000002000000
     debuffs:
     - debuff: 1
       point_x4:
@@ -11114,7 +11114,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000600000002000000
+    availableColors: 000000000100000002000000
     debuffs: []
   - player:
       x: 0
@@ -11194,7 +11194,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000600000002000000
+    availableColors: 000000000100000002000000
     debuffs: []
   - player:
       x: 1
@@ -11254,7 +11254,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000600000002000000
+    availableColors: 000000000100000002000000
     debuffs: []
   - player:
       x: 1
@@ -11314,7 +11314,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 0
       movesCount: 0
-    availableColors: 00000000010000000600000002000000
+    availableColors: 000000000100000002000000
     debuffs: []
 --- !u!4 &1112977026
 Transform:

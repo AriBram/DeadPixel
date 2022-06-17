@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemiesRespawnManager.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemies\BigEnemy.cs" />
      <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Debuff.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\AnimatedEnemy.cs" />
      <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Utils\Spine\version.txt" />

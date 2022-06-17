@@ -209,7 +209,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     public int CountAttackPower(int targetIndex) {
         int attackPower = 0;
         for(int i = targetIndex; i >= 0; i--) {
-            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit) //bug
+            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant) //bug
                 attackPower++;
             else
                 return attackPower;

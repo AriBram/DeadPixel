@@ -90,7 +90,7 @@ public abstract class EnemyBase : MonoBehaviour {
 
 
 
-    public void Attack() {
+    public virtual void Attack() {
         foreach(var ap in attackPoints) {
             MovementPoint mp = MovementManager.Instance.Points.Find(p => p.x == ap.x && p.y == ap.y);
             if(mp != null)
@@ -103,8 +103,6 @@ public abstract class EnemyBase : MonoBehaviour {
 
         if(isPlayerInAttackRadius && colorData.qType != playerQType)
             Player.Instance.health.GetDamage(attackPower);
-
-        Debug.Log(eType.ToString() + " move end");
 
         onMoveEnd.Invoke();
     }

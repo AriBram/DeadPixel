@@ -16,7 +16,7 @@ public class Enemy : EnemyBase {
 
 
 
-    public void Init(EnemyType eType, MovementPoint point) {
+    public virtual void Init(EnemyType eType, MovementPoint point) {
         BaseInit(eType);
          
         currentPoint = point;
