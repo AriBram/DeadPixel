@@ -25,7 +25,9 @@ public class Field : MonoBehaviour {
     public Transform enemiesContainer;
     public GameObject enemyPrefab_Worm;
     public GameObject enemyPrefab_Skeleton;
+    public GameObject enemyPrefab_Skeleton_Animated;
     public GameObject enemyPrefab_Zombie;
+    public GameObject enemyPrefab_Zombie_Animated;
     public GameObject enemyPrefab_Agent;
     public GameObject enemyPrefab_Spider;
     public int enemiesCounter;
@@ -49,6 +51,7 @@ public class Field : MonoBehaviour {
     public List<GameObject> enemiesLinks = new List<GameObject>();
     public List<Enemy> enemiesItems = new List<Enemy>();
     public List<BigEnemy> bigEnemiesItems = new List<BigEnemy>();
+    public List<AnimatedEnemy> animatedEnemiesItems = new List<AnimatedEnemy>();
     public List<GameObject> debuffsLinks = new List<GameObject>();
     public List<Debuff> debuffsItems = new List<Debuff>();
     public List<GameObject> quantsLinks = new List<GameObject>();
@@ -87,7 +90,7 @@ public class Field : MonoBehaviour {
     void Update() {
         if(GameplayController.Instance.IsEnemyMove) {
             //Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
-            int enemiesCount = enemiesItems.Count + bigEnemiesItems.Count;
+            int enemiesCount = enemiesItems.Count + bigEnemiesItems.Count + animatedEnemiesItems.Count;
             if(enemiesCounter == Mathf.Clamp(enemiesCount, 0, maxEnemiesCanMove))
                 Refill();
         }
@@ -97,6 +100,7 @@ public class Field : MonoBehaviour {
     public void Init() {
         DestroyField();
         LevelData level = GameData.Instance.GetCurrentLevel();
+        availableColors = new List<QBitType>(level.availableColors);
         SpawnLevelElements(level);
 
         isGoalsComplete = false;
@@ -116,10 +120,6 @@ public class Field : MonoBehaviour {
             movesCount = level.movesLimitData.movesCount;
             movesCountCaption.text = movesCount.ToString();
         }
-
-        availableColors = new List<QBitType>();
-        foreach(var c in level.availableColors)
-            availableColors.Add(c);
 
         FillFreePoints();
         
@@ -163,6 +163,7 @@ public class Field : MonoBehaviour {
         defectsItems.Clear();
         enemiesItems.Clear();
         bigEnemiesItems.Clear();
+        animatedEnemiesItems.Clear();
         debuffsItems.Clear();
         quantsItems.Clear();
 
@@ -257,7 +258,8 @@ public class Field : MonoBehaviour {
         SpawnObstacles(level.obstacles);
         SpawnDestroyables(level.destroyables);
         SpawnDefects(level.defects);
-        SpawnEnemies(level.enemies);
+        SpawnEnemies(level.enemies, false);
+        SpawnEnemies(level.animatedEnemies, true);
         SpawnBigEnemies(level.bigEnemies);
         SpawnDebuffs(level.debuffs);
         goals.Init(level.goals);
@@ -327,7 +329,7 @@ public class Field : MonoBehaviour {
         }
     }
 
-    public void SpawnEnemies(List<EnemyData> enemies) {
+    public void SpawnEnemies(List<EnemyData> enemies, bool isAnimated) {
         foreach(var e in enemies) {
             MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == e.point.x && p.y == e.point.y);
             Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
@@ -340,10 +342,16 @@ public class Field : MonoBehaviour {
                     item = Instantiate(enemyPrefab_Worm, enemiesContainer);
                     break;
                 case EnemyType.Skeleton:
-                    item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Skeleton_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
                     break;
                 case EnemyType.Zombie:
-                    item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Zombie_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
                     break;
                 case EnemyType.Agent:
                     item = Instantiate(enemyPrefab_Agent, enemiesContainer);
@@ -351,6 +359,7 @@ public class Field : MonoBehaviour {
             }
 
             item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+
             enemiesLinks.Add(item);
             spawnPoint.isFree = false;
             spawnPoint.canDrop = false;
@@ -466,6 +475,8 @@ public class Field : MonoBehaviour {
             e.ActivateMove();
         foreach(var e in bigEnemiesItems)
             e.ActivateMove();
+        foreach(var e in animatedEnemiesItems)
+            e.ActivateMove();
     }
 
     public void UpdateEnemiesCounter() {
@@ -494,7 +505,7 @@ public class Field : MonoBehaviour {
 
 
 
-    public void SpawnEnemy(EnemyType eType) {
+    public void SpawnEnemy(EnemyType eType, bool isAnimated) {
             List<MovementPoint> availablePoints = MovementManager.Instance.Points.FindAll(p => p.data == PointData.QBit || p.data == PointData.None);
             List<Coordinate> unavailablePoints = FindUnavailablePoints();
 
@@ -522,10 +533,16 @@ public class Field : MonoBehaviour {
                     item = Instantiate(enemyPrefab_Worm, enemiesContainer);
                     break;
                 case EnemyType.Skeleton:
-                    item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Skeleton_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
                     break;
                 case EnemyType.Zombie:
-                    item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Zombie_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
                     break;
                 case EnemyType.Agent:
                     item = Instantiate(enemyPrefab_Agent, enemiesContainer);

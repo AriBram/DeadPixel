@@ -10637,7 +10637,9 @@ MonoBehaviour:
         x: 4
         y: 4
     defects: []
-    enemies:
+    enemies: []
+    bigEnemies: []
+    animatedEnemies:
     - eType: 1
       point:
         x: 3
@@ -10658,14 +10660,15 @@ MonoBehaviour:
       point:
         x: 4
         y: 3
-    bigEnemies: []
     respawns:
     - rType: 2
       eType: 1
       frequency: 1
+      isAnimated: 1
     - rType: 2
       eType: 2
       frequency: 1
+      isAnimated: 1
     respawnLimits:
     - eType: 1
       value: 2
@@ -10715,10 +10718,12 @@ MonoBehaviour:
       y: 6
     enemies: []
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 1
       eType: 5
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 1
@@ -10765,13 +10770,16 @@ MonoBehaviour:
         x: 5
         y: 5
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 2
       eType: 0
       frequency: 1
+      isAnimated: 0
     - rType: 1
       eType: 5
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 2
@@ -10834,19 +10842,24 @@ MonoBehaviour:
         x: 3
         y: 4
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 2
       eType: 0
       frequency: 1
+      isAnimated: 0
     - rType: 2
       eType: 1
       frequency: 1
+      isAnimated: 0
     - rType: 0
       eType: 1
       frequency: 2
+      isAnimated: 0
     - rType: 0
       eType: 0
       frequency: 2
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 3
@@ -10908,13 +10921,16 @@ MonoBehaviour:
         x: 5
         y: 6
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 2
       eType: 3
       frequency: 1
+      isAnimated: 0
     - rType: 0
       eType: 3
       frequency: 3
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 8
@@ -10976,6 +10992,7 @@ MonoBehaviour:
         x: 6
         y: 3
     bigEnemies: []
+    animatedEnemies: []
     respawns: []
     respawnLimits: []
     goals:
@@ -11033,10 +11050,12 @@ MonoBehaviour:
       y: 6
     enemies: []
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 1
       eType: 5
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 1
@@ -11090,19 +11109,24 @@ MonoBehaviour:
         x: 5
         y: 5
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 0
       eType: 2
       frequency: 3
+      isAnimated: 0
     - rType: 0
       eType: 3
       frequency: 3
+      isAnimated: 0
     - rType: 2
       eType: 3
       frequency: 1
+      isAnimated: 0
     - rType: 2
       eType: 2
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 5
@@ -11176,13 +11200,16 @@ MonoBehaviour:
         x: 5
         y: 5
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 1
       eType: 5
       frequency: 1
+      isAnimated: 0
     - rType: 2
       eType: 0
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 2
@@ -11236,13 +11263,16 @@ MonoBehaviour:
         x: 5
         y: 3
     bigEnemies: []
+    animatedEnemies: []
     respawns:
     - rType: 1
       eType: 5
       frequency: 1
+      isAnimated: 0
     - rType: 2
       eType: 2
       frequency: 1
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 0
@@ -11296,13 +11326,16 @@ MonoBehaviour:
       point:
         x: 2
         y: 5
+    animatedEnemies: []
     respawns:
     - rType: 0
       eType: 1
       frequency: 2
+      isAnimated: 0
     - rType: 0
       eType: 0
       frequency: 2
+      isAnimated: 0
     respawnLimits: []
     goals:
     - gType: 4
@@ -18396,7 +18429,9 @@ MonoBehaviour:
   enemiesContainer: {fileID: 1611736954}
   enemyPrefab_Worm: {fileID: 7181365842108163436, guid: 7403da0a397007d43899fb4c574638d3, type: 3}
   enemyPrefab_Skeleton: {fileID: 7181365842108163436, guid: 99fd200bb7e36be4f9a3d2483a0ae9f1, type: 3}
+  enemyPrefab_Skeleton_Animated: {fileID: 7181365842108163436, guid: 496b1d0f006e7364f81522ef44d51787, type: 3}
   enemyPrefab_Zombie: {fileID: 7181365842108163436, guid: b4d230f330131804b92f4e9cdd9378e1, type: 3}
+  enemyPrefab_Zombie_Animated: {fileID: 7181365842108163436, guid: f63147938ebcd4c45b467ff16f187dc7, type: 3}
   enemyPrefab_Agent: {fileID: 7181365842108163436, guid: 764ed74ae4178054294531a14acbb4ed, type: 3}
   enemyPrefab_Spider: {fileID: 7181365842108163436, guid: d9873d9016550e2438f7a66275c565a9, type: 3}
   enemiesCounter: 0
@@ -18416,6 +18451,7 @@ MonoBehaviour:
   enemiesLinks: []
   enemiesItems: []
   bigEnemiesItems: []
+  animatedEnemiesItems: []
   debuffsLinks: []
   debuffsItems: []
   quantsLinks: []

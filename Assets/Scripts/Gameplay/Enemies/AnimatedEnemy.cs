@@ -13,8 +13,17 @@ public class AnimatedEnemy : Enemy {
         base.Init(eType, point);
 
         InitializeAnimation();
+
+        colorData = Field.Instance.GetRandomColor();
         SetSkeletonColor(colorData.qType);
+
         SetOrientation();
+
+        hasShield = false;
+        shield.gameObject.SetActive(false);
+
+        healthPoints = Random.Range(minHP, maxHP + 1);
+        hpCaption.text = healthPoints.ToString();
     }
     
     
@@ -72,11 +81,11 @@ public class AnimatedEnemy : Enemy {
 
 
     public void FlipHorizontalToLeft() {
-        enemyAnim.Skeleton.ScaleX = 1;
+        enemyAnim.Skeleton.ScaleX = -1;
     }
 
     public void FlipHorizontalToRight() {
-        enemyAnim.Skeleton.ScaleX = -1;
+        enemyAnim.Skeleton.ScaleX = 1;
     }
 
 
@@ -129,8 +138,16 @@ public class AnimatedEnemy : Enemy {
         if(isPlayerInAttackRadius && colorData.qType != playerQType) {
             Player.Instance.health.GetDamage(attackPower);
             MovementDirection mDir = Player.Instance.input.GetMovemenetDirection(currentPoint, PlayerController.Instance.currentPoint);
-            SetAttackAnimation(mDir);
+            StartCoroutine(StartAttack(mDir));
         }
+        else
+            onMoveEnd.Invoke();
+    }
+
+    public IEnumerator StartAttack(MovementDirection mDir) {
+        SetAttackAnimation(mDir);
+
+        yield return new WaitForSeconds(0.4f);
 
         onMoveEnd.Invoke();
     }

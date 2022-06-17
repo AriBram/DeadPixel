@@ -12,6 +12,7 @@ public class LevelData {
 
     public List<EnemyData> enemies; 
     public List<EnemyData> bigEnemies;
+    public List<EnemyData> animatedEnemies; 
     public List<RespawnData> respawns;
     public List<RespawnLimitData> respawnLimits;
 
@@ -88,11 +89,13 @@ public class RespawnData {
     public RespawnType rType;
     public EnemyType eType;
     public int frequency;
+    public bool isAnimated;
 
-    public RespawnData(RespawnType rType, EnemyType eType, int frequency) {
+    public RespawnData(RespawnType rType, EnemyType eType, int frequency, bool isAnimated) {
         this.rType = rType;
         this.eType = eType;
         this.frequency = frequency;
+        this.isAnimated = isAnimated;
     }
 }
 

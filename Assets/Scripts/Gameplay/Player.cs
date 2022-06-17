@@ -307,7 +307,7 @@ public class Player : MonoBehaviour {
 
     public void InitializeAnimation() {
         root.Initialize(true);
-        root.AnimationState.SetAnimation(0, "idle", false);
+        root.AnimationState.SetAnimation(0, "idle", true);
     }
 
     public void SetSkeletonColor(QBitType qType) {

@@ -52,15 +52,15 @@ public class EnemiesRespawnManager : MonoBehaviour {
             switch(respawn.rType) {
                 case RespawnType.Simple:
                     if(moveCounter % respawn.frequency == 0)
-                        Spawn(respawn.eType);
+                        Spawn(respawn.eType, respawn.isAnimated);
                     break;
                 case RespawnType.AfterGoalsComplete:
                     if(Field.Instance.isGoalsComplete && moveCounter % respawn.frequency == 0)
-                        Spawn(respawn.eType);
+                        Spawn(respawn.eType, respawn.isAnimated);
                     break;
                 case RespawnType.AfterDeath:
                     if(deathsCounter[respawn.eType] > 0) {
-                        Spawn(respawn.eType);
+                        Spawn(respawn.eType, respawn.isAnimated);
                         deathsCounter[respawn.eType] = Mathf.Clamp(deathsCounter[respawn.eType] - 1, 0, deathsCounter[respawn.eType]);
                     }
                     break;
@@ -68,7 +68,7 @@ public class EnemiesRespawnManager : MonoBehaviour {
         }
     }
 
-    private void Spawn(EnemyType eType) {
-        Field.Instance.SpawnEnemy(eType);
+    private void Spawn(EnemyType eType, bool isAnimated) {
+        Field.Instance.SpawnEnemy(eType, isAnimated);
     }
 }

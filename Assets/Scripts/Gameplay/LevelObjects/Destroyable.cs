@@ -47,7 +47,7 @@ public class Destroyable : MonoBehaviour {
     public void Use() {
         switch(dType) {
             case DestroyableType.SkeletonSpawner:
-                Field.Instance.SpawnEnemy(EnemyType.Skeleton);
+                Field.Instance.SpawnEnemy(EnemyType.Skeleton, false);
                 break;
         }
     }

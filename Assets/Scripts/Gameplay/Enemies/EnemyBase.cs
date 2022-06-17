@@ -41,16 +41,6 @@ public abstract class EnemyBase : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         canMove = true;
-
-        healthPoints = Random.Range(minHP, maxHP + 1);
-        hpCaption.text = healthPoints.ToString();
-
-        hasShield = Random.Range(0, 2) == 0 ? true : false;
-        shield.gameObject.SetActive(hasShield);
-
-        colorData = Field.Instance.GetRandomColor();
-        heart.color = colorData.color;
-        shield.color = colorData.color;
     }
 
 
