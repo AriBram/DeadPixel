@@ -11,7 +11,17 @@ public class BigEnemy : EnemyBase {
 
     
     public void Init(EnemyType eType, Point_x4 point) {
-        BaseInit(eType);
+        this.eType = eType;
+        
+        healthPoints = Random.Range(minHP, maxHP + 1);
+        hpCaption.text = healthPoints.ToString();
+
+        hasShield = Random.Range(0, 2) == 0 ? true : false;
+        shield.gameObject.SetActive(hasShield);
+
+        colorData = Field.Instance.GetRandomColor();
+        heart.color = colorData.color;
+        shield.color = colorData.color;
          
         currentPoint = point;
         foreach(var p in point.points) {

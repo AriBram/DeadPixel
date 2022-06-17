@@ -60,6 +60,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
             Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(true);
         else if(isQuant)
             Field.Instance.quantsItems.Find(q => q.x == this.x && q.y == this.y).SetActive(true);
+        else if(isEnemy)
+            Field.Instance.enemiesItems.Find(e => e.currentPoint.x == this.x && e.currentPoint.y == this.y).SetActive(true);
     }
 
     public void Deactivate() {
@@ -70,6 +72,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
             Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
         else if(isQuant)
             Field.Instance.quantsItems.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
+        else if(isEnemy)
+            Field.Instance.enemiesItems.Find(e => e.currentPoint.x == this.x && e.currentPoint.y == this.y).SetActive(false);
     }
 
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 using TMPro;
+using Spine.Unity;
 
 
 public abstract class EnemyBase : MonoBehaviour {
@@ -33,6 +34,8 @@ public abstract class EnemyBase : MonoBehaviour {
     public bool hasShield;
     public QBitData colorData;
 
+    public SkeletonGraphic activateIndicator;
+
     public class MoveEndEvent : UnityEvent { }
     [HideInInspector] public MoveEndEvent onMoveEnd = new MoveEndEvent();
 
@@ -41,6 +44,9 @@ public abstract class EnemyBase : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         canMove = true;
+
+        activateIndicator.Initialize(true);
+        activateIndicator.AnimationState.SetAnimation(0, "fear", true);
     }
 
 
@@ -60,17 +66,29 @@ public abstract class EnemyBase : MonoBehaviour {
 
 
 
-
-
-    public void BaseInit(EnemyType eType) {
-        this.eType = eType;
-        healthPoints = Random.Range(minHP, maxHP + 1);
-    }
-
-
     public abstract void SetAttackPoints();
 
     public abstract void SetMovePoints();
+
+
+    public virtual void SetActive(bool isActive) {
+        switch(colorData.qType) {
+            case QBitType.GREEN:
+                activateIndicator.Skeleton.SetSkin("green");
+                break;
+            case QBitType.BLUE:
+                activateIndicator.Skeleton.SetSkin("blue");
+                break;
+            case QBitType.RED:
+                activateIndicator.Skeleton.SetSkin("red");
+                break;
+        }
+
+        activateIndicator.Skeleton.SetSlotsToSetupPose();
+        activateIndicator.LateUpdate();
+
+        activateIndicator.gameObject.SetActive(isActive);
+    }
 
 
 

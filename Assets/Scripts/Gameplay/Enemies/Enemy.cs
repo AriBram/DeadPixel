@@ -7,17 +7,24 @@ using Random = UnityEngine.Random;
 using TMPro;
 
 
-
 public class Enemy : EnemyBase {
 
     public MovementPoint currentPoint;
     public MovementPoint targetPoint;
 
 
-
-
     public virtual void Init(EnemyType eType, MovementPoint point) {
-        BaseInit(eType);
+        this.eType = eType;
+        
+        healthPoints = Random.Range(minHP, maxHP + 1);
+        hpCaption.text = healthPoints.ToString();
+
+        hasShield = Random.Range(0, 2) == 0 ? true : false;
+        shield.gameObject.SetActive(hasShield);
+
+        colorData = Field.Instance.GetRandomColor();
+        heart.color = colorData.color;
+        shield.color = colorData.color;
          
         currentPoint = point;
         currentPoint.isFree = false;

@@ -36,12 +36,15 @@ public class AnimatedEnemy : Enemy {
         switch(qType) {
             case QBitType.GREEN:
                 enemyAnim.Skeleton.SetSkin("green");
+                activateIndicator.Skeleton.SetSkin("green");
                 break;
             case QBitType.BLUE:
                 enemyAnim.Skeleton.SetSkin("blue");
+                activateIndicator.Skeleton.SetSkin("blue");
                 break;
             case QBitType.RED:
                 enemyAnim.Skeleton.SetSkin("red");
+                activateIndicator.Skeleton.SetSkin("red");
                 break;
         }
 
@@ -150,5 +153,19 @@ public class AnimatedEnemy : Enemy {
         yield return new WaitForSeconds(0.4f);
 
         onMoveEnd.Invoke();
+    }
+
+
+
+
+    public override void SetActive(bool isActive) {
+        activateIndicator.gameObject.SetActive(isActive);
+        
+        if(isActive) {
+            enemyAnim.AnimationState.SetAnimation(0, "fear", true);
+        }
+        else {
+            enemyAnim.AnimationState.SetAnimation(0, "idle", true);
+        }
     }
 }
