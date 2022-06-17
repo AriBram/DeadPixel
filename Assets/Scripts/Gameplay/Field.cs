@@ -643,4 +643,14 @@ public class Field : MonoBehaviour {
                 d.Use();
         }
     }
+
+
+
+    public void RefreshAllEnemiesHpCaptions() {
+        foreach(var e in enemiesItems)
+            e.RefreshHpCaption();
+
+        foreach(var e in bigEnemiesItems)
+            e.RefreshHpCaption();
+    }
 }

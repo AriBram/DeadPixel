@@ -94,6 +94,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                     int attackPower = CountAttackPower(activatedPoints.Count - 1);
                                     if(attackPower >= en.healthPoints)
                                         choosenType = QBitType.NONE;
+
+                                    en.hpCaption.text = Mathf.Clamp(en.healthPoints - attackPower, 0, en.healthPoints).ToString();
                                 }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
@@ -118,6 +120,10 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                 if(unavailablePoints.Count > 0)
                                     unavailablePoints.RemoveAt(unavailablePoints.Count - 1);
                             }
+                        }
+                        else if(lastActivatedPoint.isEnemy) {
+                            Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == lastActivatedPoint.x && e.currentPoint.y == lastActivatedPoint.y);
+                            en.RefreshHpCaption();
                         }
 
                         lastActivatedPoint.Deactivate();
@@ -178,6 +184,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
         MovementManager.Instance.ClearMovementTrack();
 
         unavailablePoints.Clear();
+
+        Field.Instance.RefreshAllEnemiesHpCaptions();
     }
 
 

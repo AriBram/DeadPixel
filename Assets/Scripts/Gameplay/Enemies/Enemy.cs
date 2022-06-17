@@ -134,7 +134,7 @@ public class Enemy : EnemyBase {
             Destroy(this.gameObject);
         }
 
-        hpCaption.text = healthPoints.ToString();
+        RefreshHpCaption();
     }
 
 

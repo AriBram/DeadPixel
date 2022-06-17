@@ -145,4 +145,9 @@ public abstract class EnemyBase : MonoBehaviour {
         this.canMove = canMove;
         canMoveIndicator.SetActive(canMove);
     }
+
+
+    public void RefreshHpCaption() {
+        hpCaption.text = healthPoints.ToString();
+    }
 }
