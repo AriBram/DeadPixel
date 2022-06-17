@@ -146,7 +146,7 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1], mDir);
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -215,7 +215,7 @@ public class Player : MonoBehaviour {
     }
 
 
-    public bool AttackDestroyable(int power, MovementPoint point, MovementDirection mDir) {
+    public bool AttackDestroyable(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
         destroyableToAttack.GetDamageByPlayer(power);
@@ -223,7 +223,7 @@ public class Player : MonoBehaviour {
         return isLetal;
     }
 
-    public bool AttackEnemy(int power, MovementPoint point, MovementDirection mDir) {
+    public bool AttackEnemy(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
         bool isLetal = false;
@@ -248,6 +248,7 @@ public class Player : MonoBehaviour {
     public void PickQBit(QBitData data) {
         qBitsCollected[data.qType]++;
         SetSkeletonColor(data.qType);
+        colorType = data.qType;
     }
 
     public void PickQuant() {

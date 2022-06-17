@@ -48,6 +48,8 @@
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementPoint.cs" />
      <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Obstacle.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\MovementManager.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Controls\Point_x4.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Quant.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Player.cs" />
      <Compile Include="Assets\Scripts\UI\Game\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Controls\DragInput.cs" />
@@ -65,14 +67,12 @@
      <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemiesMovementManager.cs" />
      <Compile Include="Assets\Scripts\Data\QBitData.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Field.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyBase.cs" />
      <Compile Include="Assets\Scripts\Data\UserData.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemiesRespawnManager.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Controls\Point_x4.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemies\BigEnemy.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyBase.cs" />
      <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Debuff.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Quant.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\LevelObjects\Destroyable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Utils\Spine\version.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -866,13 +866,13 @@
       <Project>{2bc10e11-f1dd-36f8-f654-c34647368e19}</Project>
       <Name>spine-unity</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-csharp.csproj">
-      <Project>{e63f460d-7c07-f24f-7b1d-89e8542ebd30}</Project>
-      <Name>spine-csharp</Name>
-    </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{d222364e-1cbf-6f66-9d36-2e7e703e971c}</Project>
       <Name>spine-unity-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-csharp.csproj">
+      <Project>{e63f460d-7c07-f24f-7b1d-89e8542ebd30}</Project>
+      <Name>spine-csharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
