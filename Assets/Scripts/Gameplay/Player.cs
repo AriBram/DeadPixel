@@ -270,7 +270,7 @@ public class Player : MonoBehaviour {
         lastMoveType = colorType;
 
         int comboPower = MovementManager.Instance.GetCombinationPower();
-        if(comboPower >= Field.Instance.quantSpawnThreshold)
+        if(comboPower > Field.Instance.quantSpawnThreshold)
             Field.Instance.SpawnQuant();
 
         activeTargetIndex = 0;

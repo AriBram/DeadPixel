@@ -58,6 +58,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
         if(isQbit)
             Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(true);
+        else if(isQuant)
+            Field.Instance.quantsItems.Find(q => q.x == this.x && q.y == this.y).SetActive(true);
     }
 
     public void Deactivate() {
@@ -66,6 +68,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
         if(isQbit)
             Field.Instance.qBits.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
+        else if(isQuant)
+            Field.Instance.quantsItems.Find(q => q.x == this.x && q.y == this.y).SetActive(false);
     }
 
 
