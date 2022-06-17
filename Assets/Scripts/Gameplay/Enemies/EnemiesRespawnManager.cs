@@ -7,10 +7,12 @@ using UnityEngine;
 public class EnemiesRespawnManager : MonoBehaviour {
 
     public List<RespawnData> data;
+    public List<RespawnLimitData> limits;
 
     public int moveCounter;
 
     public Dictionary<EnemyType, int> deathsCounter;
+    public Dictionary<EnemyType, int> spawnsCounter;
 
     public static EnemiesRespawnManager Instance { get; private set; }
 
@@ -30,6 +32,10 @@ public class EnemiesRespawnManager : MonoBehaviour {
         var allEnemyTypes = Enum.GetValues(typeof(EnemyType));
         foreach(EnemyType eType in allEnemyTypes)
             deathsCounter[eType] = 0;
+
+        spawnsCounter = new Dictionary<EnemyType, int>();
+        foreach(EnemyType eType in allEnemyTypes)
+            spawnsCounter[eType] = 0;
     }
 
 
@@ -37,6 +43,12 @@ public class EnemiesRespawnManager : MonoBehaviour {
         moveCounter++;
 
         foreach(var respawn in data) {
+            RespawnLimitData limit = limits.Find(l => l.eType == respawn.eType);
+            if(limit != null) {
+                if(spawnsCounter[respawn.eType] >= limit.value)
+                    continue;
+            }
+            
             switch(respawn.rType) {
                 case RespawnType.Simple:
                     if(moveCounter % respawn.frequency == 0)

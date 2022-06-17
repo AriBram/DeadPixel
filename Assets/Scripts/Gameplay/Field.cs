@@ -261,6 +261,7 @@ public class Field : MonoBehaviour {
         SpawnBigEnemies(level.bigEnemies);
         SpawnDebuffs(level.debuffs);
         goals.Init(level.goals);
+        EnemiesRespawnManager.Instance.limits = new List<RespawnLimitData>(level.respawnLimits);
     }
 
     public void SpawnPlayer(Coordinate pos) {
@@ -557,6 +558,8 @@ public class Field : MonoBehaviour {
                 d.Init(spawnPoint);
                 defectsItems.Add(d);
             }
+
+            EnemiesRespawnManager.Instance.spawnsCounter[eType]++;
     }
 
     public List<Coordinate> FindUnavailablePoints() {

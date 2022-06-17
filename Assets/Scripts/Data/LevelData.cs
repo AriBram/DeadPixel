@@ -13,6 +13,7 @@ public class LevelData {
     public List<EnemyData> enemies; 
     public List<EnemyData> bigEnemies;
     public List<RespawnData> respawns;
+    public List<RespawnLimitData> respawnLimits;
 
     public List<GoalData> goals;
 
@@ -92,6 +93,17 @@ public class RespawnData {
         this.rType = rType;
         this.eType = eType;
         this.frequency = frequency;
+    }
+}
+
+[System.Serializable]
+public class RespawnLimitData {
+    public EnemyType eType;
+    public int value;
+
+    public RespawnLimitData(EnemyType eType, int value) {
+        this.eType = eType;
+        this.value = value;
     }
 }
 

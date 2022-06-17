@@ -7609,7 +7609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 378.5, y: 970.46}
+  m_AnchoredPosition: {x: 269, y: 968}
   m_SizeDelta: {x: 323, y: 219.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &787393785
@@ -10617,6 +10617,78 @@ MonoBehaviour:
     obstacles:
     - x: 0
       y: 0
+    - x: 0
+      y: 4
+    - x: 6
+      y: 0
+    - x: 6
+      y: 4
+    destroyables:
+    - dType: 0
+      point:
+        x: 2
+        y: 4
+    - dType: 0
+      point:
+        x: 3
+        y: 4
+    - dType: 0
+      point:
+        x: 4
+        y: 4
+    defects: []
+    enemies:
+    - eType: 1
+      point:
+        x: 3
+        y: 5
+    - eType: 1
+      point:
+        x: 4
+        y: 5
+    - eType: 1
+      point:
+        x: 5
+        y: 6
+    - eType: 2
+      point:
+        x: 2
+        y: 3
+    - eType: 2
+      point:
+        x: 4
+        y: 3
+    bigEnemies: []
+    respawns:
+    - rType: 2
+      eType: 1
+      frequency: 1
+    - rType: 2
+      eType: 2
+      frequency: 1
+    respawnLimits:
+    - eType: 1
+      value: 2
+    - eType: 2
+      value: 3
+    goals:
+    - gType: 4
+      value: 5
+      icon: {fileID: 21300000, guid: c54de2155ef5afe49ae19e4289e04786, type: 3}
+    - gType: 5
+      value: 5
+      icon: {fileID: 21300000, guid: 5ab6dc38b3b14b1428595f3a618bf722, type: 3}
+    movesLimitData:
+      isMovesLimited: 0
+      movesCount: 0
+    availableColors: 000000000100000002000000
+    debuffs: []
+  - player:
+      x: 1
+      y: 1
+    obstacles:
+    - x: 0
+      y: 0
     - x: 6
       y: 0
     destroyables:
@@ -10647,6 +10719,7 @@ MonoBehaviour:
     - rType: 1
       eType: 5
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 1
       value: 40
@@ -10699,6 +10772,7 @@ MonoBehaviour:
     - rType: 1
       eType: 5
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 2
       value: 40
@@ -10773,6 +10847,7 @@ MonoBehaviour:
     - rType: 0
       eType: 0
       frequency: 2
+    respawnLimits: []
     goals:
     - gType: 3
       value: 5
@@ -10840,6 +10915,7 @@ MonoBehaviour:
     - rType: 0
       eType: 3
       frequency: 3
+    respawnLimits: []
     goals:
     - gType: 8
       value: 1
@@ -10901,6 +10977,7 @@ MonoBehaviour:
         y: 3
     bigEnemies: []
     respawns: []
+    respawnLimits: []
     goals:
     - gType: 5
       value: 10
@@ -10960,6 +11037,7 @@ MonoBehaviour:
     - rType: 1
       eType: 5
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 1
       value: 30
@@ -11025,6 +11103,7 @@ MonoBehaviour:
     - rType: 2
       eType: 2
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 5
       value: 4
@@ -11104,6 +11183,7 @@ MonoBehaviour:
     - rType: 2
       eType: 0
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 2
       value: 30
@@ -11163,6 +11243,7 @@ MonoBehaviour:
     - rType: 2
       eType: 2
       frequency: 1
+    respawnLimits: []
     goals:
     - gType: 0
       value: 40
@@ -11222,6 +11303,7 @@ MonoBehaviour:
     - rType: 0
       eType: 0
       frequency: 2
+    respawnLimits: []
     goals:
     - gType: 4
       value: 3
@@ -15040,6 +15122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: []
+  limits: []
   moveCounter: 0
 --- !u!1 &1586675096
 GameObject:
