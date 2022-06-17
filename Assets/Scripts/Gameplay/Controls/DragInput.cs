@@ -47,6 +47,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     public void OnPointerDown(PointerEventData eventData) {
         ClearMovementTrack();
         IsPointerOverUIElement();
+        Player.Instance.SetLoopAnimation("wait_to_move");
     }
 
     public void OnPointerUp(PointerEventData eventData) {
@@ -138,6 +139,9 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(lastActivatedPoint.isQuant) {
                             choosenType = QBitType.NONE;
                         }
+                        else if(lastActivatedPoint.isPlayer) {
+                            choosenType = QBitType.NONE;
+                        }
                     }
                 }
 
@@ -194,6 +198,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     public void UpdateMovementPathData() {
         UpdateEditableMovementPoint();
         MovementManager.Instance.SetMovementTrack(activatedPoints);
+        if(activatedPoints.Count <= 1)
+            Player.Instance.SetLoopAnimation("idle");
     }
     
     public void UpdateEditableMovementPoint() {
