@@ -71,11 +71,11 @@ public class AnimatedEnemy : Enemy {
                 SetOneShotAnimation("attack_vertical");
                 break;
             case MovementDirection.Right: case MovementDirection.Up_Right: case MovementDirection.Down_Right:
-                FlipHorizontalToRight();
+                FlipHorizontalToLeft();
                 SetOneShotAnimation("attack_horizontal");
                 break;
             case MovementDirection.Left: case MovementDirection.Up_Left: case MovementDirection.Down_Left:
-                FlipHorizontalToLeft();
+                FlipHorizontalToRight();
                 SetOneShotAnimation("attack_horizontal");
                 break;
         }
