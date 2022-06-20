@@ -18,6 +18,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
     public List<MovementPoint> unavailablePoints = new List<MovementPoint>();
 
     private QBitType choosenType;
+    private QBitType firstColorInCombo;
 
     public List<CoordinatesDirectionData> directionData;
 
@@ -77,6 +78,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                     if( (Mathf.Abs(point.x - lastActivatedPoint.x) <= 1 && Mathf.Abs(point.y - lastActivatedPoint.y) <= 1) || isPointInBigEnemyRadius) {
                         if(choosenType == QBitType.NONE)
                             choosenType = qType;
+
+                        if(firstColorInCombo == QBitType.NONE) {
+                            firstColorInCombo = qType;
+                            Player.Instance.SetSkeletonColor(firstColorInCombo);
+                        }
 
                         if(point.isQbit && qType == choosenType) {
                             point.Activate();
@@ -151,6 +157,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         }
                         else if(lastActivatedPoint.isPlayer) {
                             choosenType = QBitType.NONE;
+                            firstColorInCombo = QBitType.NONE;
+                            Player.Instance.SetSkeletonColor(Player.Instance.colorType);
                         }
                     }
                 }
@@ -174,6 +182,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
     public void ClearMovementTrack() {
         choosenType = QBitType.NONE;
+        firstColorInCombo = QBitType.NONE;
+        Player.Instance.SetSkeletonColor(Player.Instance.colorType);
 
         lastActivatedPoint = PlayerController.Instance.currentPoint;
         PlayerController.Instance.currentPoint.isFree = false;
@@ -212,6 +222,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
         MovementManager.Instance.SetMovementTrack(activatedPoints);
         if(activatedPoints.Count <= 1)
             Player.Instance.SetLoopAnimation("idle");
+        else
+            Player.Instance.SetLoopAnimation("wait_to_move");
     }
     
     public void UpdateEditableMovementPoint() {
