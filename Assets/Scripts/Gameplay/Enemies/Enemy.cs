@@ -126,7 +126,7 @@ public class Enemy : EnemyBase {
 
         int powerRemain = Mathf.Clamp(damage - healthPoints, 0, damage);
 
-        healthPoints -= damage;
+        healthPoints = Mathf.Clamp(healthPoints - damage, 0, healthPoints);
         if(healthPoints <= 0) {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == currentPoint.x && p.y == currentPoint.y);
             point.Reset();

@@ -153,7 +153,7 @@ public class Player : MonoBehaviour {
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
-        activeTargetIndex += 2;
+        activeTargetIndex += 1;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
         MovementDirection newDir = input.GetMovemenetDirection(activatedPoints[activeTargetIndex], activatedPoints[activeTargetIndex - 1]);
         SetMoveAnimation(newDir);
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour {
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
-        activeTargetIndex += 2;
+        activeTargetIndex += 1;
         target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
         MovementDirection newDir = input.GetMovemenetDirection(activatedPoints[activeTargetIndex], activatedPoints[activeTargetIndex - 1]);
         SetMoveAnimation(newDir);

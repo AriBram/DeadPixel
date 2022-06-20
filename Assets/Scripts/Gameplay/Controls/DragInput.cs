@@ -94,7 +94,10 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             UpdateMovementPathData();
                         }
                         else if(point.isDestroyable || point.isEnemy || point.isBigEnemy) {
-                            if(!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer && !lastActivatedPoint.isBigEnemy) {
+                            int powerRemain = 0;
+                            if(powerRemainBuffer.Count > 0)
+                                powerRemain = powerRemainBuffer[powerRemainBuffer.Count - 1];
+                            if(powerRemain > 0 || (!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer && !lastActivatedPoint.isBigEnemy) ) {
                                 if(point.isEnemy) {
                                     Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
                                     if(en.hasShield && en.colorData.qType == choosenType)
@@ -106,6 +109,14 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                         choosenType = QBitType.NONE;
 
                                     en.hpCaption.text = Mathf.Clamp(en.healthPoints - attackPower, 0, en.healthPoints).ToString();
+                                }
+                                else if(point.isDestroyable) {
+                                    Destroyable des = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
+
+                                    int attackPower = CountAttackPower(activatedPoints.Count - 1);
+                                    powerRemainBuffer.Add(Mathf.Clamp(attackPower - des.healthPoints, 0, attackPower));
+
+                                    des.hpCaption.text = Mathf.Clamp(des.healthPoints - attackPower, 0, des.healthPoints).ToString();
                                 }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
@@ -136,6 +147,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(lastActivatedPoint.isEnemy) {
                             Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == lastActivatedPoint.x && e.currentPoint.y == lastActivatedPoint.y);
                             en.RefreshHpCaption();
+                            powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
+                        }
+                        else if(lastActivatedPoint.isDestroyable) {
+                            Destroyable des = Field.Instance.destroyables.Find(d => d.x == lastActivatedPoint.x && d.y == lastActivatedPoint.y);
+                            des.RefreshHpCaption();
                             powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
 

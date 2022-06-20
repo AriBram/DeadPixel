@@ -109,7 +109,7 @@ public class BigEnemy : EnemyBase {
 
         int powerRemain = Mathf.Clamp(damage - healthPoints, 0, damage);
 
-        healthPoints -= damage;
+        healthPoints = Mathf.Clamp(healthPoints - damage, 0, healthPoints);
         if(healthPoints <= 0) {
             foreach(var point in currentPoint.points) {
                 MovementPoint movePoint = MovementManager.Instance.Points.Find(p => p.x == point.x && p.y == point.y);

@@ -29,7 +29,7 @@ public class Destroyable : MonoBehaviour {
     public int GetDamageByPlayer(int damage) {
         int powerRemain = Mathf.Clamp(damage - healthPoints, 0, damage);
 
-        healthPoints -= damage;
+        healthPoints = Mathf.Clamp(healthPoints - damage, 0, healthPoints);
         if(healthPoints <= 0) {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
             point.Reset();
@@ -54,5 +54,10 @@ public class Destroyable : MonoBehaviour {
                 Field.Instance.SpawnEnemy(EnemyType.Skeleton, false);
                 break;
         }
+    }
+
+
+    public void RefreshHpCaption() {
+        hpCaption.text = healthPoints.ToString();
     }
 }
