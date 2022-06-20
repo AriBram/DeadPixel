@@ -9,6 +9,8 @@ public class UI : MonoBehaviour {
     public MainMenu mainMenu;
     public GameMenu gameMenu;
 
+    public List<Image> colorableUIitems;
+
     Stack<MenuBase> menuStack = new Stack<MenuBase>();
 
     public static UI Instance { get; private set; }
@@ -77,6 +79,14 @@ public class UI : MonoBehaviour {
         gameMenu.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
         Restart();
+    }
+
+
+
+    public void ChangeUIColor(QBitType qType) {
+        Color newColor = GameData.Instance.qBits.Find(q => q.qType == qType).color;
+        foreach(var uiItem in colorableUIitems)
+            uiItem.color = newColor;
     }
 }
 
