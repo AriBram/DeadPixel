@@ -28,6 +28,7 @@ public abstract class EnemyBase : MonoBehaviour {
     public GameObject canMoveIndicator;
 
     public TMP_Text hpCaption;
+    public TMP_Text powerRemain;
     public Image shield;
     public Image heart;
 
@@ -149,5 +150,9 @@ public abstract class EnemyBase : MonoBehaviour {
 
     public void RefreshHpCaption() {
         hpCaption.text = healthPoints.ToString();
+    }
+
+    public void SetPowerRemainCaption(int pr) {
+        powerRemain.text = pr.ToString();
     }
 }

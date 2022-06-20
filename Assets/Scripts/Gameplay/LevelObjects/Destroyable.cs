@@ -15,6 +15,7 @@ public class Destroyable : MonoBehaviour {
     public int startHp_Max;
 
     public TMP_Text hpCaption;
+    public TMP_Text powerRemain;
 
 
     public void Init(MovementPoint point) {
@@ -23,6 +24,7 @@ public class Destroyable : MonoBehaviour {
         healthPoints = Random.Range(startHp_Min, startHp_Max + 1);
 
         hpCaption.text = healthPoints.ToString();
+        powerRemain.text = "";
     }
 
 
@@ -59,5 +61,10 @@ public class Destroyable : MonoBehaviour {
 
     public void RefreshHpCaption() {
         hpCaption.text = healthPoints.ToString();
+        powerRemain.text = "";
+    }
+
+    public void SetPowerRemainCaption(int pr) {
+        powerRemain.text = pr.ToString();
     }
 }

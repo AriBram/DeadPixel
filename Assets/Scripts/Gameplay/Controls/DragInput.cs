@@ -104,19 +104,27 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                         return true;
 
                                     int attackPower = CountAttackPower(activatedPoints.Count - 1);
-                                    powerRemainBuffer.Add(Mathf.Clamp(attackPower - en.healthPoints, 0, attackPower));
+                                    int pr = Mathf.Clamp(attackPower - en.healthPoints, 0, attackPower);
+                                    powerRemainBuffer.Add(pr);
                                     if(attackPower >= en.healthPoints)
                                         choosenType = QBitType.NONE;
 
                                     en.hpCaption.text = Mathf.Clamp(en.healthPoints - attackPower, 0, en.healthPoints).ToString();
+
+                                    if(pr > 0)
+                                        en.SetPowerRemainCaption(pr);
                                 }
                                 else if(point.isDestroyable) {
                                     Destroyable des = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
 
                                     int attackPower = CountAttackPower(activatedPoints.Count - 1);
-                                    powerRemainBuffer.Add(Mathf.Clamp(attackPower - des.healthPoints, 0, attackPower));
+                                    int pr = Mathf.Clamp(attackPower - des.healthPoints, 0, attackPower);
+                                    powerRemainBuffer.Add(pr);
 
                                     des.hpCaption.text = Mathf.Clamp(des.healthPoints - attackPower, 0, des.healthPoints).ToString();
+
+                                    if(pr > 0)
+                                        des.SetPowerRemainCaption(pr);
                                 }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
