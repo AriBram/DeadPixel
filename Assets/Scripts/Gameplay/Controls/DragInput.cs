@@ -83,6 +83,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
+                            UpdateMovementPathData();
                         }
                         else if(point.isDestroyable || point.isEnemy || point.isBigEnemy) {
                             if(!lastActivatedPoint.isDestroyable && !lastActivatedPoint.isEnemy && !lastActivatedPoint.isPlayer && !lastActivatedPoint.isBigEnemy) {
@@ -101,6 +102,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                                 lastActivatedPoint = point;
                                 activatedPoints.Add(point);
+                                UpdateMovementPathData();
                             }
                         }
                         else if(point.isQuant) {
@@ -109,6 +111,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
+                            UpdateMovementPathData();
                         }
                     }
                 }
@@ -130,6 +133,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         point.ResetIndicators();
                         activatedPoints.RemoveAt(activatedPoints.Count - 1);
                         lastActivatedPoint = point;
+                        UpdateMovementPathData();
 
                         if(choosenType == QBitType.NONE && lastActivatedPoint.isQbit)
                             choosenType = qType;

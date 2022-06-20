@@ -21,17 +21,18 @@ public class GameMenu : MenuBase {
 
         MovementManager.Instance.onMovementTrackChanged.AddListener(Refresh);
 
-        goBtn.gameObject.SetActive(false);
+        goBtn.gameObject.SetActive(true);
     }
 
 
     public void Refresh() {
         bool isGoBtnActive = GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1 ? true : false;
-        goBtn.gameObject.SetActive(isGoBtnActive);
         if(isGoBtnActive)
             goCounter.text = MovementManager.Instance.GetCombinationPower().ToString();
+        else
+            goCounter.text = "";
     }
-    
+
     public override void Show() {
         gameObject.SetActive(true);
         Field.Instance.Init();
@@ -45,7 +46,8 @@ public class GameMenu : MenuBase {
 
 
     public void OnBtnGoClick() {
-        Player.Instance.ActivateMove();
+        if(GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1)
+            Player.Instance.ActivateMove();
     }
 
     public void OnBtnGoNextArenaClick() {
