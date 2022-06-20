@@ -13,7 +13,7 @@ public class Quant : MonoBehaviour {
     public SkeletonGraphic anim;
 
 
-    void Start() {
+    void Awake() {
         anim.Initialize(true);
         anim.AnimationState.SetAnimation(0, "idle", true);
         SetActive(false);

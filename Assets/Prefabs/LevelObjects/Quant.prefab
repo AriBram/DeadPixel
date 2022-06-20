@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6530414911351436061}
   - component: {fileID: 2459988377640771234}
   - component: {fileID: 2276835019761319554}
-  - component: {fileID: 7655119178212260005}
+  - component: {fileID: 4937829917448544232}
   m_Layer: 5
   m_Name: Quant
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
-  anim: {fileID: 7655119178212260005}
+  anim: {fileID: 4937829917448544232}
 --- !u!58 &2459988377640771234
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!114 &7655119178212260005
+--- !u!114 &4937829917448544232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
