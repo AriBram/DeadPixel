@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
     public int skeletonSpawnersDestroyed;
 
     public int comboCheckPointIndex;
+    private int powerRemain;
 
     public SkeletonGraphic root;
     public QBitType colorType;
@@ -98,6 +99,7 @@ public class Player : MonoBehaviour {
         activeTargetIndex = 0;
         comboCheckPointIndex = 1;
         maxPointIndex = activatedPoints.Count - 1;
+        powerRemain = 0;
 
         SwitchTargetToNextPoint();
 
@@ -146,7 +148,7 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -158,7 +160,7 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -176,7 +178,7 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -188,7 +190,7 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1), activatedPoints[activeTargetIndex + 1]);
+        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f : 0.367f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
@@ -218,7 +220,7 @@ public class Player : MonoBehaviour {
     public bool AttackDestroyable(int power, MovementPoint point) {
         Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
-        destroyableToAttack.GetDamageByPlayer(power);
+        powerRemain = destroyableToAttack.GetDamageByPlayer(power);
         bool isLetal = power >= destroyableToAttack.healthPoints ? true : false;
         return isLetal;
     }
@@ -229,14 +231,14 @@ public class Player : MonoBehaviour {
         bool isLetal = false;
         if(enemyToAttack != null) {
             isLetal = power >= enemyToAttack.healthPoints ? true : false;
-            enemyToAttack.GetDamageByPlayer(power, colorType);
+            powerRemain = enemyToAttack.GetDamageByPlayer(power, colorType);
         }
 
         for(int i = 0; i < Field.Instance.bigEnemiesItems.Count; i++) {
             foreach(var p in Field.Instance.bigEnemiesItems[i].currentPoint.points) {
                 if(p.x == point.x && p.y == point.y) {
                     isLetal = power >= Field.Instance.bigEnemiesItems[i].healthPoints ? true : false;
-                    Field.Instance.bigEnemiesItems[i].GetDamageByPlayer(power, colorType);
+                    powerRemain = Field.Instance.bigEnemiesItems[i].GetDamageByPlayer(power, colorType);
                 }
             }
         }
@@ -328,6 +330,8 @@ public class Player : MonoBehaviour {
 
         root.Skeleton.SetSlotsToSetupPose();
         root.LateUpdate();
+
+        //UI.Instance.ChangeUIColor(qType);
     }
 
     public void SetOneShotAnimation(string animName) {

@@ -120,9 +120,11 @@ public class Enemy : EnemyBase {
 
 
 
-    public override void GetDamageByPlayer(int damage, QBitType qType) {
+    public override int GetDamageByPlayer(int damage, QBitType qType) {
         if(hasShield && qType == colorData.qType)
-            return;
+            return 0;
+
+        int powerRemain = Mathf.Clamp(damage - healthPoints, 0, damage);
 
         healthPoints -= damage;
         if(healthPoints <= 0) {
@@ -135,6 +137,8 @@ public class Enemy : EnemyBase {
         }
 
         RefreshHpCaption();
+
+        return powerRemain;
     }
 
 

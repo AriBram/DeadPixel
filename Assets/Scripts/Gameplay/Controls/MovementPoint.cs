@@ -168,6 +168,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
             return;
 
         Player.Instance.input.UpdateMovementPathData();
+        Player.Instance.input.UpdateEditableMovementPoint();
     }
 }
 

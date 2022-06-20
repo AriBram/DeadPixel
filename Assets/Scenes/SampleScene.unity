@@ -616,6 +616,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 864105360}
   gameMenu: {fileID: 1950207240}
+  colorableUIitems:
+  - {fileID: 1944521957}
+  - {fileID: 1405874720}
+  - {fileID: 985786018}
+  - {fileID: 301153980}
+  - {fileID: 875014476}
+  - {fileID: 293016124}
+  - {fileID: 1071997312}
+  - {fileID: 990133079}
+  - {fileID: 1873260118}
 --- !u!1 &160957861
 GameObject:
   m_ObjectHideFlags: 0

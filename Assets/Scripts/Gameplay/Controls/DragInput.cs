@@ -19,6 +19,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
     private QBitType choosenType;
     private QBitType firstColorInCombo;
+    private List<int> powerRemainBuffer;
 
     public List<CoordinatesDirectionData> directionData;
 
@@ -53,6 +54,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
     public void OnPointerUp(PointerEventData eventData) {
         UpdateMovementPathData();
+        UpdateEditableMovementPoint();
     }
 
 
@@ -99,6 +101,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                         return true;
 
                                     int attackPower = CountAttackPower(activatedPoints.Count - 1);
+                                    powerRemainBuffer.Add(Mathf.Clamp(attackPower - en.healthPoints, 0, attackPower));
                                     if(attackPower >= en.healthPoints)
                                         choosenType = QBitType.NONE;
 
@@ -133,6 +136,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(lastActivatedPoint.isEnemy) {
                             Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == lastActivatedPoint.x && e.currentPoint.y == lastActivatedPoint.y);
                             en.RefreshHpCaption();
+                            powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
 
                         lastActivatedPoint.Deactivate();
@@ -195,6 +199,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
             point.ResetIndicators();
         }
 
+        powerRemainBuffer = new List<int>();
+
         MovementManager.Instance.ClearMovementTrack();
 
         unavailablePoints.Clear();
@@ -218,7 +224,6 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
 
     public void UpdateMovementPathData() {
-        UpdateEditableMovementPoint();
         MovementManager.Instance.SetMovementTrack(activatedPoints);
         if(activatedPoints.Count <= 1)
             Player.Instance.SetLoopAnimation("idle");
@@ -237,7 +242,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
 
     public int CountAttackPower(int targetIndex) {
-        int attackPower = 0;
+        int powerRemain = 0;
+        if(powerRemainBuffer.Count > 0)
+            powerRemain = powerRemainBuffer[powerRemainBuffer.Count - 1];
+
+        int attackPower = powerRemain;
         for(int i = targetIndex; i >= 0; i--) {
             if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant) //bug
                 attackPower++;

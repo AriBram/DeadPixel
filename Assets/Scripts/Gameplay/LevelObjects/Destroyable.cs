@@ -26,7 +26,9 @@ public class Destroyable : MonoBehaviour {
     }
 
 
-    public void GetDamageByPlayer(int damage) {
+    public int GetDamageByPlayer(int damage) {
+        int powerRemain = Mathf.Clamp(damage - healthPoints, 0, damage);
+
         healthPoints -= damage;
         if(healthPoints <= 0) {
             MovementPoint point = MovementManager.Instance.Points.Find(p => p.x == this.x && p.y == this.y);
@@ -41,6 +43,8 @@ public class Destroyable : MonoBehaviour {
         }
 
         hpCaption.text = healthPoints.ToString();
+
+        return powerRemain;
     }
 
 

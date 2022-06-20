@@ -117,7 +117,7 @@ public abstract class EnemyBase : MonoBehaviour {
 
 
 
-    public abstract void GetDamageByPlayer(int damage, QBitType qType);
+    public abstract int GetDamageByPlayer(int damage, QBitType qType);
 
 
 
