@@ -153,6 +153,6 @@ public abstract class EnemyBase : MonoBehaviour {
     }
 
     public void SetPowerRemainCaption(int pr) {
-        powerRemain.text = pr.ToString();
+        powerRemain.text = pr > 0 ? pr.ToString() : "";
     }
 }

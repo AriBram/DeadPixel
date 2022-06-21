@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Spine.Unity;
 
 
 public class Destroyable : MonoBehaviour {
@@ -17,6 +18,8 @@ public class Destroyable : MonoBehaviour {
     public TMP_Text hpCaption;
     public TMP_Text powerRemain;
 
+    public SkeletonGraphic anim;
+
 
     public void Init(MovementPoint point) {
         x = point.x;
@@ -25,6 +28,11 @@ public class Destroyable : MonoBehaviour {
 
         hpCaption.text = healthPoints.ToString();
         powerRemain.text = "";
+
+        if(anim != null) {
+            anim.Initialize(true);
+            anim.AnimationState.SetAnimation(0, "idle", true);
+        }
     }
 
 
@@ -38,7 +46,13 @@ public class Destroyable : MonoBehaviour {
             Destroyable fieldDestroyable = Field.Instance.destroyables.Find(d => d.x == this.x && d.y == this.y);
             if(fieldDestroyable != null)
                 Field.Instance.destroyables.Remove(fieldDestroyable);
-            Destroy(this.gameObject);
+            
+            if(anim != null) {
+                anim.AnimationState.SetAnimation(0, "idle", false);
+                anim.AnimationState.AddAnimation(0, "destroy", false, 0).Complete += e => Destroy(this.gameObject);
+            }
+            else
+                Destroy(this.gameObject);
 
             if(dType == DestroyableType.SkeletonSpawner)
                 Player.Instance.skeletonSpawnersDestroyed += 1;
@@ -65,6 +79,6 @@ public class Destroyable : MonoBehaviour {
     }
 
     public void SetPowerRemainCaption(int pr) {
-        powerRemain.text = pr.ToString();
+        powerRemain.text = pr > 0 ? pr.ToString() : "";
     }
 }

@@ -155,11 +155,13 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(lastActivatedPoint.isEnemy) {
                             Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == lastActivatedPoint.x && e.currentPoint.y == lastActivatedPoint.y);
                             en.RefreshHpCaption();
+                            en.SetPowerRemainCaption(0);
                             powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
                         else if(lastActivatedPoint.isDestroyable) {
                             Destroyable des = Field.Instance.destroyables.Find(d => d.x == lastActivatedPoint.x && d.y == lastActivatedPoint.y);
                             des.RefreshHpCaption();
+                            des.SetPowerRemainCaption(0);
                             powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
 

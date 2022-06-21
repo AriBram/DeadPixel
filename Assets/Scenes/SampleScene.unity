@@ -11012,7 +11012,7 @@ MonoBehaviour:
     movesLimitData:
       isMovesLimited: 1
       movesCount: 25
-    availableColors: 000000000100000006000000
+    availableColors: 000000000100000002000000
     debuffs: []
   - player:
       x: 0

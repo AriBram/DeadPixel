@@ -647,10 +647,19 @@ public class Field : MonoBehaviour {
 
 
     public void RefreshAllEnemiesHpCaptions() {
-        foreach(var e in enemiesItems)
+        foreach(var e in enemiesItems) {
             e.RefreshHpCaption();
+            e.SetPowerRemainCaption(0);
+        }
 
-        foreach(var e in bigEnemiesItems)
+        foreach(var e in bigEnemiesItems) {
             e.RefreshHpCaption();
+            e.SetPowerRemainCaption(0);
+        }
+
+        foreach(var des in destroyables) {
+            des.RefreshHpCaption();
+            des.SetPowerRemainCaption(0);
+        }
     }
 }
