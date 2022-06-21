@@ -37,6 +37,8 @@ public class Player : MonoBehaviour {
 
     public class AwakeEvent : UnityEvent { }
     [HideInInspector] public AwakeEvent onAwake = new AwakeEvent();
+
+    private int extraMoves;
     
     
     void Awake() {
@@ -82,6 +84,8 @@ public class Player : MonoBehaviour {
             qBitsCollected[qType] = 0;
 
         skeletonSpawnersDestroyed = 0;
+
+        extraMoves = 0;
 
         SetPlayerStartOrientation();
     }
@@ -285,6 +289,13 @@ public class Player : MonoBehaviour {
 
         Field.Instance.CheckDefectsForAttackPlayer();
         Field.Instance.CheckDebuffsOnPlayer();
+
+        if(extraMoves > 0) {
+            extraMoves--;
+            Field.Instance.Refill();
+            return;
+        }
+
         Field.Instance.ActivateEnemyMove();
     }
 
@@ -510,5 +521,15 @@ public class Player : MonoBehaviour {
         int distance = 0;
         distance += Mathf.Abs(point2.x - point1.x) + Mathf.Abs(point2.y - point1.y);
         return distance;
+    }
+
+
+
+
+
+
+    /*Skills*/
+    public void GiveExtraMoves(int value) {
+        extraMoves += value;
     }
 }

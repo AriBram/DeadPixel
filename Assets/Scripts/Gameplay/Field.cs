@@ -122,7 +122,6 @@ public class Field : MonoBehaviour {
         }
 
         FillFreePoints();
-        
         onFieldInit.Invoke();
     }
 
@@ -246,7 +245,6 @@ public class Field : MonoBehaviour {
             if(qBitsByPoint.Count > 1) {
                 qBits.Remove(qBitsByPoint[0]);
                 Destroy(qBitsByPoint[0].gameObject);
-                Debug.Log("duplicate destroyed");
             }
         }
     }
