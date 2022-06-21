@@ -100,11 +100,7 @@ public abstract class EnemyBase : MonoBehaviour {
 
 
     public virtual void Attack() {
-        foreach(var ap in attackPoints) {
-            MovementPoint mp = MovementManager.Instance.Points.Find(p => p.x == ap.x && p.y == ap.y);
-            if(mp != null)
-                mp.SetAttackedState();
-        }
+        ShowAttackRadius();
 
         MovementPoint playerPoint = PlayerController.Instance.currentPoint;
         bool isPlayerInAttackRadius = attackPoints.Find(ap => ap.x == playerPoint.x && ap.y == playerPoint.y) == null ? false : true;
@@ -122,7 +118,14 @@ public abstract class EnemyBase : MonoBehaviour {
 
 
 
-
+    public void ShowAttackRadius() {
+        foreach(var ap in attackPoints) {
+            MovementPoint mp = MovementManager.Instance.Points.Find(p => p.x == ap.x && p.y == ap.y);
+            if(mp != null)
+                mp.SetAttackedState();
+        }
+    }
+    
     public bool IsPointInAttackRadius(Coordinate point) {
         foreach(var p in attackPoints) {
             if(point.x == p.x && point.y == p.y)

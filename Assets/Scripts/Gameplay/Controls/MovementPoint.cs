@@ -42,6 +42,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public bool canEditMovementPath;
 
+    public Button pointBtn;
+
     
     void Awake() {
         Deactivate();
@@ -49,6 +51,10 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
         ResetIndicators();
 
         canEditMovementPath = false;
+    }
+
+    void Start() {
+        pointBtn.onClick.AddListener(ShowInfo);
     }
 
     
@@ -169,6 +175,15 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
         Player.Instance.input.UpdateMovementPathData();
         Player.Instance.input.UpdateEditableMovementPoint();
+    }
+
+
+
+    private void ShowInfo() {
+        if(isEnemy) {
+            Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == this.x && e.currentPoint.y == this.y);
+            en.ShowAttackRadius();
+        }
     }
 }
 
