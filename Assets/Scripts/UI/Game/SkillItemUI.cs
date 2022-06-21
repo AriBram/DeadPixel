@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro;
 
 
-public class SkillItemUI : MonoBehaviour {
+public class SkillItemUI : MonoBehaviour, IDragHandler {
     
     public SkillType skill;
 
@@ -55,5 +56,36 @@ public class SkillItemUI : MonoBehaviour {
     
     private void ActivateSkill() {
         onSkillActivate.Invoke(skill);
+    }
+
+
+
+    public void OnDrag(PointerEventData eventData) {
+        Vector3 dragVectorDirection = (eventData.position - eventData.pressPosition).normalized;
+        DraggedDirection dir = GetDragDirection(dragVectorDirection);
+        
+        if(dir == DraggedDirection.Up)
+            UI.Instance.ShowSkillPopup(skill);
+    }
+
+    private enum DraggedDirection {
+        Up,
+        Down,
+        Right,
+        Left
+    }
+
+    private DraggedDirection GetDragDirection(Vector3 dragVector)
+    {
+        float positiveX = Mathf.Abs(dragVector.x);
+        float positiveY = Mathf.Abs(dragVector.y);
+        DraggedDirection draggedDir;
+        if (positiveX > positiveY)
+          draggedDir = (dragVector.x > 0) ? DraggedDirection.Right : DraggedDirection.Left;
+
+        else
+          draggedDir = (dragVector.y > 0) ? DraggedDirection.Up : DraggedDirection.Down;
+
+        return draggedDir;
     }
 }

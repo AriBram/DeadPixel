@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\Gameplay\Skills\SkillsInventory.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Memory.cs" />
      <Compile Include="Assets\Scripts\UI\Game\MemoryBar.cs" />
+     <Compile Include="Assets\Scripts\UI\Popups\SkillPopup.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Utils\Spine\version.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

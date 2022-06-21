@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sType: 0
+  bigSprite: {fileID: 21300000, guid: abed8f63e4b8e5342b72e7954748baf6, type: 3}
   memoryCost: 5
   cooldown: 5
   cooldownRemain: 0

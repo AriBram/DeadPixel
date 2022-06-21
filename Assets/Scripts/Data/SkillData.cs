@@ -7,6 +7,8 @@ public abstract class SkillData : MonoBehaviour {
     
     public SkillType sType;
     
+    public Sprite bigSprite;
+    
     public int memoryCost;
     public int cooldown;
 

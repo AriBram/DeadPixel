@@ -9,6 +9,8 @@ public class UI : MonoBehaviour {
     public MainMenu mainMenu;
     public GameMenu gameMenu;
 
+    public SkillPopup skillPopup;
+
     public List<Image> colorableUIitems;
 
     Stack<MenuBase> menuStack = new Stack<MenuBase>();
@@ -36,6 +38,12 @@ public class UI : MonoBehaviour {
     public void ShowMainMenu() {
         HideAll();
         PushMenu(mainMenu);
+    }
+
+
+    public void ShowSkillPopup(SkillType sType) {
+        skillPopup.Init(sType);
+        PushMenu(skillPopup);
     }
 
 
