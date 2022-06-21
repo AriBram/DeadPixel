@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class SkillData : MonoBehaviour {
+    
+    public SkillType sType;
     
     public int memoryCost;
     public int cooldown;
 
     private int cooldownRemain;
 
-    public int isActivated;
+    public bool isActivated;
 
 
     public virtual void Init() {
@@ -30,3 +33,6 @@ public abstract class SkillData : MonoBehaviour {
         return cooldownRemain <= 0;
     }
 }
+
+
+public enum SkillType {DoubleMove, MassiveAttack}

@@ -290,6 +290,8 @@ public class Player : MonoBehaviour {
         Field.Instance.CheckDefectsForAttackPlayer();
         Field.Instance.CheckDebuffsOnPlayer();
 
+        SkillsInventory.Instance.PlaySkills();
+
         if(extraMoves > 0) {
             extraMoves--;
             Field.Instance.Refill();
@@ -527,8 +529,6 @@ public class Player : MonoBehaviour {
 
 
 
-
-    /*Skills*/
     public void GiveExtraMoves(int value) {
         extraMoves += value;
     }
