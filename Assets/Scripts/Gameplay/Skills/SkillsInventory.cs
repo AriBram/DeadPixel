@@ -13,9 +13,17 @@ public class SkillsInventory : MonoBehaviour {
     public class SkillsDeactivatedEvent : UnityEvent { }
     [HideInInspector] public SkillsDeactivatedEvent onDeactivate = new SkillsDeactivatedEvent();
 
+    public class SkillsCooldownEvent : UnityEvent { }
+    [HideInInspector] public SkillsCooldownEvent onCooldown = new SkillsCooldownEvent();
+
 
     void Awake() {
         Instance = this;
+    }
+
+    void Start() {
+        foreach(var s in Skills)
+            s.isActivated = false;
     }
 
     
@@ -40,6 +48,7 @@ public class SkillsInventory : MonoBehaviour {
         
         Player.Instance.memory.Use(activatedSkill.memoryCost);
         activatedSkill.PlayAbility();
+        activatedSkill.SetCooldown();
 
         DeactivateAll();
     }
@@ -49,5 +58,12 @@ public class SkillsInventory : MonoBehaviour {
             s.isActivated = false;
 
         onDeactivate.Invoke();
+    }
+
+    public void ReduceCooldown() {
+        foreach(var s in Skills)
+            s.ReduceCooldown();
+
+        onCooldown.Invoke();
     }
 }

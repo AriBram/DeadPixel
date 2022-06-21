@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 
 public class SkillItemUI : MonoBehaviour {
@@ -16,6 +17,8 @@ public class SkillItemUI : MonoBehaviour {
 
     public GameObject indicatorActivated;
     public GameObject icon;
+    public GameObject cooldown;
+    public TMP_Text cdValue;
 
     public class SkillActivatedEvent : UnityEvent<SkillType> { }
     [HideInInspector] public SkillActivatedEvent onSkillActivate = new SkillActivatedEvent();
@@ -24,6 +27,8 @@ public class SkillItemUI : MonoBehaviour {
     void Start() {
         skillBtn.onClick.AddListener(ActivateSkill);
         indicatorActivated.SetActive(false);
+        cooldown.SetActive(false);
+        cdValue.text = "";
     }
 
 
@@ -35,10 +40,15 @@ public class SkillItemUI : MonoBehaviour {
             else
                 icon.transform.position = new Vector3(startPosition.position.x, startPosition.position.y, startPosition.position.z);
             indicatorActivated.SetActive(sk.isActivated);
+
+            cooldown.SetActive(sk.cooldownRemain > 0);
+            cdValue.text = sk.cooldownRemain > 0 ? sk.cooldownRemain.ToString() : "";
         }
         else {
             this.transform.position = new Vector3(startPosition.position.x, startPosition.position.y, startPosition.position.z);
             indicatorActivated.SetActive(false);
+            cooldown.SetActive(false);
+            cdValue.text = "";
         }
     }
 

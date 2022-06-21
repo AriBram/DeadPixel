@@ -301,6 +301,7 @@ public class Player : MonoBehaviour {
         Field.Instance.CheckDefectsForAttackPlayer();
         Field.Instance.CheckDebuffsOnPlayer();
 
+        SkillsInventory.Instance.ReduceCooldown();
         SkillsInventory.Instance.PlaySkills();
 
         if(extraMoves > 0) {

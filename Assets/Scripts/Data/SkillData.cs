@@ -10,7 +10,7 @@ public abstract class SkillData : MonoBehaviour {
     public int memoryCost;
     public int cooldown;
 
-    private int cooldownRemain;
+    public int cooldownRemain;
 
     public bool isActivated;
 

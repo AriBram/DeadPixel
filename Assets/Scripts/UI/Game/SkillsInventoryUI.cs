@@ -9,7 +9,8 @@ public class SkillsInventoryUI : MonoBehaviour {
 
     void Start() {
         SkillsInventory.Instance.onDeactivate.AddListener(Refresh);
-        
+        SkillsInventory.Instance.onCooldown.AddListener(Refresh);
+
         foreach(var s in skillItems)
             s.onSkillActivate.AddListener(ActivateSkill);
     }
