@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 160957871}
   - component: {fileID: 160957872}
   - component: {fileID: 160957873}
+  - component: {fileID: 160957874}
   m_Layer: 5
   m_Name: Player
   m_TagString: Player
@@ -765,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 160957869}
+  memory: {fileID: 160957874}
   moveSpeed: 10
   activatedPoints: []
   input: {fileID: 0}
@@ -773,6 +775,7 @@ MonoBehaviour:
   root: {fileID: 160957873}
   colorType: 0
   lastMoveType: 0
+  qbitsCountToGetMemory: 0
 --- !u!58 &160957868
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -910,6 +913,23 @@ MonoBehaviour:
       calculateTangents: 0
       addNormals: 0
       immutableTriangles: 0
+--- !u!114 &160957874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160957861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dfb439b1b0163409a35f5191636a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startVaue: 2
+  startMaxValue: 5
+  value: 0
+  maxValue: 0
+  limit: 10
 --- !u!1001 &167467220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14968,8 +14988,9 @@ GameObject:
   - component: {fileID: 1499735367}
   - component: {fileID: 1499735369}
   - component: {fileID: 1499735368}
+  - component: {fileID: 1499735370}
   m_Layer: 5
-  m_Name: MemoryBar (Stub)
+  m_Name: MemoryBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14982,7 +15003,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499735366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14996,7 +15017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.18, y: 99.5}
+  m_AnchoredPosition: {x: 14.180023, y: 99.50006}
   m_SizeDelta: {x: 325.01, y: 64.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1499735368
@@ -15037,6 +15058,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499735366}
   m_CullTransparentMesh: 1
+--- !u!114 &1499735370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499735366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c0c121e51f0314091e7eec97b861d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activePoints:
+  - {fileID: 747538763}
+  - {fileID: 951371552}
+  - {fileID: 1937885877}
+  - {fileID: 1444052059}
+  - {fileID: 563525402}
+  - {fileID: 1586675096}
+  - {fileID: 476527142}
+  - {fileID: 1574261983}
+  - {fileID: 715831866}
+  - {fileID: 535542657}
+  passivePoints:
+  - {fileID: 1114578134}
+  - {fileID: 64106347}
+  - {fileID: 974582101}
+  - {fileID: 1524210349}
+  - {fileID: 1627660056}
+  - {fileID: 1650156760}
+  - {fileID: 1708179452}
+  - {fileID: 1386037114}
+  - {fileID: 167848864}
+  - {fileID: 336753605}
+  caption: {fileID: 1691515733}
 --- !u!1 &1524210349
 GameObject:
   m_ObjectHideFlags: 0
@@ -16705,7 +16761,7 @@ GameObject:
   - component: {fileID: 1691515734}
   - component: {fileID: 1691515733}
   m_Layer: 5
-  m_Name: HealthPointCaption
+  m_Name: MemoryPointCaption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

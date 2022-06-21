@@ -10,6 +10,7 @@ using Spine.Unity;
 public class Player : MonoBehaviour {
 
     public Health health;
+    public Memory memory;
 
     private Transform target;
     private Rigidbody2D rb;
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour {
     [HideInInspector] public AwakeEvent onAwake = new AwakeEvent();
 
     private int extraMoves;
+    private int memoryQbitsCounter;
+    public int qbitsCountToGetMemory;
     
     
     void Awake() {
@@ -49,10 +52,12 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<DragInput>();
         health = GetComponent<Health>();
+        memory = GetComponent<Memory>();
 
         activeTargetIndex = 0;
         maxPointIndex = 0;
         comboCheckPointIndex = 0;
+        memoryQbitsCounter = 0;
 
         foreach(var point in MovementManager.Instance.Points)
             point.onPointReach.AddListener(SwitchTargetToNextPoint);
@@ -84,8 +89,8 @@ public class Player : MonoBehaviour {
             qBitsCollected[qType] = 0;
 
         skeletonSpawnersDestroyed = 0;
-
         extraMoves = 0;
+        memoryQbitsCounter = 0;
 
         SetPlayerStartOrientation();
     }
@@ -255,6 +260,12 @@ public class Player : MonoBehaviour {
         qBitsCollected[data.qType]++;
         SetSkeletonColor(data.qType);
         colorType = data.qType;
+
+        memoryQbitsCounter++;
+        if(memoryQbitsCounter >= qbitsCountToGetMemory) {
+            memory.Get(1);
+            memoryQbitsCounter = 0;
+        }
     }
 
     public void PickQuant() {

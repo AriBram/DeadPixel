@@ -29,7 +29,7 @@ public class SkillsInventory : MonoBehaviour {
         if(wasActive)
             return;
         
-        if(skill.IsAvailable())
+        if(skill.IsAvailable() && Player.Instance.memory.value >= skill.memoryCost)
             skill.isActivated = true;
     }
 
@@ -38,6 +38,7 @@ public class SkillsInventory : MonoBehaviour {
         if(activatedSkill == null)
             return;
         
+        Player.Instance.memory.Use(activatedSkill.memoryCost);
         activatedSkill.PlayAbility();
 
         DeactivateAll();
