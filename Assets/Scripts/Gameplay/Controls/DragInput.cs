@@ -92,6 +92,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
                             UpdateMovementPathData();
+                            ResetAllPowerCaptions();
+                            point.SetPowerRemainCaption(CountAttackPower(activatedPoints.Count - 1));
                         }
                         else if(point.isDestroyable || point.isEnemy || point.isBigEnemy) {
                             int powerRemain = 0;
@@ -110,9 +112,6 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                         choosenType = QBitType.NONE;
 
                                     en.hpCaption.text = Mathf.Clamp(en.healthPoints - attackPower, 0, en.healthPoints).ToString();
-
-                                    if(pr > 0)
-                                        en.SetPowerRemainCaption(pr);
                                 }
                                 else if(point.isDestroyable) {
                                     Destroyable des = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
@@ -122,15 +121,14 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                                     powerRemainBuffer.Add(pr);
 
                                     des.hpCaption.text = Mathf.Clamp(des.healthPoints - attackPower, 0, des.healthPoints).ToString();
-
-                                    if(pr > 0)
-                                        des.SetPowerRemainCaption(pr);
                                 }
                                 point.Activate();
                                 lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
                                 lastActivatedPoint = point;
                                 activatedPoints.Add(point);
                                 UpdateMovementPathData();
+                                ResetAllPowerCaptions();
+                                point.SetPowerRemainCaption(CountAttackPower(activatedPoints.Count - 1));
                             }
                         }
                         else if(point.isQuant) {
@@ -140,6 +138,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             lastActivatedPoint = point;
                             activatedPoints.Add(point);
                             UpdateMovementPathData();
+                            ResetAllPowerCaptions();
+                            point.SetPowerRemainCaption(CountAttackPower(activatedPoints.Count - 1));
                         }
                     }
                 }
@@ -155,13 +155,11 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         else if(lastActivatedPoint.isEnemy) {
                             Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == lastActivatedPoint.x && e.currentPoint.y == lastActivatedPoint.y);
                             en.RefreshHpCaption();
-                            en.SetPowerRemainCaption(0);
                             powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
                         else if(lastActivatedPoint.isDestroyable) {
                             Destroyable des = Field.Instance.destroyables.Find(d => d.x == lastActivatedPoint.x && d.y == lastActivatedPoint.y);
                             des.RefreshHpCaption();
-                            des.SetPowerRemainCaption(0);
                             powerRemainBuffer.RemoveAt(powerRemainBuffer.Count - 1);
                         }
 
@@ -170,6 +168,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                         activatedPoints.RemoveAt(activatedPoints.Count - 1);
                         lastActivatedPoint = point;
                         UpdateMovementPathData();
+                        ResetAllPowerCaptions();
+                        point.SetPowerRemainCaption(CountAttackPower(activatedPoints.Count - 1));
 
                         if(choosenType == QBitType.NONE && lastActivatedPoint.isQbit)
                             choosenType = qType;
@@ -231,6 +231,8 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
         unavailablePoints.Clear();
 
+        ResetAllPowerCaptions();
+
         Field.Instance.RefreshAllEnemiesHpCaptions();
     }
 
@@ -274,7 +276,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
 
         int attackPower = powerRemain;
         for(int i = targetIndex; i >= 0; i--) {
-            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant) //bug
+            if(activatedPoints[i].data == PointData.None || activatedPoints[i].isQbit || activatedPoints[i].isQuant)
                 attackPower++;
             else
                 return attackPower;
@@ -354,6 +356,12 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
             output_mp_list.Add(mp);
         
         return output_mp_list;
+    }
+
+
+    public void ResetAllPowerCaptions() {
+        foreach(var p in MovementManager.Instance.Points)
+            p.SetPowerRemainCaption(0);
     }
 }
 

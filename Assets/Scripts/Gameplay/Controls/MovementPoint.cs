@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
@@ -44,6 +45,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public Button pointBtn;
 
+    public TMP_Text powerRemain;
+
     
     void Awake() {
         Deactivate();
@@ -55,6 +58,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     void Start() {
         pointBtn.onClick.AddListener(ShowInfo);
+        powerRemain.text = "";
     }
 
     
@@ -184,6 +188,11 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
             Enemy en = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == this.x && e.currentPoint.y == this.y);
             en.ShowAttackRadius();
         }
+    }
+
+
+    public void SetPowerRemainCaption(int pr) {
+        powerRemain.text = pr > 0 ? pr.ToString() : "";
     }
 }
 

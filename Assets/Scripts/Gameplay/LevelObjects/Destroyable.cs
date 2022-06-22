@@ -16,7 +16,6 @@ public class Destroyable : MonoBehaviour {
     public int startHp_Max;
 
     public TMP_Text hpCaption;
-    public TMP_Text powerRemain;
 
     public SkeletonGraphic anim;
 
@@ -27,7 +26,6 @@ public class Destroyable : MonoBehaviour {
         healthPoints = Random.Range(startHp_Min, startHp_Max + 1);
 
         hpCaption.text = healthPoints.ToString();
-        powerRemain.text = "";
 
         if(anim != null) {
             anim.Initialize(true);
@@ -75,10 +73,5 @@ public class Destroyable : MonoBehaviour {
 
     public void RefreshHpCaption() {
         hpCaption.text = healthPoints.ToString();
-        powerRemain.text = "";
-    }
-
-    public void SetPowerRemainCaption(int pr) {
-        powerRemain.text = pr > 0 ? pr.ToString() : "";
     }
 }
