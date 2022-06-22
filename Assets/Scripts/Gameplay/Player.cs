@@ -282,10 +282,6 @@ public class Player : MonoBehaviour {
         PlayerController.Instance.currentPoint.canDrop = false;
         PlayerController.Instance.currentPoint.data = PointData.Player;
 
-        if(colorType == lastMoveType && activatedPoints.Count >= 3)
-            health.GetHeal(0, 1);
-        lastMoveType = colorType;
-
         int comboPower = MovementManager.Instance.GetCombinationPower();
         if(comboPower > Field.Instance.quantSpawnThreshold)
             Field.Instance.SpawnQuant();
@@ -303,6 +299,10 @@ public class Player : MonoBehaviour {
 
         SkillsInventory.Instance.ReduceCooldown();
         SkillsInventory.Instance.PlaySkills();
+
+        if(colorType == lastMoveType && activatedPoints.Count >= 3)
+            health.GetHeal(0, 1);
+        lastMoveType = colorType;
 
         if(extraMoves > 0) {
             extraMoves--;
