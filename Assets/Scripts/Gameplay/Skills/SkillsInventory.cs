@@ -22,8 +22,10 @@ public class SkillsInventory : MonoBehaviour {
     }
 
     void Start() {
-        foreach(var s in Skills)
+        foreach(var s in Skills) {
             s.isActivated = false;
+            s.cooldownRemain = 0;
+        }
     }
 
     
