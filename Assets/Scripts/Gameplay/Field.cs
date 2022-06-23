@@ -60,8 +60,8 @@ public class Field : MonoBehaviour {
 
     public GoalsController goals;
     public bool isGoalsComplete;
-    public List<Coordinate> exitFromLevelPoints;
     public GameObject goalsCompleteUI;
+    public GameObject escapePoint;
 
     public bool isMovesLimited;
     public int movesCount;
@@ -105,6 +105,7 @@ public class Field : MonoBehaviour {
 
         isGoalsComplete = false;
         goalsCompleteUI.SetActive(false);
+        escapePoint.SetActive(false);
 
         EnemiesRespawnManager.Instance.Init(level.respawns);
         deathsCounter = new Dictionary<EnemyType, int>();
@@ -216,7 +217,7 @@ public class Field : MonoBehaviour {
 
     public void FillFreePoints() {
         foreach(var spawnPoint in MovementManager.Instance.Points) {
-            if(spawnPoint.isFree) {
+            if(spawnPoint.isFree && !spawnPoint.isEscapeFromLevel) {
                 Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
                 var item = Instantiate(qBitPrefab, qBitsContainer);
                 item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
@@ -433,19 +434,9 @@ public class Field : MonoBehaviour {
     public void SetGoalsCompleteState() {
         isGoalsComplete = true;
         goalsCompleteUI.SetActive(true);
+        escapePoint.SetActive(true);
     }
 
-    public bool CheckIfLevelComplete(Coordinate playerPoint) {
-        if(isGoalsComplete) {
-            foreach(var exit in exitFromLevelPoints) {
-                if(playerPoint.x == exit.x && playerPoint.y == exit.y) {
-                    MoveToNextLevel();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     
     public void MoveToNextLevel() {
         UserData.Instance.currentLevel++;

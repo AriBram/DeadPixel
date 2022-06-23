@@ -66,7 +66,6 @@ public class Player : MonoBehaviour {
 
         Init();
 
-        InitializeAnimation();
         SetSkeletonColor(QBitType.GREEN);
 
         onAwake.Invoke();
@@ -95,6 +94,8 @@ public class Player : MonoBehaviour {
         memoryQbitsCounter = 0;
 
         SetPlayerStartOrientation();
+        InitializeAnimation();
+        input.ClearMovementTrack();
     }
 
 
@@ -340,10 +341,6 @@ public class Player : MonoBehaviour {
         activeTargetIndex = 0;
         input.ClearMovementTrack();
         activatedPoints.Clear();
-
-        bool isLevelComplete = Field.Instance.CheckIfLevelComplete(new Coordinate(PlayerController.Instance.currentPoint.x, PlayerController.Instance.currentPoint.y));
-        if(isLevelComplete)
-            return;
 
         Field.Instance.CheckDefectsForAttackPlayer();
         Field.Instance.CheckDebuffsOnPlayer();

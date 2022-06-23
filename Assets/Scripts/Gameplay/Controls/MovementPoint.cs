@@ -22,6 +22,8 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     public bool isFree;
     public bool canDrop;
 
+    public bool isEscapeFromLevel;
+
     public bool isObstacle => data == PointData.Obstacle;
     public bool isDestroyable => data == PointData.Destroyable;
     public bool isQbit => data == PointData.QBit;
@@ -89,6 +91,9 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")) {
+            if(isEscapeFromLevel)
+                Field.Instance.MoveToNextLevel();
+
             if(GameplayController.Instance.IsMove) {
                 Deactivate();
                 onPointReach.Invoke();

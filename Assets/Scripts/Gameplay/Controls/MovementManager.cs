@@ -22,9 +22,11 @@ public class MovementManager : MonoBehaviour {
 
         GameObject[] pointsGameObjects = GameObject.FindGameObjectsWithTag("MovementPoint");
 
-        foreach(GameObject point in pointsGameObjects)
-            Points.Add(point.GetComponent<MovementPoint>());
-
+        foreach(GameObject p in pointsGameObjects) {
+            MovementPoint point = p.GetComponent<MovementPoint>();
+            if(!point.isEscapeFromLevel)
+                Points.Add(point);
+        }
 
         GameObject[] points_x4_GameObjects = GameObject.FindGameObjectsWithTag("Point_x4");
 

@@ -74,7 +74,7 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                 if(qBit != null)
                     qType = qBit.data.qType;
 
-                if(!activatedPoints.Contains(point) && !point.isObstacle && !unavailablePoints.Contains(point)) {
+                if(!activatedPoints.Contains(point) && !point.isObstacle && !unavailablePoints.Contains(point) && !lastActivatedPoint.isEscapeFromLevel) {
                     List<MovementPoint> bigEnemyPoints = FindAvailablePointsToMoveFromBigEnemy();
                     bool isPointInBigEnemyRadius = bigEnemyPoints.Find(p => p.x == point.x && p.y == point.y) != null;
                     if( (Mathf.Abs(point.x - lastActivatedPoint.x) <= 1 && Mathf.Abs(point.y - lastActivatedPoint.y) <= 1) || isPointInBigEnemyRadius) {
@@ -140,6 +140,14 @@ public class DragInput : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerD
                             UpdateMovementPathData();
                             ResetAllPowerCaptions();
                             point.SetPowerRemainCaption(CountAttackPower(activatedPoints.Count - 1));
+                        }
+                        else if(point.isEscapeFromLevel) {
+                            point.Activate();
+                            lastActivatedPoint.ActivateIndicator(GetMovemenetDirection(lastActivatedPoint, point), choosenType);
+                            lastActivatedPoint = point;
+                            activatedPoints.Add(point);
+                            UpdateMovementPathData();
+                            ResetAllPowerCaptions();
                         }
                     }
                 }
