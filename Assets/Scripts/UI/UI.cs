@@ -92,7 +92,11 @@ public class UI : MonoBehaviour {
 
 
     public void ChangeUIColor(QBitType qType) {
-        Color newColor = GameData.Instance.qBits.Find(q => q.qType == qType).color;
+        QBitData qbit = GameData.Instance.qBits.Find(q => q.qType == qType);
+        if(qbit == null)
+            return;
+
+        Color newColor = qbit.color;
         foreach(var uiItem in colorableUIitems)
             uiItem.color = newColor;
     }

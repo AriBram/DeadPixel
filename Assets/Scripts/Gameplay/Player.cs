@@ -356,7 +356,7 @@ public class Player : MonoBehaviour {
         root.Skeleton.SetSlotsToSetupPose();
         root.LateUpdate();
 
-        //UI.Instance.ChangeUIColor(qType);
+        UI.Instance.ChangeUIColor(qType);
     }
 
     public void SetOneShotAnimation(string animName) {
