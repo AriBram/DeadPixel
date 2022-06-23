@@ -24,6 +24,8 @@ public class AnimatedEnemy : Enemy {
 
         healthPoints = Random.Range(minHP, maxHP + 1);
         hpCaption.text = healthPoints.ToString();
+
+        SetOneShotAnimation("spawn");
     }
     
     

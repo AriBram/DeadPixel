@@ -322,7 +322,7 @@ MonoBehaviour:
   initialFlipY: 0
   startingAnimation: idle
   startingLoop: 1
-  timeScale: 0.4
+  timeScale: 0.3
   freeze: 0
   updateWhenInvisible: 3
   unscaledTime: 0
@@ -556,7 +556,6 @@ MonoBehaviour:
   canMove: 0
   canMoveIndicator: {fileID: 6284014538256678064}
   hpCaption: {fileID: 2439184452600118602}
-  powerRemain: {fileID: 0}
   shield: {fileID: 2110526190247816771}
   heart: {fileID: 5556847520387033678}
   hasShield: 0
