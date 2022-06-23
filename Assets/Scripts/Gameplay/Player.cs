@@ -158,7 +158,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
 
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
-        float timing = isLetal ? 0.533f : 0.367f;
+        float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
@@ -170,7 +170,7 @@ public class Player : MonoBehaviour {
 
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
         bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
-        float timing = isLetal ? 0.533f : 0.367f;
+        float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
 
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
-        float timing = isLetal ? 0.533f : 0.367f;
+        float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour {
 
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
         bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
-        float timing = isLetal ? 0.533f : 0.367f;
+        float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
         yield return new WaitForSeconds(timing);
 
