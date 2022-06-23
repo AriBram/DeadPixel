@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using TMPro;
+using Spine.Unity;
 
 
 public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
@@ -38,7 +39,6 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
     public DebuffType debuff;
 
     public List<MovementDirectionData> directionIndicators;
-    public List<MovementIndicatorData> miData;
 
     public class PointReachedEvent : UnityEvent { }
     [HideInInspector] public PointReachedEvent onPointReach = new PointReachedEvent();
@@ -147,8 +147,22 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public void ChangeIndicatorsColor(QBitType qType) {
         foreach(var data in directionIndicators) {
-            Sprite newSprite = miData.Find(d => d.qType == qType).indSprite;
-            data.indicator.GetComponent<Image>().sprite = newSprite;
+            SkeletonGraphic sg = data.indicator.GetComponent<SkeletonGraphic>();
+            switch(qType) {
+                case QBitType.GREEN:
+                    sg.Skeleton.SetSkin("green");
+                    break;
+                case QBitType.BLUE:
+                    sg.Skeleton.SetSkin("blue");
+                    break;
+                case QBitType.RED:
+                    sg.Skeleton.SetSkin("red");
+                    break;
+                case QBitType.NONE:
+                    break;
+            }
+            sg.Skeleton.SetSlotsToSetupPose();
+            sg.LateUpdate();
         }
     }
 
@@ -213,11 +227,4 @@ public enum DebuffType {None, Puddle}
 public class MovementDirectionData {
     public MovementDirection direction;
     public GameObject indicator;
-}
-
-
-[System.Serializable]
-public class MovementIndicatorData {
-    public QBitType qType;
-    public Sprite indSprite;
 }

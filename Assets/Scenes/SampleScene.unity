@@ -11442,10 +11442,10 @@ MonoBehaviour:
       value: 3
     goals:
     - gType: 4
-      value: 1
+      value: 5
       icon: {fileID: 21300000, guid: c54de2155ef5afe49ae19e4289e04786, type: 3}
     - gType: 5
-      value: 1
+      value: 5
       icon: {fileID: 21300000, guid: 5ab6dc38b3b14b1428595f3a618bf722, type: 3}
     movesLimitData:
       isMovesLimited: 0
