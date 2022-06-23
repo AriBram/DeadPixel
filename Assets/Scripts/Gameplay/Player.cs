@@ -42,6 +42,8 @@ public class Player : MonoBehaviour {
     private int extraMoves;
     private int memoryQbitsCounter;
     public int qbitsCountToGetMemory;
+
+    public MovementDirection lastDirection;
     
     
     void Awake() {
@@ -110,12 +112,17 @@ public class Player : MonoBehaviour {
         maxPointIndex = activatedPoints.Count - 1;
         powerRemain = 0;
 
+        lastDirection = MovementDirection.None;
+
         SwitchTargetToNextPoint();
 
         GameplayController.Instance.SetMoveState();
     }
 
     public void Move() {
+        if(target == null)
+            return;
+
         Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
         rb.MovePosition(temp);
     }
@@ -147,10 +154,19 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        activeTargetIndex++;
-        target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
+        StartCoroutine(SwitchToNextTarget(mDir));
 
         SetMoveAnimation(mDir);
+
+        lastDirection = mDir;
+    }
+
+    public IEnumerator SwitchToNextTarget(MovementDirection mDir) {
+        float timing = lastDirection == mDir ? 0f : 0.05f;
+        yield return new WaitForSeconds(timing);
+
+        activeTargetIndex++;
+        target = activatedPoints[activeTargetIndex].gameObject.GetComponent<Transform>();
     }
 
     public IEnumerator FightWithDestroyableContinuous(MovementDirection mDir) {
@@ -371,10 +387,12 @@ public class Player : MonoBehaviour {
     public void SetMoveAnimation(MovementDirection mDir) {
         switch(mDir) {
             case MovementDirection.Up:
-                SetLoopAnimation("move_down_up");
+                SetLoopAnimation("move_up_down");
+                //SetLoopAnimation("move_down_up");
                 break;
             case MovementDirection.Down:
-                SetLoopAnimation("move_up_down");
+                SetLoopAnimation("move_down_up");
+                //SetLoopAnimation("move_up_down");
                 break;
             case MovementDirection.Right:
                 FlipHorizontalToRight();
@@ -386,19 +404,23 @@ public class Player : MonoBehaviour {
                 break;
             case MovementDirection.Up_Right:
                 FlipHorizontalToRight();
-                SetLoopAnimation("move_diagonal_down_up");
+                SetLoopAnimation("move_diagonal_up_down");
+                //SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Up_Left:
                 FlipHorizontalToLeft();
-                SetLoopAnimation("move_diagonal_down_up");
+                SetLoopAnimation("move_diagonal_up_down");
+                //SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Down_Right:
                 FlipHorizontalToRight();
-                SetLoopAnimation("move_diagonal_up_down");
+                SetLoopAnimation("move_diagonal_down_up");
+                //SetLoopAnimation("move_diagonal_up_down");
                 break;
             case MovementDirection.Down_Left:
                 FlipHorizontalToLeft();
-                SetLoopAnimation("move_diagonal_up_down");
+                SetLoopAnimation("move_diagonal_down_up");
+                //SetLoopAnimation("move_diagonal_up_down");
                 break;
         }
     }

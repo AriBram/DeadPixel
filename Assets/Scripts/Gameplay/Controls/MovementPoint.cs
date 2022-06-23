@@ -199,7 +199,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
 
 public enum PointData {None, Obstacle, Destroyable, Enemy, Defect, QBit, Player, BigEnemy, Quant}
 
-public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left}
+public enum MovementDirection {Up, Down, Right, Left, Up_Right, Up_Left, Down_Right, Down_Left, None}
 
 public enum DebuffType {None, Puddle}
 
