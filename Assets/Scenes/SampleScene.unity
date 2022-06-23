@@ -784,7 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 160957869}
   memory: {fileID: 160957874}
-  moveSpeed: 10
+  moveSpeed: 8
   activatedPoints: []
   input: {fileID: 0}
   skeletonSpawnersDestroyed: 0
@@ -793,6 +793,7 @@ MonoBehaviour:
   colorType: 0
   lastMoveType: 0
   qbitsCountToGetMemory: 0
+  lastDirection: 0
 --- !u!58 &160957868
 CircleCollider2D:
   m_ObjectHideFlags: 0
