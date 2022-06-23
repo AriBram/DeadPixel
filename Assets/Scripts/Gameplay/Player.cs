@@ -173,9 +173,14 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
+        int attackPower = CountAttackPower(activeTargetIndex + 1) + powerRemain;
+        bool isLetal = IsAttackLetal_Destroyable(attackPower, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
+        yield return new WaitForSeconds(timing / 2f);
+
+        AttackDestroyable(attackPower, activatedPoints[activeTargetIndex + 1]);
+
         yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 1;
@@ -185,9 +190,15 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithDestroyableEnd(MovementDirection mDir) {
-        bool isLetal = AttackDestroyable(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
+        int attackPower = CountAttackPower(activeTargetIndex + 1) + powerRemain;
+        bool isLetal = IsAttackLetal_Destroyable(attackPower, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
+
+        yield return new WaitForSeconds(timing / 2f);
+
+        AttackDestroyable(attackPower, activatedPoints[activeTargetIndex + 1]);
+
         yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isDestroyable)
@@ -203,9 +214,15 @@ public class Player : MonoBehaviour {
         SetMoveAnimation(mDir);
         yield return new WaitForSeconds(0.01f);
 
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
+        int attackPower = CountAttackPower(activeTargetIndex + 1) + powerRemain;
+        bool isLetal = IsAttackLetal(attackPower, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
+
+        yield return new WaitForSeconds(timing / 2f);
+
+        AttackEnemy(attackPower, activatedPoints[activeTargetIndex + 1]);
+
         yield return new WaitForSeconds(timing);
 
         activeTargetIndex += 1;
@@ -215,9 +232,15 @@ public class Player : MonoBehaviour {
     }
 
     public IEnumerator FightWithEnemyEnd(MovementDirection mDir) {
-        bool isLetal = AttackEnemy(CountAttackPower(activeTargetIndex + 1) + powerRemain, activatedPoints[activeTargetIndex + 1]);
+        int attackPower = CountAttackPower(activeTargetIndex + 1) + powerRemain;
+        bool isLetal = IsAttackLetal(attackPower, activatedPoints[activeTargetIndex + 1]);
         float timing = isLetal ? 0.533f * 2f : 0.367f * 2f;
         SetAttackAnimation(mDir, isLetal);
+
+        yield return new WaitForSeconds(timing / 2f);
+
+        AttackEnemy(attackPower, activatedPoints[activeTargetIndex + 1]);
+
         yield return new WaitForSeconds(timing);
 
         if(activatedPoints[activeTargetIndex + 1].isEnemy || activatedPoints[activeTargetIndex + 1].isBigEnemy) {
@@ -243,15 +266,13 @@ public class Player : MonoBehaviour {
 
 
     public bool AttackDestroyable(int power, MovementPoint point) {
-        Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
-        powerRemain = destroyableToAttack.GetDamageByPlayer(power);
         bool isLetal = power >= destroyableToAttack.healthPoints ? true : false;
+        powerRemain = destroyableToAttack.GetDamageByPlayer(power);
         return isLetal;
     }
 
     public bool AttackEnemy(int power, MovementPoint point) {
-        Debug.Log("power: " + power.ToString() + "; point x: " + point.x.ToString() + " y: " + point.y.ToString());
         Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
         bool isLetal = false;
         if(enemyToAttack != null) {
@@ -269,6 +290,20 @@ public class Player : MonoBehaviour {
         }
 
         return isLetal;
+    }
+
+    public bool IsAttackLetal(int power, MovementPoint point) {
+        Enemy enemyToAttack = Field.Instance.enemiesItems.Find(e => e.currentPoint.x == point.x && e.currentPoint.y == point.y);
+        if(enemyToAttack != null)
+            return power >= enemyToAttack.healthPoints;
+        return false;
+    }
+
+    public bool IsAttackLetal_Destroyable(int power, MovementPoint point) {
+        Destroyable destroyableToAttack = Field.Instance.destroyables.Find(d => d.x == point.x && d.y == point.y);
+        if(destroyableToAttack != null)
+            return power >= destroyableToAttack.healthPoints;
+        return false;
     }
 
 
@@ -290,7 +325,7 @@ public class Player : MonoBehaviour {
 
 
     public void EndMove() {
-        SetOneShotAnimation("idle");
+        SetLoopAnimation("idle");
 
         PlayerController.Instance.currentPoint.Reset();
         PlayerController.Instance.currentPoint = activatedPoints[activeTargetIndex];
@@ -376,11 +411,12 @@ public class Player : MonoBehaviour {
     }
 
     public void SetOneShotAnimation(string animName) {
-        root.AnimationState.SetAnimation(0, animName, false);
-        root.AnimationState.AddAnimation(0, "idle", false, 0);
+        Debug.Log("player one shot animation: " + animName);
+        root.AnimationState.SetAnimation(0, animName, false).Complete += e => SetLoopAnimation("idle");
     }
 
     public void SetLoopAnimation(string animName) {
+        //Debug.Log("enemy loop animation: " + animName);
         root.AnimationState.SetAnimation(0, animName, true);
     }
 
@@ -431,13 +467,15 @@ public class Player : MonoBehaviour {
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
-                    SetOneShotAnimation("attack_vertical_down_up");
+                    SetOneShotAnimation("attack_vertical_up_down");
+                    //SetOneShotAnimation("attack_vertical_down_up");
                 break;
             case MovementDirection.Down:
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
-                    SetOneShotAnimation("attack_vertical_up_down");
+                    SetOneShotAnimation("attack_vertical_down_up");
+                    //SetOneShotAnimation("attack_vertical_up_down");
                 break;
             case MovementDirection.Right:
                 FlipHorizontalToRight();

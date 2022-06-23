@@ -55,8 +55,7 @@ public class AnimatedEnemy : Enemy {
     }
 
     public void SetOneShotAnimation(string animName) {
-        enemyAnim.AnimationState.SetAnimation(0, animName, false);
-        enemyAnim.AnimationState.AddAnimation(0, "idle", true, 0);
+        enemyAnim.AnimationState.SetAnimation(0, animName, false).Complete += e => SetLoopAnimation("idle");
     }
 
     public void SetLoopAnimation(string animName) {
