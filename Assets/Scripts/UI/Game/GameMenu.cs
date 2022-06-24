@@ -28,7 +28,7 @@ public class GameMenu : MenuBase {
     public void Refresh() {
         bool isGoBtnActive = GameplayController.Instance.IsPrepare && MovementManager.Instance.ActivatedPoints.Count > 1 ? true : false;
         if(isGoBtnActive)
-            goCounter.text = MovementManager.Instance.GetCombinationPower().ToString();
+            goCounter.text = (MovementManager.Instance.ActivatedPoints.Count - 1).ToString();
         else
             goCounter.text = "";
     }
