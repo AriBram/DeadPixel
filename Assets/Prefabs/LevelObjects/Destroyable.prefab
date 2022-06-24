@@ -75,7 +75,7 @@ MonoBehaviour:
   initialFlipY: 0
   startingAnimation: idle
   startingLoop: 0
-  timeScale: 0.5
+  timeScale: 0.35
   freeze: 0
   updateWhenInvisible: 3
   unscaledTime: 0
@@ -163,7 +163,6 @@ MonoBehaviour:
   startHp_Min: 2
   startHp_Max: 2
   hpCaption: {fileID: 3955752782750911518}
-  powerRemain: {fileID: 0}
   anim: {fileID: 6451911905754724313}
 --- !u!223 &7096802518135981084
 Canvas:
