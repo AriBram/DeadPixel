@@ -159,6 +159,7 @@ public class MovementPoint : MonoBehaviour, IDragHandler, IEndDragHandler {
                     sg.Skeleton.SetSkin("red");
                     break;
                 case QBitType.NONE:
+                    sg.Skeleton.SetSkin("white");
                     break;
             }
             sg.Skeleton.SetSlotsToSetupPose();

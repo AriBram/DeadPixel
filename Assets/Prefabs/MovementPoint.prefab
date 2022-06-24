@@ -92,7 +92,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -209,7 +209,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -365,17 +365,6 @@ MonoBehaviour:
     indicator: {fileID: 985535925184233722}
   - direction: 7
     indicator: {fileID: 5968109553363154440}
-  miData:
-  - qType: 0
-    indSprite: {fileID: 21300000, guid: 535cd4b6d9d75fe4b837c450204c5f38, type: 3}
-  - qType: 1
-    indSprite: {fileID: 21300000, guid: ba8e440f820da7f4db52c3c19fe38c28, type: 3}
-  - qType: 2
-    indSprite: {fileID: 21300000, guid: 1d0f0cb7b1f741548b5cbab3aa58fae9, type: 3}
-  - qType: 1
-    indSprite: {fileID: 21300000, guid: ba8e440f820da7f4db52c3c19fe38c28, type: 3}
-  - qType: 3
-    indSprite: {fileID: 21300000, guid: 179d6f3213219904c88dae8a1c7b8c66, type: 3}
   canEditMovementPath: 0
   pointBtn: {fileID: 3392046882154938964}
   powerRemain: {fileID: 4098422150349835894}
@@ -569,7 +558,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -686,7 +675,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -803,7 +792,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -920,7 +909,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -1172,7 +1161,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: green
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle
@@ -1289,7 +1278,7 @@ MonoBehaviour:
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
-  initialSkinName: 
+  initialSkinName: white
   initialFlipX: 0
   initialFlipY: 0
   startingAnimation: idle

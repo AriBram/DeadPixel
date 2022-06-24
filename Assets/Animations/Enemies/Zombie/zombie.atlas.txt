@@ -1,662 +1,646 @@
 zombie.png
-size:1651,1032
+size:1460,1540
 format:RGBA4444
 filter:Linear,Linear
 pma:true
 scale:0.6
 blue/attack_horizontal/Group 46461
-bounds:1481,476,55,58
+bounds:850,30,55,58
 offsets:22,13,103,106
 rotate:90
 blue/attack_horizontal/Group 46462
-bounds:947,362,57,63
+bounds:1365,751,57,63
 offsets:19,13,103,106
+rotate:90
 blue/attack_horizontal/Group 46463
-bounds:605,118,60,73
+bounds:972,441,60,73
 offsets:16,13,103,106
+rotate:90
 blue/attack_horizontal/Group 46464
-bounds:732,33,62,71
+bounds:1172,999,62,71
 offsets:12,13,103,106
+rotate:90
 blue/attack_horizontal/Group 46465
-bounds:1010,436,62,71
+bounds:387,221,62,71
 offsets:12,15,103,106
 blue/attack_horizontal/Group 46466
-bounds:866,363,62,71
+bounds:1074,547,62,71
 offsets:12,15,103,106
-rotate:90
 blue/attack_horizontal/Group 46468
-bounds:866,363,62,71
+bounds:1074,547,62,71
 offsets:12,15,103,106
-rotate:90
 blue/attack_horizontal/Group 46467
-bounds:1014,359,62,67
+bounds:1157,470,62,67
 offsets:12,15,103,106
 blue/attack_horizontal/Group 46469
-bounds:785,338,62,72
+bounds:1381,1033,62,72
 offsets:12,15,103,106
 blue/attack_horizontal/Group 46470
-bounds:1341,493,60,56
+bounds:906,447,60,56
 offsets:14,15,103,106
+rotate:90
 blue/attack_horizontal/Group 46472
-bounds:804,75,56,55
+bounds:1016,160,56,55
 offsets:22,15,103,106
 rotate:90
 blue/attack_horizontal/Group 46473
-bounds:1278,507,55,53
+bounds:816,165,55,53
 offsets:24,15,103,106
-rotate:90
 blue/attack_vertical/1
-bounds:427,10,55,50
-offsets:80,27,215,123
+bounds:275,132,109,98
+offsets:160,55,430,246
+rotate:90
 blue/attack_vertical/10
-bounds:1345,688,119,70
-offsets:15,21,215,123
+bounds:143,497,236,138
+offsets:31,43,430,246
 rotate:90
 blue/attack_vertical/11
-bounds:677,236,99,63
-offsets:35,27,215,123
+bounds:570,922,196,126
+offsets:71,54,430,246
+rotate:90
 blue/attack_vertical/12
-bounds:1183,215,55,55
-offsets:79,27,215,123
+bounds:872,632,109,111
+offsets:159,54,430,246
 blue/attack_vertical/2
-bounds:492,10,55,50
-offsets:80,27,215,123
+bounds:618,399,109,98
+offsets:160,55,430,246
+rotate:90
 blue/attack_vertical/3
-bounds:1248,215,55,55
-offsets:80,27,215,123
+bounds:927,1107,109,109
+offsets:160,55,430,246
 blue/attack_vertical/4
-bounds:859,145,55,62
-offsets:80,27,215,123
+bounds:459,280,109,122
+offsets:160,55,430,246
 rotate:90
 blue/attack_vertical/5
-bounds:454,200,103,63
-offsets:58,27,215,123
+bounds:706,1020,204,125
+offsets:117,55,430,246
 blue/attack_vertical/6
-bounds:224,342,135,62
-offsets:47,27,215,123
-rotate:90
+bounds:1018,1407,269,123
+offsets:95,55,430,246
 blue/attack_vertical/7
-bounds:576,639,128,85
-offsets:43,0,215,123
+bounds:10,743,256,169
+offsets:87,0,430,246
 blue/attack_vertical/8
-bounds:10,243,174,99
-offsets:22,0,215,123
+bounds:10,1334,347,196
+offsets:44,0,430,246
 blue/attack_vertical/9
-bounds:194,234,142,98
-offsets:16,2,215,123
+bounds:10,922,284,196
+offsets:32,4,430,246
 blue/death/Group 46516
-bounds:390,183,56,54
+bounds:1081,160,56,54
 offsets:47,8,150,97
 rotate:90
 blue/death/Group 46517
-bounds:390,117,56,54
+bounds:1145,160,56,54
 offsets:47,8,150,97
 rotate:90
 blue/death/Group 46518
-bounds:1089,79,57,52
+bounds:910,380,57,52
 offsets:46,8,150,97
-blue/death/Group 46519
-bounds:1411,474,57,60
-offsets:44,8,150,97
 rotate:90
+blue/death/Group 46519
+bounds:850,95,57,60
+offsets:44,8,150,97
 blue/death/Group 46520
-bounds:938,285,66,67
+bounds:383,144,66,67
 offsets:45,10,150,97
 blue/death/Group 46521
-bounds:557,10,84,71
+bounds:920,897,84,71
 offsets:39,6,150,97
-rotate:90
 blue/death/Group 46522
-bounds:1549,578,92,60
+bounds:1390,1319,92,60
 offsets:45,8,150,97
+rotate:90
 blue/death/Group 46523
-bounds:330,132,92,50
+bounds:793,593,92,50
 offsets:44,8,150,97
 rotate:90
 blue/death/Group 46524
-bounds:556,104,86,39
+bounds:291,253,86,39
 offsets:50,4,150,97
-rotate:90
 blue/death/Group 46525
-bounds:1605,957,65,24
+bounds:508,12,65,24
 offsets:42,3,150,97
-rotate:90
 blue/death/Group 46526
-bounds:367,832,12,11
+bounds:661,1134,12,11
 offsets:95,3,150,97
 green/death/Group 46526
-bounds:367,832,12,11
+bounds:661,1134,12,11
 offsets:95,3,150,97
 red/death/Group 46526
-bounds:367,832,12,11
+bounds:661,1134,12,11
 offsets:95,3,150,97
 blue/fear/1
-bounds:714,639,116,112
+bounds:130,10,116,112
 offsets:21,25,168,172
-rotate:90
 blue/fear/7
-bounds:714,639,116,112
+bounds:130,10,116,112
 offsets:21,25,168,172
-rotate:90
 blue/fear/2
-bounds:836,639,116,115
+bounds:1264,1153,116,115
 offsets:21,25,168,172
-rotate:90
 blue/fear/3
-bounds:961,639,116,118
+bounds:1046,1131,116,118
 offsets:21,25,168,172
 blue/fear/5
-bounds:961,639,116,118
+bounds:1046,1131,116,118
 offsets:21,25,168,172
 blue/fear/4
-bounds:947,767,116,119
+bounds:591,273,116,119
 offsets:21,25,168,172
+rotate:90
 blue/fear/6
-bounds:1087,574,116,115
+bounds:1046,878,116,115
 offsets:21,25,168,172
 blue/get_damage/Group 46461
-bounds:869,75,56,55
+bounds:1052,25,56,55
 offsets:11,12,78,78
-rotate:90
 blue/get_damage/Group 46462
-bounds:934,75,56,55
+bounds:1123,405,56,55
 offsets:11,12,78,78
-rotate:90
 blue/get_damage/Group 46463
-bounds:1408,409,56,55
+bounds:1189,405,56,55
 offsets:11,12,78,78
 blue/idle/Group 46461
-bounds:1313,215,55,54
+bounds:1312,339,55,54
 offsets:12,12,78,78
 rotate:90
 blue/idle/Group 46466
-bounds:1313,215,55,54
+bounds:1312,339,55,54
 offsets:12,12,78,78
 rotate:90
 blue/idle/Group 46462
-bounds:1352,85,55,54
+bounds:1209,211,55,54
 offsets:11,12,78,78
-rotate:90
 blue/idle/Group 46463
-bounds:872,10,55,57
+bounds:918,30,55,57
 offsets:12,12,78,78
 rotate:90
 blue/idle/Group 46464
-bounds:939,10,55,57
+bounds:985,25,55,57
 offsets:11,12,78,78
 rotate:90
 blue/idle/Group 46465
-bounds:1443,215,55,54
+bounds:1274,210,55,54
 offsets:12,12,78,78
-rotate:90
 blue/spawn/1
-bounds:677,309,98,76
+bounds:927,1226,98,76
 offsets:58,38,229,172
+rotate:90
 green/spawn/1
-bounds:677,309,98,76
+bounds:927,1226,98,76
 offsets:58,38,229,172
+rotate:90
 red/spawn/1
-bounds:677,309,98,76
+bounds:927,1226,98,76
 offsets:58,38,229,172
+rotate:90
 blue/spawn/2
-bounds:10,28,167,85
+bounds:518,827,167,85
 offsets:35,29,229,172
 green/spawn/2
-bounds:10,28,167,85
+bounds:518,827,167,85
 offsets:35,29,229,172
 red/spawn/2
-bounds:10,28,167,85
+bounds:518,827,167,85
 offsets:35,29,229,172
 blue/spawn/3
-bounds:304,649,167,85
+bounds:695,790,167,85
 offsets:35,29,229,172
-rotate:90
 blue/spawn/4
-bounds:399,639,167,85
+bounds:518,732,167,85
 offsets:35,29,229,172
 blue/spawn/7
-bounds:10,123,158,110
+bounds:10,17,158,110
 offsets:35,26,229,172
+rotate:90
 blue/spawn/8
-bounds:399,734,149,109
+bounds:1297,1421,149,109
 offsets:44,29,229,172
 blue/spawn/9
-bounds:558,734,109,105
+bounds:459,165,109,105
 offsets:60,29,229,172
-rotate:90
 blue/squeeze/Group 46461
-bounds:1416,86,55,54
+bounds:726,344,55,54
 offsets:12,12,78,78
 blue/squeeze/Group 46462
-bounds:1082,441,55,42
+bounds:1049,293,55,42
 offsets:12,12,78,78
 blue/squeeze/Group 46463
-bounds:1619,443,55,22
+bounds:1014,913,55,22
 offsets:12,12,78,78
 rotate:90
 blue/squeeze/Group 46464
-bounds:187,10,53,11
+bounds:497,751,53,11
 offsets:12,12,78,78
+rotate:90
 blue/squeeze/Group 46603
-bounds:304,622,62,17
+bounds:276,850,62,17
 offsets:8,5,78,78
+rotate:90
 blue/threat/Group 46461
-bounds:1481,150,55,50
+bounds:793,528,55,50
 offsets:12,12,78,78
 rotate:90
 green/attack_horizontal/Group 46461
-bounds:1481,411,55,58
+bounds:917,95,55,58
 offsets:22,13,103,106
 rotate:90
 green/attack_horizontal/Group 46462
-bounds:1089,214,57,63
+bounds:1373,440,57,63
 offsets:19,13,103,106
+rotate:90
 green/attack_horizontal/Group 46463
-bounds:786,255,60,73
+bounds:1365,818,60,73
 offsets:16,13,103,106
 green/attack_horizontal/Group 46464
-bounds:857,291,62,71
+bounds:1146,547,62,71
 offsets:12,13,103,106
-rotate:90
 green/attack_horizontal/Group 46465
-bounds:1014,278,62,71
+bounds:1218,547,62,71
 offsets:12,15,103,106
 green/attack_horizontal/Group 46466
-bounds:859,210,62,71
+bounds:1290,550,62,71
 offsets:12,15,103,106
 green/attack_horizontal/Group 46468
-bounds:859,210,62,71
+bounds:1290,550,62,71
 offsets:12,15,103,106
 green/attack_horizontal/Group 46467
-bounds:1012,206,62,67
+bounds:1229,470,62,67
 offsets:12,15,103,106
-rotate:90
 green/attack_horizontal/Group 46469
-bounds:866,435,62,72
+bounds:834,435,62,72
 offsets:12,15,103,106
 green/attack_horizontal/Group 46470
-bounds:1549,442,60,56
+bounds:946,160,60,56
 offsets:14,15,103,106
 green/attack_horizontal/Group 46472
-bounds:1274,380,56,55
+bounds:1114,340,56,55
 offsets:22,15,103,106
 green/attack_horizontal/Group 46473
-bounds:1481,85,55,53
+bounds:881,165,55,53
 offsets:24,15,103,106
-rotate:90
 green/attack_vertical/1
-bounds:1340,18,55,50
-offsets:80,27,215,123
-rotate:90
+bounds:578,165,109,98
+offsets:160,55,430,246
 green/attack_vertical/10
-bounds:1341,559,119,70
-offsets:15,21,215,123
+bounds:143,251,236,138
+offsets:31,43,430,246
 rotate:90
 green/attack_vertical/11
-bounds:567,201,99,63
-offsets:35,27,215,123
+bounds:291,678,196,126
+offsets:71,54,430,246
 green/attack_vertical/12
-bounds:1351,150,55,55
-offsets:79,27,215,123
+bounds:1172,878,109,111
+offsets:159,54,430,246
 green/attack_vertical/2
-bounds:1400,20,55,50
-offsets:80,27,215,123
+bounds:627,46,109,98
+offsets:160,55,430,246
 rotate:90
 green/attack_vertical/3
-bounds:1416,150,55,55
-offsets:80,27,215,123
+bounds:508,46,109,109
+offsets:160,55,430,246
 green/attack_vertical/4
-bounds:1206,507,55,62
-offsets:80,27,215,123
+bounds:143,132,109,122
+offsets:160,55,430,246
 rotate:90
 green/attack_vertical/5
-bounds:676,163,103,63
-offsets:58,27,215,123
+bounds:706,885,204,125
+offsets:117,55,430,246
 green/attack_vertical/6
-bounds:1554,648,135,62
-offsets:47,27,215,123
+bounds:10,464,269,123
+offsets:95,55,430,246
 rotate:90
 green/attack_vertical/7
-bounds:187,31,128,85
-offsets:43,0,215,123
+bounds:304,949,256,169
+offsets:87,0,430,246
 green/attack_vertical/8
-bounds:1085,923,174,99
-offsets:22,0,215,123
+bounds:10,1128,347,196
+offsets:44,0,430,246
 green/attack_vertical/9
-bounds:178,126,142,98
-offsets:16,2,215,123
+bounds:367,1128,284,196
+offsets:32,4,430,246
 green/death/Group 46516
-bounds:1340,367,56,54
+bounds:1185,94,56,54
 offsets:47,8,150,97
+rotate:90
 green/death/Group 46517
-bounds:1406,345,56,54
+bounds:1185,28,56,54
 offsets:47,8,150,97
+rotate:90
 green/death/Group 46518
-bounds:1274,445,57,52
+bounds:910,313,57,52
 offsets:46,8,150,97
+rotate:90
 green/death/Group 46519
-bounds:1549,375,57,60
+bounds:985,90,57,60
 offsets:44,8,150,97
-rotate:90
 green/death/Group 46520
-bounds:1012,130,66,67
+bounds:834,358,66,67
 offsets:45,10,150,97
-rotate:90
 green/death/Group 46521
-bounds:638,33,84,71
+bounds:1172,1165,84,71
 offsets:39,6,150,97
+rotate:90
 green/death/Group 46522
-bounds:1549,508,92,60
+bounds:1390,1217,92,60
 offsets:45,8,150,97
+rotate:90
 green/death/Group 46523
-bounds:454,140,92,50
+bounds:972,571,92,50
 offsets:44,8,150,97
 green/death/Group 46524
-bounds:675,114,86,39
+bounds:674,527,86,39
 offsets:50,4,150,97
 red/death/Group 46524
-bounds:675,114,86,39
+bounds:674,527,86,39
 offsets:50,4,150,97
 green/death/Group 46525
-bounds:1041,564,65,24
+bounds:583,12,65,24
 offsets:42,3,150,97
-rotate:90
 red/death/Group 46525
-bounds:1041,564,65,24
+bounds:583,12,65,24
 offsets:42,3,150,97
-rotate:90
 green/fear/1
-bounds:289,494,116,112
+bounds:256,10,116,112
 offsets:21,25,168,172
-rotate:90
 green/fear/2
-bounds:296,368,116,115
+bounds:991,753,116,115
 offsets:21,25,168,172
-rotate:90
 green/fear/3
-bounds:1213,572,116,118
+bounds:1046,1003,116,118
 offsets:21,25,168,172
-rotate:90
 green/fear/5
-bounds:1213,572,116,118
+bounds:1046,1003,116,118
 offsets:21,25,168,172
-rotate:90
 green/fear/4
-bounds:1087,699,116,119
+bounds:1264,1278,116,119
 offsets:21,25,168,172
 green/fear/6
-bounds:411,514,116,115
+bounds:1117,753,116,115
 offsets:21,25,168,172
 green/fear/7
-bounds:789,517,116,112
+bounds:382,10,116,112
 offsets:21,25,168,172
 green/get_damage/Group 46461
-bounds:1274,315,56,55
+bounds:1180,340,56,55
 offsets:11,12,78,78
 green/get_damage/Group 46462
-bounds:1340,302,56,55
+bounds:1255,404,56,55
 offsets:11,12,78,78
 green/get_damage/Group 46463
-bounds:1406,280,56,55
+bounds:1246,339,56,55
 offsets:11,12,78,78
 green/idle/Group 46461
-bounds:1460,21,55,54
+bounds:720,280,55,54
 offsets:12,12,78,78
 green/idle/Group 46466
-bounds:1460,21,55,54
+bounds:720,280,55,54
 offsets:12,12,78,78
 green/idle/Group 46462
-bounds:1525,21,55,54
+bounds:785,280,55,54
 offsets:11,12,78,78
 green/idle/Group 46463
-bounds:1006,10,55,57
+bounds:1045,226,55,57
 offsets:12,12,78,78
-rotate:90
 green/idle/Group 46464
-bounds:1073,10,55,57
+bounds:1118,25,55,57
 offsets:11,12,78,78
 rotate:90
 green/idle/Group 46465
-bounds:1472,344,55,54
+bounds:1339,182,55,54
 offsets:12,12,78,78
-rotate:90
 green/spawn/3
-bounds:1085,828,167,85
+bounds:695,695,167,85
 offsets:35,29,229,172
 red/spawn/3
-bounds:1085,828,167,85
+bounds:695,695,167,85
 offsets:35,29,229,172
 green/spawn/4
-bounds:1262,817,167,85
+bounds:497,518,167,85
 offsets:35,29,229,172
 red/spawn/4
-bounds:1262,817,167,85
+bounds:497,518,167,85
 offsets:35,29,229,172
 green/spawn/7
-bounds:1269,912,158,110
+bounds:291,422,158,110
 offsets:35,26,229,172
 green/spawn/8
-bounds:673,765,149,109
+bounds:497,613,149,109
 offsets:44,29,229,172
 green/spawn/9
-bounds:832,765,109,105
+bounds:735,46,109,105
 offsets:60,29,229,172
 rotate:90
 green/squeeze/Group 46461
-bounds:1472,280,55,54
+bounds:1249,146,55,54
 offsets:12,12,78,78
 green/squeeze/Group 46462
-bounds:1154,509,55,42
+bounds:1321,404,55,42
 offsets:12,12,78,78
 rotate:90
 green/squeeze/Group 46463
-bounds:1619,378,55,22
+bounds:1416,968,55,22
 offsets:12,12,78,78
 rotate:90
 green/squeeze/Group 46464
-bounds:250,10,53,11
+bounds:1291,880,53,11
 offsets:12,12,78,78
 green/squeeze/Group 46603
-bounds:1598,840,62,17
+bounds:658,19,62,17
 offsets:8,5,78,78
-rotate:90
 green/threat/Group 46461
-bounds:1507,215,55,50
+bounds:850,293,55,50
 offsets:12,12,78,78
 rotate:90
 red/attack_horizontal/Group 46461
-bounds:804,10,55,58
+bounds:1055,412,55,58
 offsets:22,13,103,106
 rotate:90
 red/attack_horizontal/Group 46462
-bounds:1089,141,57,63
+bounds:972,226,57,63
 offsets:19,13,103,106
+rotate:90
 red/attack_horizontal/Group 46463
-bounds:789,172,60,73
+bounds:1074,477,60,73
 offsets:16,13,103,106
+rotate:90
 red/attack_horizontal/Group 46464
-bounds:931,213,62,71
+bounds:1362,588,62,71
 offsets:12,13,103,106
-rotate:90
 red/attack_horizontal/Group 46465
-bounds:931,141,62,71
+bounds:1301,469,62,71
 offsets:12,15,103,106
-rotate:90
 red/attack_horizontal/Group 46466
-bounds:1082,493,62,71
+bounds:1373,507,62,71
 offsets:12,15,103,106
 red/attack_horizontal/Group 46468
-bounds:1082,493,62,71
+bounds:1373,507,62,71
 offsets:12,15,103,106
 red/attack_horizontal/Group 46467
-bounds:1086,364,62,67
+bounds:972,369,62,67
 offsets:12,15,103,106
+rotate:90
 red/attack_horizontal/Group 46469
-bounds:938,435,62,72
+bounds:1362,669,62,72
 offsets:12,15,103,106
 red/attack_horizontal/Group 46470
-bounds:1156,145,60,56
+bounds:1052,90,60,56
 offsets:14,15,103,106
 rotate:90
 red/attack_horizontal/Group 46472
-bounds:1222,149,56,55
+bounds:1376,375,56,55
 offsets:22,15,103,106
-rotate:90
 red/attack_horizontal/Group 46473
-bounds:1541,150,55,53
+bounds:1249,19,55,53
 offsets:24,15,103,106
-rotate:90
 red/attack_vertical/1
-bounds:346,249,109,98
+bounds:697,165,109,98
 offsets:160,55,430,246
-rotate:90
 red/attack_vertical/10
-bounds:633,884,236,138
+bounds:1018,1259,236,138
 offsets:31,43,430,246
 red/attack_vertical/11
-bounds:879,896,196,126
+bounds:291,542,196,126
 offsets:71,54,430,246
 red/attack_vertical/12
-bounds:547,393,109,111
+bounds:1243,631,109,111
 offsets:159,54,430,246
 red/attack_vertical/2
-bounds:454,273,109,98
+bounds:726,408,109,98
 offsets:160,55,430,246
 rotate:90
 red/attack_vertical/3
-bounds:666,395,109,109
+bounds:674,576,109,109
 offsets:160,55,430,246
 red/attack_vertical/4
-bounds:1213,698,109,122
+bounds:872,753,109,122
 offsets:160,55,430,246
-rotate:90
 red/attack_vertical/5
-bounds:10,352,204,125
+bounds:304,814,204,125
 offsets:117,55,430,246
 red/attack_vertical/6
-bounds:10,487,269,123
+bounds:10,185,269,123
 offsets:95,55,430,246
+rotate:90
 red/attack_vertical/7
-bounds:367,853,256,169
+bounds:661,1155,256,169
 offsets:87,0,430,246
 red/attack_vertical/8
-bounds:10,826,347,196
+bounds:367,1334,347,196
 offsets:44,0,430,246
 red/attack_vertical/9
-bounds:10,620,284,196
+bounds:724,1334,284,196
 offsets:32,4,430,246
 red/death/Group 46516
-bounds:1223,83,56,54
+bounds:1376,311,56,54
 offsets:47,8,150,97
-rotate:90
 red/death/Group 46517
-bounds:1287,149,56,54
+bounds:1241,275,56,54
 offsets:47,8,150,97
-rotate:90
 red/death/Group 46518
-bounds:1341,431,57,52
+bounds:910,246,57,52
 offsets:46,8,150,97
+rotate:90
 red/death/Group 46519
-bounds:1156,75,57,60
+bounds:1118,90,57,60
 offsets:44,8,150,97
 red/death/Group 46520
-bounds:1086,287,66,67
+bounds:972,293,66,67
 offsets:45,10,150,97
+rotate:90
 red/death/Group 46521
-bounds:785,420,84,71
+bounds:1172,1071,84,71
 offsets:39,6,150,97
 rotate:90
 red/death/Group 46522
-bounds:454,70,92,60
+bounds:1390,1115,92,60
 offsets:45,8,150,97
+rotate:90
 red/death/Group 46523
-bounds:325,10,92,50
+bounds:972,511,92,50
 offsets:44,8,150,97
 red/fear/1
-bounds:915,517,116,112
+bounds:991,631,116,112
 offsets:21,25,168,172
 red/fear/2
-bounds:537,514,116,115
+bounds:1117,628,116,115
 offsets:21,25,168,172
 red/fear/3
-bounds:1421,541,116,118
+bounds:1253,1027,116,118
 offsets:21,25,168,172
 rotate:90
 red/fear/5
-bounds:1421,541,116,118
+bounds:1253,1027,116,118
 offsets:21,25,168,172
 rotate:90
 red/fear/4
-bounds:1425,667,116,119
+bounds:920,978,116,119
 offsets:21,25,168,172
-rotate:90
 red/fear/6
-bounds:663,514,116,115
+bounds:1291,901,116,115
 offsets:21,25,168,172
-red/fear/7
-bounds:421,392,116,112
-offsets:21,25,168,172
-red/get_damage/Group 46461
-bounds:1287,83,56,55
-offsets:11,12,78,78
 rotate:90
+red/fear/7
+bounds:1243,752,116,112
+offsets:21,25,168,172
+rotate:90
+red/get_damage/Group 46461
+bounds:1175,275,56,55
+offsets:11,12,78,78
 red/get_damage/Group 46462
-bounds:1274,18,56,55
+bounds:1307,274,56,55
 offsets:11,12,78,78
 red/get_damage/Group 46463
-bounds:1377,215,56,55
+bounds:1373,246,56,55
 offsets:11,12,78,78
 red/idle/Group 46461
-bounds:1544,85,55,54
+bounds:1249,82,55,54
 offsets:12,12,78,78
-rotate:90
 red/idle/Group 46466
-bounds:1544,85,55,54
+bounds:1249,82,55,54
 offsets:12,12,78,78
-rotate:90
 red/idle/Group 46462
-bounds:1537,311,55,54
+bounds:1314,118,55,54
 offsets:11,12,78,78
 red/idle/Group 46463
-bounds:1140,10,55,57
+bounds:1049,345,55,57
 offsets:12,12,78,78
-rotate:90
 red/idle/Group 46464
-bounds:1207,10,55,57
+bounds:1110,226,55,57
 offsets:11,12,78,78
-rotate:90
 red/idle/Group 46465
-bounds:1567,246,55,54
+bounds:1314,54,55,54
 offsets:12,12,78,78
-rotate:90
 red/spawn/7
-bounds:1437,912,158,110
+bounds:291,302,158,110
 offsets:35,26,229,172
 red/spawn/8
-bounds:1439,793,149,109
+bounds:459,399,149,109
 offsets:44,29,229,172
 red/spawn/9
-bounds:562,274,109,105
+bounds:853,517,109,105
 offsets:60,29,229,172
-rotate:90
 red/squeeze/Group 46461
-bounds:1183,443,55,54
+bounds:1379,117,55,54
 offsets:12,12,78,78
 red/squeeze/Group 46462
-bounds:999,78,55,42
+bounds:1404,181,55,42
 offsets:12,12,78,78
+rotate:90
 red/squeeze/Group 46463
-bounds:1619,313,55,22
+bounds:1416,903,55,22
 offsets:12,12,78,78
 rotate:90
 red/squeeze/Group 46464
-bounds:638,12,53,11
+bounds:1439,248,53,11
 offsets:12,12,78,78
-red/squeeze/Group 46603
-bounds:1156,215,62,17
-offsets:8,5,78,78
 rotate:90
+red/squeeze/Group 46603
+bounds:730,19,62,17
+offsets:8,5,78,78
 red/threat/Group 46461
-bounds:1590,20,55,50
+bounds:850,228,55,50
 offsets:12,12,78,78
 rotate:90

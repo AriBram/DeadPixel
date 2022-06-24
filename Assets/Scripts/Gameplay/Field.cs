@@ -129,9 +129,9 @@ public class Field : MonoBehaviour {
         SpawnLevelElements(level);
         FillFreePoints();
 
-        yield return new WaitForSeconds(1.2f);
-        
-        SpawnEnemies(level.animatedEnemies, true);
+        yield return new WaitForSeconds(0.5f);
+
+        StartCoroutine(SpawnEnemiesCoroutine(level.animatedEnemies, true));
         onFieldInit.Invoke();
     }
 
@@ -377,6 +377,52 @@ public class Field : MonoBehaviour {
             enemy.Init(e.eType, spawnPoint);
             enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
             enemiesItems.Add(enemy);
+        }
+    }
+
+
+    public IEnumerator SpawnEnemiesCoroutine(List<EnemyData> enemies, bool isAnimated) {
+        foreach(var e in enemies) {
+            MovementPoint spawnPoint = MovementManager.Instance.Points.Find(p => p.x == e.point.x && p.y == e.point.y);
+            Transform spawnTransform = spawnPoint.gameObject.GetComponent<Transform>();
+
+            GameObject item = new GameObject();
+            Destroy(item);
+
+            switch(e.eType) {
+                case EnemyType.Worm:
+                    item = Instantiate(enemyPrefab_Worm, enemiesContainer);
+                    break;
+                case EnemyType.Skeleton:
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Skeleton_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Skeleton, enemiesContainer);
+                    break;
+                case EnemyType.Zombie:
+                    if(isAnimated)
+                        item = Instantiate(enemyPrefab_Zombie_Animated, enemiesContainer);
+                    else
+                        item = Instantiate(enemyPrefab_Zombie, enemiesContainer);
+                    break;
+                case EnemyType.Agent:
+                    item = Instantiate(enemyPrefab_Agent, enemiesContainer);
+                    break;
+            }
+
+            item.transform.position = new Vector3(spawnTransform.position.x, spawnTransform.position.y, item.transform.position.z);
+
+            enemiesLinks.Add(item);
+            spawnPoint.isFree = false;
+            spawnPoint.canDrop = false;
+            spawnPoint.data = PointData.Enemy;
+
+            Enemy enemy = item.GetComponent<Enemy>();
+            enemy.Init(e.eType, spawnPoint);
+            enemy.onMoveEnd.AddListener(UpdateEnemiesCounter);
+            enemiesItems.Add(enemy);
+
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

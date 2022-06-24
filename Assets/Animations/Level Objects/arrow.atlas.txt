@@ -1,5 +1,5 @@
 arrow.png
-size:628,48
+size:731,48
 format:RGBA4444
 filter:Linear,Linear
 pma:true
@@ -16,3 +16,7 @@ red/idle/1
 bounds:422,10,93,28
 red/idle/2
 bounds:525,10,93,28
+white/idle/1
+bounds:628,10,93,28
+white/idle/2
+bounds:628,10,93,28
