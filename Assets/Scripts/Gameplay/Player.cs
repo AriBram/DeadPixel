@@ -408,12 +408,10 @@ public class Player : MonoBehaviour {
     }
 
     public void SetOneShotAnimation(string animName) {
-        Debug.Log("player one shot animation: " + animName);
         root.AnimationState.SetAnimation(0, animName, false).Complete += e => SetLoopAnimation("idle");
     }
 
     public void SetLoopAnimation(string animName) {
-        //Debug.Log("enemy loop animation: " + animName);
         root.AnimationState.SetAnimation(0, animName, true);
     }
 
@@ -421,11 +419,9 @@ public class Player : MonoBehaviour {
         switch(mDir) {
             case MovementDirection.Up:
                 SetLoopAnimation("move_up_down");
-                //SetLoopAnimation("move_down_up");
                 break;
             case MovementDirection.Down:
                 SetLoopAnimation("move_down_up");
-                //SetLoopAnimation("move_up_down");
                 break;
             case MovementDirection.Right:
                 FlipHorizontalToRight();
@@ -438,22 +434,18 @@ public class Player : MonoBehaviour {
             case MovementDirection.Up_Right:
                 FlipHorizontalToRight();
                 SetLoopAnimation("move_diagonal_up_down");
-                //SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Up_Left:
                 FlipHorizontalToLeft();
                 SetLoopAnimation("move_diagonal_up_down");
-                //SetLoopAnimation("move_diagonal_down_up");
                 break;
             case MovementDirection.Down_Right:
                 FlipHorizontalToRight();
                 SetLoopAnimation("move_diagonal_down_up");
-                //SetLoopAnimation("move_diagonal_up_down");
                 break;
             case MovementDirection.Down_Left:
                 FlipHorizontalToLeft();
                 SetLoopAnimation("move_diagonal_down_up");
-                //SetLoopAnimation("move_diagonal_up_down");
                 break;
         }
     }
@@ -465,14 +457,12 @@ public class Player : MonoBehaviour {
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_vertical_up_down");
-                    //SetOneShotAnimation("attack_vertical_down_up");
                 break;
             case MovementDirection.Down:
                 if(isLetal)
                     SetOneShotAnimation("attack_horizontal_letal");
                 else
                     SetOneShotAnimation("attack_vertical_down_up");
-                    //SetOneShotAnimation("attack_vertical_up_down");
                 break;
             case MovementDirection.Right:
                 FlipHorizontalToRight();

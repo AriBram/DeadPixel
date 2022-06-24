@@ -13,11 +13,13 @@ public class GameMenu : MenuBase {
 
     /*Debug features*/
     public Button goNextArenaBtn;
+    public Button restartBtn;
 
 
     void Start() {
         goBtn.onClick.AddListener(OnBtnGoClick);
         goNextArenaBtn.onClick.AddListener(OnBtnGoNextArenaClick);
+        restartBtn.onClick.AddListener(OnBtnRestartClick);
 
         MovementManager.Instance.onMovementTrackChanged.AddListener(Refresh);
 
@@ -52,5 +54,9 @@ public class GameMenu : MenuBase {
 
     public void OnBtnGoNextArenaClick() {
         Field.Instance.MoveToNextLevel();
+    }
+
+    public void OnBtnRestartClick() {
+        Field.Instance.RestartGame();
     }
 }

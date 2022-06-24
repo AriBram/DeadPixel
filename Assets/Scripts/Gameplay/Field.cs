@@ -89,7 +89,6 @@ public class Field : MonoBehaviour {
 
     void Update() {
         if(GameplayController.Instance.IsEnemyMove) {
-            //Debug.Log("counter: " + enemiesCounter.ToString() + "; items: " + enemiesItems.Count.ToString());
             int enemiesCount = enemiesItems.Count + bigEnemiesItems.Count + animatedEnemiesItems.Count;
             if(enemiesCounter == Mathf.Clamp(enemiesCount, 0, maxEnemiesCanMove))
                 Refill();
@@ -98,7 +97,6 @@ public class Field : MonoBehaviour {
 
 
     public void Init() {
-        DestroyField();
         LevelData level = GameData.Instance.GetCurrentLevel();
         availableColors = new List<QBitType>(level.availableColors);
         SpawnLevelElements(level);
@@ -122,7 +120,18 @@ public class Field : MonoBehaviour {
             movesCountCaption.text = movesCount.ToString();
         }
 
+        StartCoroutine(BuildLevel(level));
+    }
+
+
+    public IEnumerator BuildLevel(LevelData level) {
+        DestroyField();
+        SpawnLevelElements(level);
         FillFreePoints();
+
+        yield return new WaitForSeconds(1.2f);
+        
+        SpawnEnemies(level.animatedEnemies, true);
         onFieldInit.Invoke();
     }
 
@@ -258,7 +267,7 @@ public class Field : MonoBehaviour {
         SpawnDestroyables(level.destroyables);
         SpawnDefects(level.defects);
         SpawnEnemies(level.enemies, false);
-        SpawnEnemies(level.animatedEnemies, true);
+        //SpawnEnemies(level.animatedEnemies, true);
         SpawnBigEnemies(level.bigEnemies);
         SpawnDebuffs(level.debuffs);
         goals.Init(level.goals);
@@ -440,6 +449,12 @@ public class Field : MonoBehaviour {
     
     public void MoveToNextLevel() {
         UserData.Instance.currentLevel++;
+        GameplayController.Instance.SetPrepareState();
+        Init();
+    }
+
+    public void RestartGame() {
+        UserData.Instance.currentLevel = 0;
         GameplayController.Instance.SetPrepareState();
         Init();
     }
