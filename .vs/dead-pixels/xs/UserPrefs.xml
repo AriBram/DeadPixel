@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{40CEC81D-E892-6994-E036-0779DBB018E4}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/MainMenu/StartMenu.cs">
+    <Files>
+      <File FileName="Assets/Scripts/UI/MainMenu.cs" Line="25" Column="31" />
+      <File FileName="Assets/Scripts/UI/MainMenu/StartMenu.cs" Line="18" Column="10" />
+      <File FileName="Assets/TopDownModule/Scripts/UI/LevelChanger.cs" Line="7" Column="21" />
+      <File FileName="Assets/Scripts/Tools/CrabStuff.cs" Line="4" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="dead-pixels" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Tools" expanded="True" />
+                <Node name="UI" expanded="True">
+                  <Node name="MainMenu" expanded="True">
+                    <Node name="StartMenu.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="TopDownModule" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="UI" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c4dfb1f1-70d8-458a-9bfe-f179ba6e2012" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
