@@ -1,10 +1,14 @@
 ﻿<Properties StartupConfiguration="{40CEC81D-E892-6994-E036-0779DBB018E4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/MainMenu/StartMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Gameplay/Health.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/MainMenu.cs" Line="25" Column="31" />
-      <File FileName="Assets/Scripts/UI/MainMenu/StartMenu.cs" Line="18" Column="10" />
-      <File FileName="Assets/TopDownModule/Scripts/UI/LevelChanger.cs" Line="7" Column="21" />
-      <File FileName="Assets/Scripts/Tools/CrabStuff.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/UI/MainMenu/StartMenu.cs" Line="20" Column="10" />
+      <File FileName="Assets/Scripts/UI/UI.cs" Line="109" Column="2" />
+      <File FileName="Assets/Scripts/UI/UI_Logic.cs" Line="11" Column="38" />
+      <File FileName="Assets/Scripts/UI/Game/GameMenu.cs" Line="12" Column="25" />
+      <File FileName="Assets/Scripts/Gameplay/Player.cs" Line="71" Column="26" />
+      <File FileName="Assets/Scripts/Gameplay/PlayerLogic.cs" Line="378" Column="68" />
+      <File FileName="Assets/Scripts/Gameplay/Player/PlayerStats.cs" Line="29" Column="1" />
+      <File FileName="Assets/Scripts/Gameplay/Health.cs" Line="36" Column="54" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,16 +16,15 @@
           <Node name="dead-pixels" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
+                <Node name="Gameplay" expanded="True">
+                  <Node name="Player" expanded="True" />
+                  <Node name="Health.cs" selected="True" />
+                </Node>
                 <Node name="Tools" expanded="True" />
                 <Node name="UI" expanded="True">
-                  <Node name="MainMenu" expanded="True">
-                    <Node name="StartMenu.cs" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="TopDownModule" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="UI" expanded="True" />
+                  <Node name="Game" expanded="True" />
+                  <Node name="MainMenu" expanded="True" />
+                  <Node name="Old" expanded="True" />
                 </Node>
               </Node>
             </Node>
@@ -32,7 +35,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c4dfb1f1-70d8-458a-9bfe-f179ba6e2012" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7b63c614-eb6f-4e02-977b-4c8ae85ba26c" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

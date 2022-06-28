@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using CrabStuff;
 
 namespace DeadPixel
 {
@@ -11,7 +11,6 @@ namespace DeadPixel
         [SerializeField]
         private Button startBtn;
 
-
         void Start()
         {
             startBtn.onClick.AddListener(StartGame);
@@ -19,7 +18,7 @@ namespace DeadPixel
 
         private void StartGame()
         {
-            SceneManager.LoadScene(1);
+            Loader.Load(1); //Loading Gameplay scene 
         }
     }
 }

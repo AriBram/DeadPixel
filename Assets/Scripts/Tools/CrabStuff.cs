@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CrabStuff {
     public class Pointer
@@ -33,6 +34,13 @@ namespace CrabStuff {
             Vector3 worldPos = camera.ScreenToWorldPoint(screenPos);
             return worldPos;
         }
+    }
+
+    public class Loader
+    {
+        public static void Load(int scene) => SceneManager.LoadScene(scene);
+
+        public static void Load(string scene) => SceneManager.LoadScene(scene);
     }
 }
 

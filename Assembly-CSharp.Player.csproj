@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Gameplay/Shields.cs" />
-    <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
+    <Compile Include="Assets/Scripts/UI/Old/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Gameplay/GameplayController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Skills/Skill_MassiveAttack.cs" />
     <Compile Include="Assets/Scripts/Data/SkillData.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Assets/Scripts/UI/Game/HealthBar.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Controls/DragInput.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Memory.cs" />
-    <Compile Include="Assets/Scripts/UI/UI.cs" />
+    <Compile Include="Assets/Scripts/UI/Old/UI.cs" />
     <Compile Include="Assets/Scripts/Data/LevelData.cs" />
     <Compile Include="Assets/Scripts/UI/Game/GameMenu.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Skills/Skill_DoubleMove.cs" />
@@ -85,9 +85,11 @@
     <Compile Include="Assets/Scripts/Gameplay/QBit.cs" />
     <Compile Include="Assets/Scripts/Data/GameData.cs" />
     <Compile Include="Assets/Scripts/UI/Game/SkillsInventoryUI.cs" />
+    <Compile Include="Assets/Scripts/UI/MainMenu/StartMenu.cs" />
     <Compile Include="Assets/Scripts/Gameplay/GoalsController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Enemies/EnemiesMovementManager.cs" />
     <Compile Include="Assets/Scripts/Data/QBitData.cs" />
+    <Compile Include="Assets/Scripts/Tools/CrabStuff.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Field.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Enemies/EnemyBase.cs" />
     <Compile Include="Assets/Scripts/UI/Popups/SkillPopup.cs" />
@@ -98,9 +100,10 @@
     <Compile Include="Assets/Scripts/Gameplay/LevelObjects/Debuff.cs" />
     <Compile Include="Assets/Scripts/Gameplay/Enemies/AnimatedEnemy.cs" />
     <Compile Include="Assets/Scripts/Gameplay/LevelObjects/Destroyable.cs" />
-    <Compile Include="Assets/Scripts/UI/MainMenu/StartMenu.cs" />
-    <Compile Include="Assets/TopDownModule/Scripts/UI/LevelChanger.cs" />
-    <Compile Include="Assets/Scripts/Tools/CrabStuff.cs" />
+    <Compile Include="Assets/Scripts/UI/UI_Logic.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/Player/PlayerLogic.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/Player/PlayerStats.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/Player/PlayerAnim.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
